@@ -1299,7 +1299,8 @@ pre code {
     .col-lg-4 {
         -ms-flex: 0 0 33.333333%;
         flex: 0 0 33.333333%;
-        max-width: 33.333333%
+        max-width: 33.333333%;
+        box-shadow: 0px 0px 15px 0px #d6d6d6;
     }
     .col-lg-5 {
         -ms-flex: 0 0 41.666667%;
@@ -5107,7 +5108,7 @@ input[type=submit].btn-block {
 
 .jumbotron {
     padding: 2rem 1rem;
-    background-color: #e9ecef;
+    background-color: #e9efeb;
     border-radius: .3rem
 }
 
@@ -5118,9 +5119,8 @@ input[type=submit].btn-block {
 }
 
 .jumbotron-fluid {
-    padding-right: 0;
-    padding-left: 0;
-    border-radius: 0
+    padding: 2rem 2rem;
+    border: radius 50px;
 }
 
 .alert {
@@ -6339,7 +6339,7 @@ button.close {
 }
 
 .bg-primary {
-    background-color: #ee0581 !important
+    background-color: #71cd14 !important
 }
 
 a.bg-primary:focus,

@@ -1,67 +1,75 @@
 <!DOCTYPE html>
 <?php
 
-// $result = "";
-// $error  = "";
+//$result = "";
+//$error  = "";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+
+//$txtName = (isset($_POST['name']))?$_POST['name']:"";
+//$txtEmail = (isset($_POST['email']))?$_POST['email']:"";
+//$txtSubject = (isset($_POST['subject']))?$_POST['subject']:"";
+//$txtMessage = (isset($_POST['message']))?$_POST['message']:"";
 
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
-$txtName = (isset($_POST['name'])) ? $_POST['name'] : "";
-$txtEmail = (isset($_POST['email'])) ? $_POST['email'] : "";
-$txtSubject = (isset($_POST['subject'])) ? $_POST['subject'] : "";
-$txtMessage = (isset($_POST['message'])) ? $_POST['message'] : "";
+
 
 try {
-  if (isset($_POST['Enviar'])) {
-
+  if (isset($_POST['submit'])) {
     //Import PHPMailer classes into the global namespace
     //These must be at the top of your script, not inside a function
-    require 'PHPMailer/src/Exception.php';
-    require 'PHPMailer/src/PHPMailer.php';
-    require 'PHPMailer/src/SMTP.php';
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
-
-
     //Server settings
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'daniel.reyna.abarrotesjavi.space';                     //Set the SMTP server to send through
+    $mail->Host       = 'pdmika.ferreteraar.space';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'contacto@daniel.reyna.abarrotesjavi.space';                     //SMTP username
-    $mail->Password   = 'Bleachbestoshonen123.';                               //SMTP password
+    $mail->Username   = 'contacto@pdmika.ferreteraar.space';                     //SMTP username
+    $mail->Password   = 'Hatsunemikubestoanime99.';                               //SMTP password
     $mail->SMTPSecure = 'ssl';               //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
     //Recipients
-    $mail->setFrom($_POST['email']);
-
+    $mail->setFrom('contacto@pdmika.ferreteraar.space', 'Contacto');
+    $mail->addAddress('contacto@pdmika.ferreteraar.space', 'Contacto');     //Add a recipient
+    //$mail->addAddress('contacto@cookietienda.tk');               //Name is optional
+    //$mail->addReplyTo('contacto@cookietienda.tk', 'Information');
+    //$mail->addCC('contacto@cookietienda.tk');
+    //$mail->addBCC('contacto@cookietienda.tk');
+    //$mail->setFrom($_POST['email'],$_POST['name']);
 
     $mail->isHTML(true);
-    //$mail->addReplyTo($_POST['email'],$_POST['name']);    
-    $mail->addAddress('contacto@daniel.reyna.abarrotesjavi.space'); //correo del cliente aqui
-    $mail->Subject = 'Asunto:' . $_POST['subject'];
-    $mail->Body = '<h3>Nombre :' . $_POST['name'] . '<br> Email: ' . $_POST['email'] . '<br>Mensaje: ' . $_POST['message'] . '</h3>';
+    $mail->addReplyTo($_POST['email'], $_POST['name']);
+    $mail->addAddress($_POST['email']); //correo del cliente aqui. Pero en form contacto, se pone el mismo correp
+    $mail->Subject = 'Form Submission:' . $_POST['subject'];
+    $mail->Body = '<h3>El cliente ' . $_POST['name'] . '<br> con correo : ' . $_POST['email'] . '<br> Mensaje: ' . $_POST['message'] . '</h3>';
 
+    //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    //Content
     //Set email format to HTML
     //$mail->Subject = 'Here is the subject';
     //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-
     $mail->send();
-    if (!$mail->send()) {
-      $error = "Algo ha salido mal. Vuelva a intentarlo.";
-    } else {
-      $result = "Gracias\t" . $_POST['name'] . " por contactarnos.";
-    }
+    /* if(!$mail->send())
+       {
+         $error = "Something went worng. Please try again.";
+       }
+       else 
+       {
+         $result="Thanks\t" .$_POST['name']. " for contacting us.";
+       } */
   }
 } catch (Exception $e) {
-  $error = "No se ha podido enviar el mensaje. Mailer Error: {$mail->ErrorInfo}";
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 ?>
 <html lang="en">
@@ -220,21 +228,29 @@ try {
         </div>
       </div>
       <div class="contact-info-form">
-        <form method="POST" onclick="return false;" autocomplete="off">
+        <form method="POST">
           <h3 class="title">Contáctanos</h3>
           <div class="social-input-containers">
-            <input type="text" name="name" id="name" class="input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Nombre" />
+            <input type="text" name="name" id="name" class="input" placeholder="Nombre" />
           </div>
           <div class="social-input-containers">
-            <input type="email" name="email" id="email" class="input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Email" />
+            <input type="email" name="email" id="email" class="input" placeholder="Email" />
           </div>
-          <div class="social-input-containers">
-            <input type="text" name="subject" id="subject" class="input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Asunto" />
-          </div>
+          <!--
+            <div class="social-input-containers">
+              <input
+                type="text"
+                name="subject"
+                id="subject"
+                class="input"
+                placeholder="Asunto"
+              />
+            </div>
+            -->
           <div class="social-input-containers textarea">
-            <textarea name="message" id="message" class="input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Mensaje"></textarea>
+            <textarea name="message" id="message" class="input" placeholder="message"></textarea>
           </div>
-          <input type="submitB" value="submitB" class="btn" />
+          <button type="submit" id="submit" name="submit" value="submit" class="btn" />Enviar</button>
         </form>
       </div>
     </div>

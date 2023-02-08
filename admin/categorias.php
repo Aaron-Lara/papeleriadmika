@@ -16,19 +16,19 @@ switch ($action) {
     $InsertQuery->execute();
     break;
   case 'Modificar':
-    $ModifyQuery = $pdo->prepare("UPDATE categorias SET categoriaNombre=:nombreCategoria WHERE idCategoria=:id");
+    $ModifyQuery = $pdo->prepare("UPDATE categorias SET categoriaNombre=:nombreCategoria WHERE id=:id");
     $ModifyQuery->bindParam(':id', $txtID);
     $ModifyQuery->bindParam(':nombreCategoria', $txtname);
     $ModifyQuery->execute();
     break;
   case 'Eliminar':
-    $DeleteQuery = $pdo->prepare("DELETE FROM categorias  WHERE idCategoria=:id");
+    $DeleteQuery = $pdo->prepare("DELETE FROM categorias  WHERE id=:id");
     $DeleteQuery->bindParam(':id', $txtID);
     $DeleteQuery->execute();
     break;
 
   case 'Seleccionar':
-    $SelectQuery = $pdo->prepare("SELECT * FROM categorias WHERE idCategoria=:id");
+    $SelectQuery = $pdo->prepare("SELECT * FROM categorias WHERE id=:id");
     $SelectQuery->bindParam(':id', $txtID);
     $SelectQuery->execute();
     $ACategoria = $SelectQuery->fetch(PDO::FETCH_LAZY);
@@ -215,11 +215,11 @@ switch ($action) {
                         <tbody>
                           <?php foreach ($ListCategory as $categorias) { ?>
                             <tr>
-                              <td><?php echo $categorias['idCategoria'] ?></td>
+                              <td><?php echo $categorias['id'] ?></td>
                               <td><?php echo $categorias['categoriaNombre'] ?></td>
                               <td>
                                 <form method="POST">
-                                  <input type="hidden" name="txtID" value="<?php echo $categorias['idCategoria'] ?>">
+                                  <input type="hidden" name="txtID" value="<?php echo $categorias['id'] ?>">
                                   <input type="submit" name="action" value="Seleccionar" class="btn btn-warning btn-sm"></input>
                                   <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm"></input>
                                 </form>

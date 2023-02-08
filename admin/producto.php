@@ -286,7 +286,7 @@ switch ($action) {
                                 <label>Categoria</label>
                                 <?php echo $txtcategoriaID; ?>
                                 <select class="form-control" name="txtcategoriaID" id="txtcategoriaID">
-                                  <option value="00">->Selecciona<-< /option>
+                                  <option value="00"> ->Selecciona<- </option>
                                       <?php
                                       $SelectCategory = $pdo->prepare("SELECT * FROM categorias;");
                                       $SelectCategory->execute();

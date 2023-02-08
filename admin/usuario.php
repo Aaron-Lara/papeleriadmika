@@ -228,7 +228,7 @@ switch ($action) {
                                 <label>Tipo de usuario</label>
                                 <?php echo $txttipoID; ?>
                                 <select class="form-control" name="txttipoID" id="txttipoID">
-                                  <option value="00">->Selecciona<-</option>
+                                  <option value="00"> ->Selecciona<- </option>
                                       <?php
                                       $SelectTypeUser = $pdo->prepare("SELECT * FROM tipousuario;");
                                       $SelectTypeUser->execute();

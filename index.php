@@ -89,15 +89,19 @@ if (isset($_GET['logout'])) {
                   </li>
                   </li>
                   <li class="nav-item">
-                    <a href="login.php" class="icons">
-                      <i class="ti-user" aria-hidden="true"></i>
-                      <?php
-                      if (isset($_SESSION['session_nameCliente'])) {
-                        echo "Bienvenido, " . $_SESSION['session_nameCliente'] . " | ";
-                        echo "<a href='index.php?logout=true'>Salir</a>";
-                      } 
-                      ?>
-                    </a>
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                      $user = $_SESSION['user'];
+                      echo "Welcome, " . $user['clienteNombre'] . "!";
+                      echo '<a href="index.php?logout=1" class="icons">';
+                      echo '<i class="ti-power-off" aria-hidden="true"></i>';
+                      echo '</a>';
+                    } else {
+                      echo '<a href="login.php" class="icons">';
+                      echo '<i class="ti-user" aria-hidden="true"></i>';
+                      echo '</a>';
+                    }
+                    ?>
                   </li>
                 </ul>
               </div>

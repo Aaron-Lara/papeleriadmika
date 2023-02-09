@@ -14,12 +14,26 @@ body {
 input,
 button {
   font-family: sans-serif, Arial;
+      font-family: sans-serif, Arial;
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
 }
 input:focus,
 button:focus,
 input:active,
 button:active {
   outline: none;
+      font-family: sans-serif, Arial;
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
 }
 a {
   text-decoration: none;

@@ -46,7 +46,7 @@ try {
     $mail->isHTML(true);
     $mail->addReplyTo($_POST['email'], $_POST['name']);
     $mail->addAddress($_POST['email']); //correo del cliente aqui. Pero en form contacto, se pone el mismo correp
-    $mail->Subject = 'Form Submission:' . $_POST['subject'];
+    //$mail->Subject = 'Form Submission:' . $_POST['subject'];
     $mail->Body = '<h3>El cliente ' . $_POST['name'] . '<br> con correo : ' . $_POST['email'] . '<br> Mensaje: ' . $_POST['message'] . '</h3>';
 
     //Attachments

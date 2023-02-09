@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_GET['logout'])) {
+  session_destroy();
+  header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,8 +40,7 @@
           <a class="navbar-brand logo_h" href="index.php">
             <img src="img/logo.jpg" alt="" />
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -78,10 +84,19 @@
                     <a href="cart.php" class="icons">
                       <i class="ti-shopping-cart"></i>
                     </a>
+                  <li>
+                  </li>
+                  </li>
                   </li>
                   <li class="nav-item">
                     <a href="login.php" class="icons">
                       <i class="ti-user" aria-hidden="true"></i>
+                      <?php
+                      if (isset($_SESSION['session_nameCliente'])) {
+                        echo "Bienvenido, " . $_SESSION['session_nameCliente'] . " | ";
+                        echo "<a href='index.php?logout=true'>Salir</a>";
+                      } 
+                      ?>
                     </a>
                   </li>
                 </ul>
@@ -252,7 +267,7 @@
   <!--================ End Feature Product Area =================-->
 
   <!--================ Offer Area =================-->
-  
+
   <!--================ End Offer Area =================-->
 
   <!--================ New Product Area =================-->
@@ -357,7 +372,7 @@
   <!--================ End Inspired Product Area =================-->
 
   <!--================ Start Blog Area =================-->
-  
+
   <!--================ End Blog Area =================-->
 
   <!--================ start footer Area  =================-->
@@ -423,8 +438,11 @@
     <!-- Copyright -->
     <div class=" p-3" style="background-color: rgba(0, 0, 0, 0.2)">
       <p class="footer-text m-0 col-lg-12 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> Papelería D Mika | Todos los derechos reservados
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+        Copyright &copy;<script>
+          document.write(new Date().getFullYear());
+        </script> Papelería D Mika | Todos los derechos reservados
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+      </p>
     </div>
     <!-- Copyright -->
   </footer>

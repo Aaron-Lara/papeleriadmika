@@ -87,12 +87,11 @@ if (isset($_GET['logout'])) {
                   <li>
                   </li>
                   </li>
-                  </li>
                   <li class="nav-item">
                     <?php
                     if (isset($_SESSION['user'])) {
                       $user = $_SESSION['user'];
-                      echo "Welcome, " . $user['clienteNombre'] . "!";
+                      echo "Bienvenido, " . $user['clienteNombre'] . "!";
                       echo '<a href="index.php?logout=1" class="icons">';
                       echo '<i class="ti-power-off" aria-hidden="true"></i>';
                       echo '</a>';

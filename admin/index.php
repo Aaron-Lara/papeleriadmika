@@ -22,7 +22,7 @@
         <div class="sidebar-header position-relative">
           <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-              <a href="index.php"><img src="assets/images/logo/logo.svg" alt="Logo" srcset="" /></a>
+              <a href="index.php"><img src="../img/logo.jpg" alt="Logo" srcset="" /></a>
             </div>
             <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -51,36 +51,41 @@
         <div class="sidebar-menu">
           <ul class="menu">
             <li class="sidebar-title">Menu</li>
-
             <li class="sidebar-item active">
               <a href="index.php" class="sidebar-link">
                 <i class="bi bi-grid-fill"></i>
-                <span>Interfaz</span>
+                <span>INTERFAZ</span>
               </a>
             </li>
-
-            <li class="sidebar-item has-sub">
-              <a href="#" class="sidebar-link">
-                <i class="bi bi-stack"></i>
-                <span>Formularios</span>
+            <li class="sidebar-item">
+              <a href="producto.php" class="sidebar-link">
+                <i class="bi bi-cart-plus-fill"></i>
+                <span>PRODUCTOS</span>
               </a>
-              <ul class="submenu">
-                <li class="submenu-item">
-                  <a href="producto.php">Producto</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="cliente.php">Cliente</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="categorias.php">Categoria</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="usuario.php">Usuario</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="tipoUsuario.php">Tipo de usuario</a>
-                </li>
-              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a href="cliente.php" class="sidebar-link">
+                <i class="bi bi-people-fill"></i>
+                <span>CLIENTES</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="usuario.php" class="sidebar-link">
+                <i class="bi bi-person-circle"></i>
+                <span>USUARIOS</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="tipoUsuario.php" class="sidebar-link">
+                <i class="bi bi-person-badge-fill"></i>
+                <span>TIPO DE USUARIO</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="categorias.php" class="sidebar-link">
+                <i class="bi bi-tags-fill"></i>
+                <span>CATEGORIAS</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -100,91 +105,73 @@
         <section class="row">
           <div class="col-12 col-lg-12">
             <div class="row">
-              <div class="col-8 col-lg-4 col-md-8">
+              <div id="producto-div" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="fa-solid fa-barcode fa-3x" style="margin: 10px"></i>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7" style="text-align: center">
-                        <a href="producto.php" class="btn btn-success btn-bg" style="text-align: center">PRODUCTOS</a>
+                        <i class="bi bi-cart-plus-fill fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-8 col-lg-4 col-md-8">
+              <div id="cliente-div" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="fa-solid fa-person fa-3x" style="margin: 10px"></i>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7" style="text-align: center">
-                        <a href="cliente.php" class="btn btn-success btn-bg">CLIENTES</a>
+                        <i class="bi bi-people-fill fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-8 col-lg-4 col-md-8">
+              <div id="user-div" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="fa-solid fa-user-plus fa-3x" style="margin: 10px"></i>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7" style="text-align: center">
-                        <a href="usuario.php" class="btn btn-success btn-bg">USUARIOS</a>
+                        <i class="bi bi-person-circle fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-8 col-lg-4 col-md-8">
+              <div id="tipo-div" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="fa-solid fa-users fa-3x" style="margin: 10px"></i>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7" style="text-align: center">
-                        <a href="tipoUsuario.php" class="btn btn-success btn-bg">TIPO DE USUARIO</a>
+                        <i class="bi bi-person-badge-fill fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-8 col-lg-4 col-md-8">
+              <div id="categoria-div" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="fa-solid fa-tags fa-3x" style="margin: 10px"></i>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7" style="text-align: center">
-                        <a href="categorias.php" class="btn btn-success btn-bg">CATEGORIAS</a>
+                        <i class="bi bi-tags-fill fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-8 col-lg-4 col-md-8">
+              <div id="logout-id" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="fa-solid fa-right-from-bracket fa-3x" style="margin: 10px"></i>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7" style="text-align: center">
-                        <a href="../index.php" class="btn btn-danger btn-bg">CERRAR SESIÓN</a>
+                        <i class="bi bi-box-arrow-right fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
@@ -216,6 +203,26 @@
   <!-- Need: Apexcharts -->
   <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
   <script src="assets/js/pages/dashboard.js"></script>
+  <script>
+    document.getElementById("user-div").addEventListener("click", function() {
+      window.location.href = "usuario.php";
+    });
+    document.getElementById("producto-div").addEventListener("click", function() {
+      window.location.href = "producto.php";
+    });
+    document.getElementById("cliente-div").addEventListener("click", function() {
+      window.location.href = "cliente.php";
+    });
+    document.getElementById("categoria-div").addEventListener("click", function() {
+      window.location.href = "categorias.php";
+    });
+    document.getElementById("tipo-div").addEventListener("click", function() {
+      window.location.href = "tipoUsuario.php";
+    });
+    document.getElementById("logout-div").addEventListener("click", function() {
+      window.location.href = "../index.php";
+    });
+  </script>
 </body>
 
 </html>

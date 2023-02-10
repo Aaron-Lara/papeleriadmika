@@ -604,6 +604,7 @@ body.theme-dark .row {
     margin-left: calc(var(--bs-gutter-x) * -0.5);
     margin-right: calc(var(--bs-gutter-x) * -0.5);
     margin-top: calc(var(--bs-gutter-y) * -1);
+        color: #71cd14;
 }
 body.theme-dark .row > * {
     flex-shrink: 0;
@@ -1166,6 +1167,7 @@ body.theme-dark .gy-5 {
     body.theme-dark .col-lg-4 {
         flex: 0 0 auto;
         width: 33.33333333%;
+            color: #71cd14;
     }
     body.theme-dark .col-lg-5 {
         flex: 0 0 auto;

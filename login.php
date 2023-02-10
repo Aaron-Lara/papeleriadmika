@@ -56,7 +56,7 @@ if (isset($_POST["login"])) {
             <input type="password" id="password" name="password" class="input-field">
             <u></u>
           </div>
-          <input type="submit" name="login" value="Login" class="btn">
+          <input type="submit" name="login" value="Login">
         </form>
       </div>
       <div class="box registerBox" style="overflow-y: auto;">

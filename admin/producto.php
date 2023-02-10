@@ -133,7 +133,7 @@ switch ($action) {
         <div class="sidebar-header position-relative">
           <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-              <a href="index.php"><img src="assets/images/logo/logo.svg" alt="Logo" srcset="" /></a>
+              <a href="index.php"><img src="../img/logo.jpg" alt="Logo" srcset="" /></a>
             </div>
             <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -162,245 +162,251 @@ switch ($action) {
         <div class="sidebar-menu">
           <ul class="menu">
             <li class="sidebar-title">Menu</li>
-
             <li class="sidebar-item">
               <a href="index.php" class="sidebar-link">
                 <i class="bi bi-grid-fill"></i>
-                <span>Interfaz</span>
+                <span>INTERFAZ</span>
               </a>
             </li>
-
-            <li class="sidebar-item has-sub">
-              <a href="#" class="sidebar-link">
-                <i class="bi bi-stack"></i>
-                <span>Formularios</span>
+            <li class="sidebar-item active">
+              <a href="producto.php" class="sidebar-link">
+                <i class="bi bi-cart-plus-fill"></i>
+                <span>PRODUCTOS</span>
               </a>
-              <ul class="submenu">
-                <li class="submenu-item active">
-                  <a href="producto.php">Producto</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="cliente.php">Cliente</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="categorias.php">Categoria</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="usuario.php">Usuario</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="tipoUsuario.php">Tipo de usuario</a>
-                </li>
-              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a href="cliente.php" class="sidebar-link">
+                <i class="bi bi-people-fill"></i>
+                <span>CLIENTES</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="usuario.php" class="sidebar-link">
+                <i class="bi bi-person-circle"></i>
+                <span>USUARIOS</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="tipoUsuario.php" class="sidebar-link">
+                <i class="bi bi-person-badge-fill"></i>
+                <span>TIPO DE USUARIO</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="categorias.php" class="sidebar-link">
+                <i class="bi bi-tags-fill"></i>
+                <span>CATEGORIAS</span>
+              </a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div id="main">
-      <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
-          <i class="bi bi-justify fs-3"></i>
-        </a>
-      </header>
+  </div>
+  <div id="main">
+    <header class="mb-3">
+      <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+      </a>
+    </header>
 
-      <div class="page-heading">
-        <h3>PRODUCTOS</h3>
-      </div>
-      <div class="page-content">
-        <section class="row">
-          <div class="col-12 col-lg-12">
-            <div class="row">
-              <div class="col-12 col-lg-12 col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title">Registrar producto</h4>
-                  </div>
-                  <div class="card-content">
-                    <div class="card-body">
-                      <form action="producto.php" method="POST" enctype='multipart/form-data' class="form form-vertical">
-                        <div class="form-body">
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="form-group">
-                                <div class="position-relative">
-                                  <input type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" class=" form-control" />
-                                </div>
+    <div class="page-heading">
+      <h3>PRODUCTOS</h3>
+    </div>
+    <div class="page-content">
+      <section class="row">
+        <div class="col-12 col-lg-12">
+          <div class="row">
+            <div class="col-12 col-lg-12 col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Registrar producto</h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    <form action="producto.php" method="POST" enctype='multipart/form-data' class="form form-vertical">
+                      <div class="form-body">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="form-group">
+                              <div class="position-relative">
+                                <input type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" class=" form-control" />
                               </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group has-icon-left">
-                                <label for="first-name-icon">Nombre</label>
-                                <div class="position-relative">
-                                  <input type="text" name="txtnombre" id="txtnombre" value="<?php echo $txtnombre; ?>" class="form-control" placeholder="Nombre" />
-                                  <div class="form-control-icon">
-                                    <i class="bi bi-person"></i>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group has-icon-left">
-                                <label>Precio</label>
-                                <div class="position-relative">
-                                  <input type="number" name="txtprecio" id="txtprecio" value="<?php echo $txtprecio; ?>" min="1" step="any" class="form-control" placeholder="Precio" />
-                                  <div class="form-control-icon">
-                                    <i class="fa-solid fa-coins"></i>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group has-icon-left">
-                                <label>Detalles</label>
-                                <div class="position-relative">
-                                  <input type="text" name="txtdetalles" id="txtdetalles" value="<?php echo $txtdetalles; ?>" class="form-control" placeholder="Detalles" />
-                                  <div class="form-control-icon">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group has-icon-left">
-                                <label>Cantidad</label>
-                                <div class="position-relative">
-                                  <input type="number" name="txtcantidad" id="txtcantidad" value="<?php echo $txtcantidad; ?>" class="form-control" placeholder="Cantidad" />
-                                  <div class="form-control-icon">
-                                    <i class="fa-solid fa-boxes-stacked"></i>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group">
-                                <label for="txtimagen">Imagen</label>
-                                <div>
-                                  <input type="hidden" name="txtOldimg" value="<?php echo $txtimagen; ?>">
-                                  <input type="file" name="txtimagen" id="txtimagen" class="form-control" placeholder="imagen">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group">
-                                <label>Categoria</label>
-                                <?php echo $txtcategoriaID; ?>
-                                <select class="form-control" name="txtcategoriaID" id="txtcategoriaID">
-                                  <option value="00"> ->Selecciona<- </option>
-                                      <?php
-                                      $SelectCategory = $pdo->prepare("SELECT * FROM categorias;");
-                                      $SelectCategory->execute();
-
-                                      if (!empty($txtcategoriaID)) {
-                                        $ListCategory = $SelectCategory->fetchAll();
-                                        foreach ($ListCategory as $categorias) {
-                                          $Selected = ($txtcategoriaID == $categorias['id']) ? 'selected' : null;
-                                          echo '<option value="' . $categorias['id'] . '"' . $Selected . '>' . $categorias['categoriaNombre'];
-                                          '</option>';
-                                        }
-                                      } else {
-                                        $ListCategory = $SelectCategory->fetchAll();
-                                        foreach ($ListCategory as $categorias) {
-                                          echo '<option value="' . $categorias['id'] . '">' . $categorias['categoriaNombre'] . '</option>';
-                                        }
-                                      }
-                                      ?>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-12 d-flex justify-content-end">
-                              <input type="submit" name="action" value="Añadir" class="btn btn-success me-1 mb-1">
-                              </input>
-                              <input type="submit" name="action" value="Modificar" class="btn btn-primary me-1 mb-1">
-                              </input>
-                              <input type="submit" name="action" value="Cancelar" class="btn btn-danger me-1 mb-1">
-                              </input>
                             </div>
                           </div>
+                          <div class="col-12">
+                            <div class="form-group has-icon-left">
+                              <label for="first-name-icon">Nombre</label>
+                              <div class="position-relative">
+                                <input type="text" name="txtnombre" id="txtnombre" value="<?php echo $txtnombre; ?>" class="form-control" />
+                                <div class="form-control-icon">
+                                  <i class="bi bi-person"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group has-icon-left">
+                              <label>Precio</label>
+                              <div class="position-relative">
+                                <input type="number" name="txtprecio" id="txtprecio" value="<?php echo $txtprecio; ?>" min="1" step="any" class="form-control" />
+                                <div class="form-control-icon">
+                                  <i class="fa-solid fa-coins"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group has-icon-left">
+                              <label>Detalles</label>
+                              <div class="position-relative">
+                                <input type="text" name="txtdetalles" id="txtdetalles" value="<?php echo $txtdetalles; ?>" class="form-control" />
+                                <div class="form-control-icon">
+                                  <i class="fa-solid fa-circle-info"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group has-icon-left">
+                              <label>Cantidad</label>
+                              <div class="position-relative">
+                                <input type="number" name="txtcantidad" id="txtcantidad" value="<?php echo $txtcantidad; ?>" class="form-control" />
+                                <div class="form-control-icon">
+                                  <i class="fa-solid fa-boxes-stacked"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label for="txtimagen">Imagen</label>
+                              <div>
+                                <input type="hidden" name="txtOldimg" value="<?php echo $txtimagen; ?>">
+                                <input type="file" name="txtimagen" id="txtimagen" class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label>Categoria</label>
+                              <?php echo $txtcategoriaID; ?>
+                              <select class="form-control" name="txtcategoriaID" id="txtcategoriaID">
+                                <option value="00"> ->Selecciona<- </option>
+                                    <?php
+                                    $SelectCategory = $pdo->prepare("SELECT * FROM categorias;");
+                                    $SelectCategory->execute();
+
+                                    if (!empty($txtcategoriaID)) {
+                                      $ListCategory = $SelectCategory->fetchAll();
+                                      foreach ($ListCategory as $categorias) {
+                                        $Selected = ($txtcategoriaID == $categorias['id']) ? 'selected' : null;
+                                        echo '<option value="' . $categorias['id'] . '"' . $Selected . '>' . $categorias['categoriaNombre'];
+                                        '</option>';
+                                      }
+                                    } else {
+                                      $ListCategory = $SelectCategory->fetchAll();
+                                      foreach ($ListCategory as $categorias) {
+                                        echo '<option value="' . $categorias['id'] . '">' . $categorias['categoriaNombre'] . '</option>';
+                                      }
+                                    }
+                                    ?>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-12 d-flex justify-content-end">
+                            <input type="submit" name="action" value="Añadir" class="btn btn-success me-1 mb-1">
+                            </input>
+                            <input type="submit" name="action" value="Modificar" class="btn btn-primary me-1 mb-1">
+                            </input>
+                            <input type="submit" name="action" value="Cancelar" class="btn btn-danger me-1 mb-1">
+                            </input>
+                          </div>
                         </div>
-                      </form>
-                      <?php
-                      $ProductoQuery = $pdo->prepare("SELECT * FROM productos");
-                      $ProductoQuery->execute();
-                      $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
-                      ?>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="col-12 col-lg-12 col-md-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="form-body">
-                <div class="row">
-                  <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>NOMBRE</th>
-                          <th>PRECIO</th>
-                          <th>DETALLES</th>
-                          <th>CANTIDAD</th>
-                          <th>IMAGEN</th>
-                          <th>CATEGORIA</th>
-                          <th>AJUSTES</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach ($ListProducto as $productos) { ?>
-                          <tr>
-                            <td><?php echo $productos['id'] ?></td>
-                            <td><?php echo $productos['productoNombre'] ?></td>
-                            <td><?php echo $productos['productoPrecio'] ?></td>
-                            <td><?php echo $productos['productoDetalles'] ?></td>
-                            <td><?php echo $productos['productoQTY'] ?></td>
-                            <td><img src="../img/productosImg/<?php echo $productos['productoImg']; ?>" width="50%"></td>
-                            <td>
-                              <?php
-                              $CategoryQuery = $pdo->prepare("SELECT categoriaNombre FROM categorias WHERE id=?");
-                              $CategoryQuery->execute([$productos['categoriaID']]);
-                              $ListCategory = $CategoryQuery->fetch(PDO::FETCH_ASSOC);
-                              $categoriaNombre = $ListCategory['categoriaNombre'];
-                              echo $categoriaNombre
-                              ?>
-                            </td>
-                            <td>
-                              <form method="POST">
-                                <input type="hidden" name="txtID" value="<?php echo $productos['id'] ?>">
-                                <input type="submit" name="action" value="Seleccionar" class="btn btn-warning btn-sm"></input>
-                                <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm"></input>
-                              </form>
-                            </td>
-                          <?php } ?>
-                      </tbody>
-                    </table>
+                      </div>
+                    </form>
+                    <?php
+                    $ProductoQuery = $pdo->prepare("SELECT * FROM productos");
+                    $ProductoQuery->execute();
+                    $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <footer>
-        <div class="footer clearfix mb-0 text-muted">
-          <div class="float-start">
-            <p class="footer-text m-0 col-lg-12 col-md-12">
-              Copyright &copy;
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              Papelería D Mika | Todos los derechos reservados
-            </p>
-          </div>
-        </div>
-      </footer>
+      </section>
     </div>
+    <div class="col-12 col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="form-body">
+              <div class="row">
+                <div class="table-responsive">
+                  <table class="table table-bordered mb-0">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>PRECIO</th>
+                        <th>DETALLES</th>
+                        <th>CANTIDAD</th>
+                        <th>IMAGEN</th>
+                        <th>CATEGORIA</th>
+                        <th>AJUSTES</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($ListProducto as $productos) { ?>
+                        <tr>
+                          <td><?php echo $productos['id'] ?></td>
+                          <td><?php echo $productos['productoNombre'] ?></td>
+                          <td><?php echo $productos['productoPrecio'] ?></td>
+                          <td><?php echo $productos['productoDetalles'] ?></td>
+                          <td><?php echo $productos['productoQTY'] ?></td>
+                          <td><img src="../img/productosImg/<?php echo $productos['productoImg']; ?>" width="50%"></td>
+                          <td>
+                            <?php
+                            $CategoryQuery = $pdo->prepare("SELECT categoriaNombre FROM categorias WHERE id=?");
+                            $CategoryQuery->execute([$productos['categoriaID']]);
+                            $ListCategory = $CategoryQuery->fetch(PDO::FETCH_ASSOC);
+                            $categoriaNombre = $ListCategory['categoriaNombre'];
+                            echo $categoriaNombre
+                            ?>
+                          </td>
+                          <td>
+                            <form method="POST">
+                              <input type="hidden" name="txtID" value="<?php echo $productos['id'] ?>">
+                              <input type="submit" name="action" value="Seleccionar" class="btn btn-warning btn-sm"></input>
+                              <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm"></input>
+                            </form>
+                          </td>
+                        <?php } ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer clearfix mb-0 text-muted">
+        <div class="float-start">
+          <p class="footer-text m-0 col-lg-12 col-md-12">
+            Copyright &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            Papelería D Mika | Todos los derechos reservados
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
   </div>
   <script src="assets/js/bootstrap.js"></script>
   <script src="assets/js/app.js"></script>

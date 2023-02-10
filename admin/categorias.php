@@ -67,7 +67,7 @@ switch ($action) {
         <div class="sidebar-header position-relative">
           <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-              <a href="index.php"><img src="assets/images/logo/logo.svg" alt="Logo" srcset="" /></a>
+              <a href="index.php"><img src="../img/logo.jpg" alt="Logo" srcset="" /></a>
             </div>
             <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -96,36 +96,41 @@ switch ($action) {
         <div class="sidebar-menu">
           <ul class="menu">
             <li class="sidebar-title">Menu</li>
-
             <li class="sidebar-item">
               <a href="index.php" class="sidebar-link">
                 <i class="bi bi-grid-fill"></i>
-                <span>Interfaz</span>
+                <span>INTERFAZ</span>
               </a>
             </li>
-
-            <li class="sidebar-item has-sub">
-              <a href="#" class="sidebar-link">
-                <i class="bi bi-stack"></i>
-                <span>Formularios</span>
+            <li class="sidebar-item">
+              <a href="producto.php" class="sidebar-link">
+                <i class="bi bi-cart-plus-fill"></i>
+                <span>PRODUCTOS</span>
               </a>
-              <ul class="submenu">
-                <li class="submenu-item">
-                  <a href="producto.php">Producto</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="cliente.php">Cliente</a>
-                </li>
-                <li class="submenu-item active">
-                  <a href="categorias.php">Categoria</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="usuario.php">Usuario</a>
-                </li>
-                <li class="submenu-item">
-                  <a href="tipoUsuario.php">Tipo de usuario</a>
-                </li>
-              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a href="cliente.php" class="sidebar-link">
+                <i class="bi bi-people-fill"></i>
+                <span>CLIENTES</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="usuario.php" class="sidebar-link">
+                <i class="bi bi-person-circle"></i>
+                <span>USUARIOS</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="tipoUsuario.php" class="sidebar-link">
+                <i class="bi bi-person-badge-fill"></i>
+                <span>TIPO DE USUARIO</span>
+              </a>
+            </li>
+            <li class="sidebar-item active">
+              <a href="categorias.php" class="sidebar-link">
+                <i class="bi bi-tags-fill"></i>
+                <span>CATEGORIAS</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -158,7 +163,7 @@ switch ($action) {
                             <div class="col-12">
                               <div class="form-group has-icon-left">
                                 <div class="position-relative">
-                                  <input type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" class="form-control single-input" placeholder="ID" />
+                                  <input type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" class="form-control single-input" />
                                 </div>
                               </div>
                             </div>
@@ -166,7 +171,7 @@ switch ($action) {
                               <div class="form-group has-icon-left">
                                 <label for="first-name-icon">Nombre</label>
                                 <div class="position-relative">
-                                  <input type="text" name="txtname" id="txtname" value="<?php echo $txtname; ?>" class="form-control single-input" placeholder="Nombre" />
+                                  <input type="text" name="txtname" id="txtname" value="<?php echo $txtname; ?>" class="form-control single-input" />
                                   <div class="form-control-icon">
                                     <i class="fa-solid fa-tags"></i>
                                   </div>
@@ -201,36 +206,36 @@ switch ($action) {
         <div class="card">
           <div class="card-content">
             <div class="card-body">
-                <div class="form-body">
-                  <div class="row">
-                    <div class="table-responsive">
-                      <table class="table table-bordered mb-0">
-                        <thead>
+              <div class="form-body">
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>CATEGORIA</th>
+                          <th>AJUSTES</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($ListCategory as $categorias) { ?>
                           <tr>
-                            <th>ID</th>
-                            <th>CATEGORIA</th>
-                            <th>AJUSTES</th>
+                            <td><?php echo $categorias['id'] ?></td>
+                            <td><?php echo $categorias['categoriaNombre'] ?></td>
+                            <td>
+                              <form method="POST">
+                                <input type="hidden" name="txtID" value="<?php echo $categorias['id'] ?>">
+                                <input type="submit" name="action" value="Seleccionar" class="btn btn-warning btn-sm"></input>
+                                <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm"></input>
+                              </form>
+                            </td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          <?php foreach ($ListCategory as $categorias) { ?>
-                            <tr>
-                              <td><?php echo $categorias['id'] ?></td>
-                              <td><?php echo $categorias['categoriaNombre'] ?></td>
-                              <td>
-                                <form method="POST">
-                                  <input type="hidden" name="txtID" value="<?php echo $categorias['id'] ?>">
-                                  <input type="submit" name="action" value="Seleccionar" class="btn btn-warning btn-sm"></input>
-                                  <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm"></input>
-                                </form>
-                              </td>
-                            </tr>
-                          <?php } ?>
-                        </tbody>
-                      </table>
-                    </div>
+                        <?php } ?>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>

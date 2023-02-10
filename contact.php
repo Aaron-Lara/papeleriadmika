@@ -80,8 +80,6 @@ try {
 }
 ?>
 <html lang="en">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
 
@@ -163,12 +161,14 @@ try {
                     <a href="cart.php" class="icons">
                       <i class="ti-shopping-cart"></i>
                     </a>
+                  <li>
+                  </li>
                   </li>
                   <li class="nav-item">
                     <?php
                     if (isset($_SESSION['user'])) {
                       $user = $_SESSION['user'];
-                      echo "Welcome, " . $user['clienteNombre'] . "!";
+                      echo "Bienvenido, " . $user['clienteNombre'] . "!";
                       echo '<a href="index.php?logout=1" class="icons">';
                       echo '<i class="ti-power-off" aria-hidden="true"></i>';
                       echo '</a>';

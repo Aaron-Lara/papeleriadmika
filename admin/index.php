@@ -171,7 +171,7 @@
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="bi bi-box-arrow-right fa-5x" style="margin: 10px"></i>
+                        <i class="bi bi-box-arrow-right fa-5x" style="color:red; margin: 10px"></i>
                       </div>
                     </div>
                   </div>

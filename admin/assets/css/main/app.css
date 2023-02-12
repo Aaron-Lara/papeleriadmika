@@ -4374,7 +4374,7 @@ fieldset:disabled .btn {
     border-top: 0;
 }
 .card-body {
-    color: black;
+    color: #71cd14;
     flex: 1 1 auto;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
 }
@@ -16975,7 +16975,7 @@ body .bi:before {
     padding: 2rem 2rem 1rem;
 }
 .sidebar-wrapper .sidebar-header img {
-    height: 3.8rem;
+    height: 3rem;
 }
 .sidebar-wrapper .sidebar-toggler.x {
     display: none;

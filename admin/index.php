@@ -165,7 +165,7 @@
                   </div>
                 </div>
               </div>
-              <div id="logout-id" class="col-8 col-lg-4 col-md-8">
+              <div id="logout-div" class="col-8 col-lg-4 col-md-8">
                 <div class="card">
                   <div class="card-body px-4 py-4-5">
                     <div class="row">

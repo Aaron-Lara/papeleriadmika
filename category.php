@@ -141,24 +141,10 @@ if (isset($_GET['logout'])) {
     <div class="container">
       <div class="row flex-row-reverse">
         <div class="col-lg-9">
-          <div class="product_top_bar">
-            <div class="left_dorp">
-              <select class="sorting">
-                <option value="1">Default sorting</option>
-                <option value="2">Default sorting 01</option>
-                <option value="4">Default sorting 02</option>
-              </select>
-              <select class="show">
-                <option value="1">Show 12</option>
-                <option value="2">Show 14</option>
-                <option value="4">Show 16</option>
-              </select>
-            </div>
-          </div>
 
           <div class="latest_product_inner">
             <div class="row">
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i1.jpg" alt="" />
@@ -180,13 +166,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i2.jpg" alt="" />
@@ -208,13 +193,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i3.jpg" alt="" />
@@ -236,13 +220,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i4.jpg" alt="" />
@@ -264,13 +247,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i5.jpg" alt="" />
@@ -292,13 +274,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i6.jpg" alt="" />
@@ -320,13 +301,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i7.jpg" alt="" />
@@ -348,13 +328,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i8.jpg" alt="" />
@@ -376,13 +355,12 @@ if (isset($_GET['logout'])) {
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6">
+              <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
                     <img class="card-img" src="img/product/inspired-product/i2.jpg" alt="" />
@@ -398,15 +376,6 @@ if (isset($_GET['logout'])) {
                       </a>
                     </div>
                   </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -417,30 +386,21 @@ if (isset($_GET['logout'])) {
           <div class="left_sidebar_area">
             <aside class="left_widgets p_filter_widgets">
               <div class="l_w_title">
-                <h3>Browse Categories</h3>
+                <h3>Categorias</h3>
               </div>
               <div class="widgets_inner">
                 <ul class="list">
                   <li>
-                    <a href="#">Frozen Fish</a>
+                    <a href="#">Cuadernos y Libretas</a>
                   </li>
                   <li>
-                    <a href="#">Dried Fish</a>
+                    <a href="#">Manualidades</a>
                   </li>
                   <li>
-                    <a href="#">Fresh Fish</a>
+                    <a href="#">Artículos para Dibujo</a>
                   </li>
                   <li>
-                    <a href="#">Meat Alternatives</a>
-                  </li>
-                  <li>
-                    <a href="#">Fresh Fish</a>
-                  </li>
-                  <li>
-                    <a href="#">Meat Alternatives</a>
-                  </li>
-                  <li>
-                    <a href="#">Meat</a>
+                    <a href="#">Artículos de Oficina</a>
                   </li>
                 </ul>
               </div>
@@ -448,24 +408,24 @@ if (isset($_GET['logout'])) {
 
             <aside class="left_widgets p_filter_widgets">
               <div class="l_w_title">
-                <h3>Product Brand</h3>
+                <h3>Filtro de color</h3>
               </div>
               <div class="widgets_inner">
                 <ul class="list">
                   <li>
-                    <a href="#">Apple</a>
+                    <a href="#">Negro</a>
                   </li>
                   <li>
-                    <a href="#">Asus</a>
+                    <a href="#">Azul</a>
                   </li>
                   <li class="active">
-                    <a href="#">Gionee</a>
+                    <a href="#">Rojo</a>
                   </li>
                   <li>
-                    <a href="#">Micromax</a>
+                    <a href="#">Amarillo</a>
                   </li>
                   <li>
-                    <a href="#">Samsung</a>
+                    <a href="#">Verde</a>
                   </li>
                 </ul>
               </div>
@@ -473,32 +433,7 @@ if (isset($_GET['logout'])) {
 
             <aside class="left_widgets p_filter_widgets">
               <div class="l_w_title">
-                <h3>Color Filter</h3>
-              </div>
-              <div class="widgets_inner">
-                <ul class="list">
-                  <li>
-                    <a href="#">Black</a>
-                  </li>
-                  <li>
-                    <a href="#">Black Leather</a>
-                  </li>
-                  <li class="active">
-                    <a href="#">Black with red</a>
-                  </li>
-                  <li>
-                    <a href="#">Gold</a>
-                  </li>
-                  <li>
-                    <a href="#">Spacegrey</a>
-                  </li>
-                </ul>
-              </div>
-            </aside>
-
-            <aside class="left_widgets p_filter_widgets">
-              <div class="l_w_title">
-                <h3>Price Filter</h3>
+                <h3>Filtrar precio</h3>
               </div>
               <div class="widgets_inner">
                 <div class="range_item">

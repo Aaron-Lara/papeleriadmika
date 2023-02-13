@@ -62,12 +62,12 @@ if (isset($_POST["login"])) {
         <h2>Iniciar Sesión</h2>
         <form action="login.php" method="POST" class="form">
           <div class="f_row">
-            <label for="email">Email:</label>
+            <label for="email">Correo:</label>
             <input type="email" id="email" name="email" class="input-field">
             <u></u>
           </div>
           <div class="f_row last">
-            <label for="password">Password:</label>
+            <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" class="input-field">
             <u></u>
           </div>
@@ -76,35 +76,35 @@ if (isset($_POST["login"])) {
       </div>
       <div class="box registerBox" style="overflow-y: auto;">
         <span class="reg_bg"></span>
-        <h2>Register</h2>
+        <h2>Registro</h2>
         <form action="register.php" method="post" class="form">
           <div class="f_row">
-            <label for="name">Name:</label>
+            <label for="name">Nombre:</label>
             <input type="text" name="name" id="name" class="input-field" required>
             <u><u>
           </div>
           <div class="f_row">
-            <label for="apellidos">Last Name:</label>
+            <label for="apellidos">Apellido:</label>
             <input type="text" name="apellidos" id="apellidos" class="input-field" required>
             <u><u>
           </div>
           <div class="f_row">
-            <label for="correo">Email:</label>
+            <label for="correo">Correo:</label>
             <input type="email" name="correo" id="correo" class="input-field" required>
             <u><u>
           </div>
           <div class="f_row">
-            <label for="tel">Phone Number:</label>
+            <label for="tel">Telefono:</label>
             <input type="tel" name="tel" id="tel" class="input-field" required>
             <u><u>
           </div>
           <div class="f_row">
-            <label for="password1">Password:</label>
+            <label for="password1">Contraseña:</label>
             <input type="password" name="password1" id="password1" class="input-field" required>
             <u><u>
           </div>
           <div class="f_row">
-            <label for="password2">Confirm Password:</label>
+            <label for="password2">Confirmar Contraseña:</label>
             <input type="password" name="password2" id="password2" class="input-field" required>
             <u><u>
           </div>

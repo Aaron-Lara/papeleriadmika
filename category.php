@@ -27,6 +27,7 @@ if (isset($_GET['logout'])) {
   <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css" />
   <!-- main css -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style2.css">
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 
@@ -50,10 +51,10 @@ if (isset($_GET['logout'])) {
             <div class="row w-100 mr-0">
               <div class="col-lg-7 pr-0">
                 <ul class="nav navbar-nav center_nav pull-right">
-                  <li class="nav-item active">
+                  <li class="nav-item">
                     <a class="nav-link" href="index.php">Inicio</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item active">
                     <a href="category.php" class="nav-link">Tienda</a>
                     <!-- <ul class="dropdown-menu">
                       <li class="nav-item">
@@ -524,8 +525,19 @@ if (isset($_GET['logout'])) {
       <div class="row my-4">
         <!--Grid column-->
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-4"><strong>Sobre nosotros</strong></h5>
           <div class="shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 150px; height: 150px;">
-            <!-- <img src="img/logo.jpg" loading="lazy" />  -->
+            <p>Este proyecto nace al querer cumplir un gran sueño, el cual es ser una papelería útil</p>
+            <p></p>
+          </div>
+          <div class="mt-4">
+            <!-- Facebook -->
+            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+            <!-- Twitter -->
+            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+            <!-- Google + -->
+            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+            <!-- Linkedin -->
           </div>
         </div>
         <!--Grid column-->

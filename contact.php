@@ -287,8 +287,19 @@ try {
       <div class="row my-4">
         <!--Grid column-->
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <div class="shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 150px; height: 150px">
-            <!-- <img src="img/logo.jpg" loading="lazy" />  -->
+          <h5 class="text-uppercase mb-4"><strong>Sobre nosotros</strong></h5>
+          <div class="shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 150px; height: 150px;">
+            <p>Este proyecto nace al querer cumplir un gran sueño, el cual es ser una papelería útil</p>
+            <p></p>
+          </div>
+          <div class="mt-4">
+            <!-- Facebook -->
+            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+            <!-- Twitter -->
+            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+            <!-- Google + -->
+            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+            <!-- Linkedin -->
           </div>
         </div>
         <!--Grid column-->

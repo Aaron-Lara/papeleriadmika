@@ -16439,6 +16439,46 @@ body .bi:before {
     transform: scale(1.1);
     cursor: pointer;
 }
+#producto-div {
+    transition: all 0.2s ease-in-out;
+}
+
+#producto-div:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+#cliente-div {
+    transition: all 0.2s ease-in-out;
+}
+
+#cliente-div:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+#user-div {
+    transition: all 0.2s ease-in-out;
+}
+
+#user-div:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+#tipo-div {
+    transition: all 0.2s ease-in-out;
+}
+
+#tipo-div:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+#categoria-div {
+    transition: all 0.2s ease-in-out;
+}
+
+#categoria-div:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
 .card.card-statistic {
     background: linear-gradient(180deg, #25a6f1, #54b9ff);
     box-shadow: 1px 2px 5px rgba(47, 170, 244, 0.5);

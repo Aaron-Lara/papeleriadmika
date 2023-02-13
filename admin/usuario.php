@@ -7,7 +7,6 @@ include '../global/dbconnection.php';
 <?php
 $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtnombre = (isset($_POST['txtnombre'])) ? $_POST['txtnombre'] : "";
-$txtapellido = (isset($_POST['txtapellido'])) ? $_POST['txtapellido'] : "";
 $txtcorreo = (isset($_POST['txtcorreo'])) ? $_POST['txtcorreo'] : "";
 $txtcontraseña = (isset($_POST['txtcontraseña'])) ? $_POST['txtcontraseña'] : "";
 $txtnumero = (isset($_POST['txtnumero'])) ? $_POST['txtnumero'] : "";
@@ -17,10 +16,9 @@ $action = (isset($_POST['action'])) ? $_POST['action'] : "";
 switch ($action) {
   case 'Añadir':
     $hash = password_hash($txtcontraseña, PASSWORD_DEFAULT);
-    $InsertQuery = $pdo->prepare("INSERT INTO usuario (usuarioNombre, usuarioApellido, usuarioEmial, usuarioPw, tipoID)  
-    VALUES (:Usuarioname, :Usuariolastname, :Usuarioemail, :Usuariopass, :tipoid)");
+    $InsertQuery = $pdo->prepare("INSERT INTO usuario (usuarioNombre, usuarioEmial, usuarioPw, tipoID)  
+    VALUES (:Usuarioname, :Usuarioemail, :Usuariopass, :tipoid)");
     $InsertQuery->bindParam(':Usuarioname', $txtnombre);
-    $InsertQuery->bindParam(':Usuariolastname', $txtapellido);
     $InsertQuery->bindParam(':Usuarioemail', $txtcorreo);
     $InsertQuery->bindParam(':Usuariopass', $hash);
     $InsertQuery->bindParam(':tipoid', $txttipoID);
@@ -28,11 +26,11 @@ switch ($action) {
     break;
   case 'Modificar':
     $hash = password_hash($txtcontraseña, PASSWORD_DEFAULT);
-    $ModifyQuery = $pdo->prepare("UPDATE usuario SET usuarioNombre = :Usuarioname, usuarioApellido = :UsuarioLastname, 
+    $ModifyQuery = $pdo->prepare("UPDATE usuario SET usuarioNombre = :Usuarioname, 
     usuarioEmial = :Usuarioemail, usuarioPw = :Usuariopass, tipoID = :tipoid  WHERE id=:id");
     $ModifyQuery->bindParam(':id', $txtID);
     $ModifyQuery->bindParam(':Usuarioname', $txtnombre);
-    $ModifyQuery->bindParam(':UsuarioLastname', $txtapellido);
+    $ModifyQuery->bindParam(':UsuarioLastname', );
     $ModifyQuery->bindParam(':Usuarioemail', $txtcorreo);
     $ModifyQuery->bindParam(':Usuariopass', $hash);
     $ModifyQuery->bindParam(':tipoid', $txttipoID);
@@ -49,7 +47,6 @@ switch ($action) {
     $SelectQuery->execute();
     $AUsuario = $SelectQuery->fetch(PDO::FETCH_LAZY);
     $txtnombre = $AUsuario['usuarioNombre'];
-    $txtapellido = $AUsuario['usuarioApellido'];
     $txtcorreo = $AUsuario['usuarioEmial'];
     $txtcontraseña = $AUsuario['usuarioPw'];
     $txttipoID = $AUsuario['tipoID'];
@@ -197,17 +194,6 @@ switch ($action) {
                             </div>
                             <div class="col-12">
                               <div class="form-group has-icon-left">
-                                <label>Apellidos</label>
-                                <div class="position-relative">
-                                  <input type="text" name="txtapellido" id="txtapellido" value="<?php echo $txtapellido; ?>" class="form-control" />
-                                  <div class="form-control-icon">
-                                    <i class="fa-solid fa-keyboard"></i>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group has-icon-left">
                                 <label>Email</label>
                                 <div class="position-relative">
                                   <input type="email" name="txtcorreo" id="txtcorreo" value="<?php echo $txtcorreo; ?>" class="form-control" />
@@ -291,7 +277,6 @@ switch ($action) {
                         <tr>
                           <th>ID</th>
                           <th>NOMBRE</th>
-                          <th>APELLIDOS</th>
                           <th>EMAIL</th>
                           <th>CONTRASEÑA</th>
                           <th>TIPO</th>
@@ -303,7 +288,6 @@ switch ($action) {
                           <tr>
                             <td><?php echo $usuarios['id'] ?></td>
                             <td><?php echo $usuarios['usuarioNombre'] ?></td>
-                            <td><?php echo $usuarios['usuarioApellido'] ?></td>
                             <td><?php echo $usuarios['usuarioEmial'] ?></td>
                             <td><?php echo $usuarios['usuarioPw'] ?></td>
                             <td><?php

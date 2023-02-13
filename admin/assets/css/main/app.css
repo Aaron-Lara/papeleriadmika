@@ -16430,6 +16430,13 @@ body .bi:before {
 .card {
     border: none;
     margin-bottom: 2.2rem;
+}
+#logout-div {
+    transition: all 0.2s ease-in-out;
+}
+
+#logout-div:hover {
+    transform: scale(1.1);
     cursor: pointer;
 }
 .card.card-statistic {

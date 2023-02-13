@@ -21,12 +21,27 @@ if (isset($_POST["login"])) {
         $message = "Incorrect email or password";
       }
     } else {
-      $message = "Incorrect email or password";
+      $query = $pdo->prepare("SELECT * FROM usuario WHERE usuarioEmial = :email");
+      $query->bindParam(":email", $email);
+      $query->execute();
+      if ($query->rowCount() > 0) {
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($password, $user['usuarioPw'])) {
+          $_SESSION['user'] = $user;
+          header("Location: admin/index.php");
+          exit;
+        } else {
+          $message = "Incorrect email or password";
+        }
+      } else {
+        $message = "Incorrect email or password";
+      }
     }
   } else {
     $message = "You tried to submit an empty form";
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

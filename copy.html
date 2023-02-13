@@ -1,53 +1,21 @@
-<?php
-if (isset($_POST["registro"])) {
-  if (!empty($_POST['name']) && !empty($_POST['apellidos']) && !empty($_POST['correo']) && !empty($_POST['tel']) && !empty($_POST['password1']) && !empty($_POST['password2'])) {
-    $Nombre = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-    $Apellido = filter_var($_POST['apellidos'], FILTER_SANITIZE_STRING);
-    $correo = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
-    $telefono = filter_var($_POST['tel'], FILTER_SANITIZE_STRING);
-    $password1 = $_POST['password1'];
-    $password2 = $_POST['password2'];
-
-    if ($password1 === $password2) {
-      $password_hash = password_hash($password1, PASSWORD_BCRYPT);
-      $query = $pdo->prepare("SELECT * FROM clientes WHERE clienteEmail = :email");
-      $query->bindParam(":email", $correo);
-      $query->execute();
-
-      if ($query->rowCount() === 0) {
-        $query = $pdo->prepare("INSERT INTO clientes (clienteNombre, clienteApellido, clienteEmail, clientePw, clienteTel, fechaRegistro)
-        VALUES(:nombre, :apellido, :correo, :password_hash, :numero, now());");
-        $query->bindParam(":nombre", $Nombre);
-        $query->bindParam(":apellido", $Apellido);
-        $query->bindParam(":correo", $correo);
-        $query->bindParam(":numero", $telefono);
-        $query->bindParam(":password_hash", $password_hash);
-        $result = $query->execute();
-
-        if ($result) {
-          $message = "Cuenta correctamente creada";
-        } else {
-          $message = "Error al ingresar los datos, intenta de nuevo!";
-        }
-      } else {
-        $message = "El correo ya se encuentra registrado";
-      }
-    } else {
-      $message = "Las contraseñas no coinciden... Intenta de nuevo";
-    }
-  } else {
-    $message = "Intentaste enviar el formulario vacio";
-  }
-}
-?>
-
-<h2>Register</h2>
-        <form method="POST" class="form">
-          <div class="f_row">
-            <label>Nombre</label>
-            <input type="text" name="name" class="input-field" required>
-            <u></u>
-          </div>
-          <div class="f_row">
-            <label>Apellido</label>
-            <
+<div id="logout-div" class="col-8 col-lg-4 col-md-8">
+                <div class="card">
+                  <div class="card-body px-4 py-4-5">
+                    <div class="row">
+                      <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
+                      <div style="text-align: center">
+                        <?php if (isset($_SESSION['user'])) {
+                            echo '<a href="index.php?logout=1" style="color:red;">';
+                            echo '<i class="bi bi-box-arrow-right fa-5x" style="margin: 10px"></i>';
+                            echo '</a>';
+                        } else {
+                            echo '<a href="login.php" class="icons">';
+                            echo '<i class="ti-user" aria-hidden="true"></i>';
+                            echo '</a>';
+                        }
+                        ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>

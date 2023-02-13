@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_GET['logout'])) {
+  session_destroy();
+  header("Location: login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
@@ -171,7 +179,16 @@
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
                       <div style="text-align: center">
-                        <i class="bi bi-box-arrow-right fa-5x" style="color:red; margin: 10px"></i>
+                        <?php if (isset($_SESSION['user'])) {
+                          echo '<a href="logout.php" style="color:red;">';
+                          echo '<i class="bi bi-box-arrow-right fa-5x" style="margin: 10px"></i>';
+                          echo '</a>';
+                        } else {
+                          echo '<a href="../login.php" class="icons">';
+                          echo '<i class="ti-user" aria-hidden="true"></i>';
+                          echo '</a>';
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -218,9 +235,6 @@
     });
     document.getElementById("tipo-div").addEventListener("click", function() {
       window.location.href = "tipoUsuario.php";
-    });
-    document.getElementById("logout-div").addEventListener("click", function() {
-      window.location.href = "../index.php";
     });
   </script>
 </body>

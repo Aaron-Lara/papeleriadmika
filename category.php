@@ -148,7 +148,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i1.jpg" alt="" />
+                    <img class="card-img" src="img/lapiz.jpg" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -163,7 +163,7 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Lapiz</h4>
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
@@ -175,7 +175,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i2.jpg" alt="" />
+                    <img class="card-img" src="img/Cartulina-bristol-blanca.jpeg" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -190,10 +190,10 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Cartulina blanca</h4>
                     </a>
                     <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
+                      <span class="mr-4">$30.00</span>
                     </div>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i3.jpg" alt="" />
+                    <img class="card-img" src="img/cuaderno.webp" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -217,10 +217,10 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Cuaderno</h4>
                     </a>
                     <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
+                      <span class="mr-4">$39.00</span>
                     </div>
                   </div>
                 </div>
@@ -229,7 +229,8 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i4.jpg" alt="" />
+                    <img class="card-img" src="img/corrector.webp
+                    " alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -244,10 +245,10 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Corrector</h4>
                     </a>
                     <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
+                      <span class="mr-4">$27.00</span>
                     </div>
                   </div>
                 </div>
@@ -256,7 +257,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i5.jpg" alt="" />
+                    <img class="card-img" src="img/marcadores.jfif" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -271,10 +272,10 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Marcadores</h4>
                     </a>
                     <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
+                      <span class="mr-4">$31.00</span>
                     </div>
                   </div>
                 </div>
@@ -283,7 +284,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i6.jpg" alt="" />
+                    <img class="card-img" src="img/pegamento.webp" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -298,7 +299,7 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Pegamento</h4>
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
@@ -310,7 +311,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i7.jpg" alt="" />
+                    <img class="card-img" src="img/sacapuntas.jpg" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -325,10 +326,10 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Sacapuntas</h4>
                     </a>
                     <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
+                      <span class="mr-4">$20.00</span>
                     </div>
                   </div>
                 </div>
@@ -337,7 +338,7 @@ if (isset($_GET['logout'])) {
               <div class="col-lg-6 col-md-6">
                 <div class="single-product">
                   <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i8.jpg" alt="" />
+                    <img class="card-img" src="img/pluma.jpg" alt="" />
                     <div class="p_icon">
                       <a href="#">
                         <i class="ti-eye"></i>
@@ -352,29 +353,10 @@ if (isset($_GET['logout'])) {
                   </div>
                   <div class="product-btm">
                     <a href="#" class="d-block">
-                      <h4>Latest men’s sneaker</h4>
+                      <h4>Pluma</h4>
                     </a>
                     <div class="mt-3">
                       <span class="mr-4">$25.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/product/inspired-product/i2.jpg" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
                     </div>
                   </div>
                 </div>

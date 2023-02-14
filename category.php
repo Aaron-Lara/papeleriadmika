@@ -13,6 +13,7 @@ if (isset($_GET['logout'])) {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="icon" href="img/favicon.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
   <title>Papelería D Mika</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css" />
@@ -467,11 +468,11 @@ if (isset($_GET['logout'])) {
           </div>
           <div class="mt-4">
             <!-- Facebook -->
-            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+            <a type="button" class="btn btn-floating btn-success btn-lg"><i class="fab fa-facebook-f"></i></a>
             <!-- Twitter -->
-            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+            <a type="button" class="btn btn-floating btn-success btn-lg"><i class="fab fa-twitter"></i></a>
             <!-- Google + -->
-            <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+            <a type="button" class="btn btn-floating btn-success btn-lg"><i class="fab fa-google-plus-g"></i></a>
             <!-- Linkedin -->
           </div>
         </div>

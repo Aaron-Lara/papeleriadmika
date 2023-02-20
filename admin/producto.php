@@ -38,7 +38,7 @@ switch ($action) {
     $ImgTmp = $_FILES["txtimagen"]["tmp_name"];
     if ($ImgTmp != "") {
       if (isset($_FILES["txtimagen"]) && $_FILES["txtimagen"]["error"] == UPLOAD_ERR_OK) {
-        move_uploaded_file($ImgTmp, "../img/productosImg/" . $ImgFileName);
+        move_uploaded_file($ImgTmp, "assets/images/" . $ImgFileName);
       } else {
         echo "No file was uploaded";
       }
@@ -66,15 +66,15 @@ switch ($action) {
       $ImgFileName = ($txtimagen != "") ? $date->getTimestamp() . "_" . $_FILES["txtimagen"]["name"] : "";
       $ImgTmp = $_FILES["txtimagen"]["tmp_name"];
       if ($ImgTmp != "") {
-        move_uploaded_file($ImgTmp, "../img/productosImg/" . $ImgFileName);
+        move_uploaded_file($ImgTmp, "assets/images/" . $ImgFileName);
       }
       $ModifyQuery = $pdo->prepare("SELECT productoImg FROM productos WHERE id=:id");
       $ModifyQuery->bindParam(':id', $txtID);
       $ModifyQuery->execute();
       $Producto = $ModifyQuery->fetch(PDO::FETCH_LAZY);
       if (isset($Producto["productoImg"]) && ($Producto["productoImg"] != "productoImg.jpg")) {
-        if (file_exists("../img/productosImg/" . $Producto['productoImg'])) {
-          unlink("../img/productosImg/" . $Producto['productoImg']);
+        if (file_exists("assets/images/" . $Producto['productoImg'])) {
+          unlink("assets/images/" . $Producto['productoImg']);
         }
       }
       $ModifyQuery = $pdo->prepare("UPDATE productos SET productoImg =:Productoimg WHERE id =:id");
@@ -95,8 +95,8 @@ switch ($action) {
     $Producto = $DeleteQuery->fetch(PDO::FETCH_LAZY);
 
     if (isset($Producto["productoImg"]) && ($Producto["productoImg"] != "image.jpg")) {
-      if (file_exists("../img/productosImg/" . $Producto['productoImg'])) {
-        unlink("../img/productosImg/" . $Producto['productoImg']);
+      if (file_exists("assets/images/" . $Producto['productoImg'])) {
+        unlink("assets/images/" . $Producto['productoImg']);
       }
     }
     $DeleteQuery = $pdo->prepare("DELETE FROM productos  WHERE id=:id");
@@ -380,7 +380,7 @@ switch ($action) {
                           <td><?php echo $productos['productoPrecio'] ?></td>
                           <td><?php echo $productos['productoDetalles'] ?></td>
                           <td><?php echo $productos['productoQTY'] ?></td>
-                          <td><img src="../img/productosImg/<?php echo $productos['productoImg']; ?>" width="50%"></td>
+                          <td><img src="assets/images/<?php echo $productos['productoImg']; ?>" width="50%"></td>
                           <td>
                             <?php
                             $CategoryQuery = $pdo->prepare("SELECT categoriaNombre FROM categorias WHERE id=?");

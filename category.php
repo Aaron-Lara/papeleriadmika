@@ -4,7 +4,11 @@ if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");
 }
+include 'global/serverconfiguration.php';
+include 'global/dbconnection.php';
+include 'carrito.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,7 @@ if (isset($_GET['logout'])) {
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="icon" href="img/favicon.png" type="image/png" />
+  <link rel="icon" hrefassets/images/favicon.png" type="image/png" />
   <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
   <title>Papelería D Mika</title>
   <!-- Bootstrap CSS -->
@@ -40,8 +44,7 @@ if (isset($_GET['logout'])) {
         <nav class="navbar navbar-expand-lg navbar-light w-100">
           <!-- Brand and toggle get grouped for better mobile display -->
           <a class="navbar-brand logo_h" href="index.php">
-            <img src="img/logo.jpg" alt="" />
-          </a>
+            <img src="img/logo.jpg" alt="" /> </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -93,7 +96,11 @@ if (isset($_GET['logout'])) {
                     <?php
                     if (isset($_SESSION['user'])) {
                       $user = $_SESSION['user'];
-                      echo "Bienvenido, " . $user['clienteNombre'] . "!";
+                      if (isset($user['clienteNombre'])) {
+                        echo "Bienvenido, " . $user['clienteNombre'] . "!";
+                      } elseif (isset($user['usuarioNombre'])) {
+                        echo "Bienvenido, " . $user['usuarioNombre'] . "!";
+                      }
                       echo '<a href="index.php?logout=1" class="icons">';
                       echo '<i class="ti-power-off" aria-hidden="true"></i>';
                       echo '</a>';
@@ -140,231 +147,7 @@ if (isset($_GET['logout'])) {
   <!--================Category Product Area =================-->
   <section class="cat_product_area section_gap">
     <div class="container">
-      <div class="row flex-row-reverse">
-        <div class="col-lg-9">
-
-          <div class="latest_product_inner">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/lapiz.jpg" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Lapiz</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/Cartulina-bristol-blanca.jpeg" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Cartulina blanca</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$30.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/cuaderno.webp" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Cuaderno</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$39.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/corrector.webp
-                    " alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Corrector</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$27.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/marcadores.jfif" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Marcadores</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$31.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/pegamento.webp" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Pegamento</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/sacapuntas.jpg" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Sacapuntas</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$20.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="img/pluma.jpg" alt="" />
-                    <div class="p_icon">
-                      <a href="#">
-                        <i class="ti-eye"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-heart"></i>
-                      </a>
-                      <a href="#">
-                        <i class="ti-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Pluma</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="row">
         <div class="col-lg-3">
           <div class="left_sidebar_area">
             <aside class="left_widgets p_filter_widgets">
@@ -430,7 +213,64 @@ if (isset($_GET['logout'])) {
             </aside>
           </div>
         </div>
+
+        <div class="col-lg-9">
+          <?php
+          $ProductoQuery = $pdo->prepare("SELECT * FROM productos");
+          $ProductoQuery->execute();
+          $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
+          ?>
+          <?php if (!empty($mensaje)) : ?>
+            <div class="alert alert-success">
+              <?php echo $mensaje; ?>
+              <a href="cart.php" class="badge badge-success">Ver carrito</a>
+            </div>
+          <?php endif; ?>
+
+          <div class="latest_product_inner">
+            <div class="row">
+              <?php foreach ($ListProducto as $producto) : ?>
+                <div class="col-lg-4 col-md-6">
+                  <div class="single-product">
+                    <div class="product-img">
+                      <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
+                      <div class="p_icon">
+                        <button type="submit" name="action" value="Agregar" class="btn btn-success">
+                          <i class="ti-shopping-cart fa-1x mr-2"></i>
+                          Agregar
+                        </button>
+
+                      </div>
+                    </div>
+                    <div class="product-btm text-center">
+                      <h4 class="reset-anchor"><?php echo $producto['productoNombre']; ?></h4>
+                      <span>$<?php echo $producto['productoPrecio']; ?></span>
+                      <form action="" method="POST">
+                        <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
+                        <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
+                        <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
+                        <input type="hidden" name="imagen" id="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
+                        <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
+                        <div class="d-flex justify-content-center align-items-center">
+                          <i class="fa-solid fa-boxes-stacked fa-2x mr-2"></i>
+                          <div class="mr-2">
+                            <?php if ($producto['productoQTY'] <= 0) : ?>
+                              <span class="badge badge-danger">Agotado</span>
+                            <?php else : ?>
+                              <span class="badge badge-success"><?php echo $producto['productoQTY']; ?></span>
+                            <?php endif; ?>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
     </div>
   </section>
   <!--================End Category Product Area =================-->

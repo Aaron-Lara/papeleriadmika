@@ -99,7 +99,11 @@ if (isset($_GET['logout'])) {
                     <?php
                     if (isset($_SESSION['user'])) {
                       $user = $_SESSION['user'];
-                      echo "Bienvenido, " . $user['clienteNombre'] . "!";
+                      if (isset($user['clienteNombre'])) {
+                        echo "Bienvenido, " . $user['clienteNombre'] . "!";
+                      } elseif (isset($user['usuarioNombre'])) {
+                        echo "Bienvenido, " . $user['usuarioNombre'] . "!";
+                      }
                       echo '<a href="index.php?logout=1" class="icons">';
                       echo '<i class="ti-power-off" aria-hidden="true"></i>';
                       echo '</a>';

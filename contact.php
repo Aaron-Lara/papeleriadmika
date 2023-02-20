@@ -166,7 +166,11 @@ try {
                     <?php
                     if (isset($_SESSION['user'])) {
                       $user = $_SESSION['user'];
-                      echo "Bienvenido, " . $user['clienteNombre'] . "!";
+                      if (isset($user['clienteNombre'])) {
+                        echo "Bienvenido, " . $user['clienteNombre'] . "!";
+                      } elseif (isset($user['usuarioNombre'])) {
+                        echo "Bienvenido, " . $user['usuarioNombre'] . "!";
+                      }
                       echo '<a href="index.php?logout=1" class="icons">';
                       echo '<i class="ti-power-off" aria-hidden="true"></i>';
                       echo '</a>';
@@ -249,7 +253,7 @@ try {
             <input type="text" name="name" id="name" class="input" placeholder="Nombre" />
           </div>
           <div class="social-input-containers">
-            <input type="email" name="email" id="email" class="input" placeholder="Email" />
+            <input type="email" name="email" id="email" class="input" placeholder="Correo" />
           </div>
           <!--
             <div class="social-input-containers">
@@ -263,7 +267,7 @@ try {
             </div>
             -->
           <div class="social-input-containers textarea">
-            <textarea name="message" id="message" class="input" placeholder="message"></textarea>
+            <textarea name="message" id="message" class="input" placeholder="Mensaje"></textarea>
           </div>
           <button type="submit" id="submit" name="submit" value="submit" class="btn" />Enviar</button>
         </form>

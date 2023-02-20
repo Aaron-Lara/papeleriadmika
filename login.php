@@ -72,6 +72,7 @@ if (isset($_POST["login"])) {
             <u></u>
           </div>
           <input type="submit" name="login" value="Login">
+          <input type="button" onclick="location.href='index.php';" value="Cancelar" />
         </form>
       </div>
       <div class="box registerBox" style="overflow-y: auto;">
@@ -109,6 +110,7 @@ if (isset($_POST["login"])) {
             <u><u>
           </div>
           <input type="submit" name="registro" value="Submit">
+          <input type="button" onclick="location.href='index.php';" value="Cancelar" />
         </form>
         <?php if (!empty($message)) { ?>
           <div class="message">

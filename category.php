@@ -8,7 +8,6 @@ include 'global/serverconfiguration.php';
 include 'global/dbconnection.php';
 include 'carrito.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,71 +154,62 @@ include 'carrito.php';
                 <h3>Categorias</h3>
               </div>
               <div class="widgets_inner">
-                <ul class="list">
-                  <li>
-                    <a href="#">Cuadernos y Libretas</a>
-                  </li>
-                  <li>
-                    <a href="#">Manualidades</a>
-                  </li>
-                  <li>
-                    <a href="#">Artículos para Dibujo</a>
-                  </li>
-                  <li>
-                    <a href="#">Artículos de Oficina</a>
-                  </li>
-                </ul>
-              </div>
-            </aside>
-
-            <aside class="left_widgets p_filter_widgets">
-              <div class="l_w_title">
-                <h3>Filtro de color</h3>
-              </div>
-              <div class="widgets_inner">
-                <ul class="list">
-                  <li>
-                    <a href="#">Negro</a>
-                  </li>
-                  <li>
-                    <a href="#">Azul</a>
-                  </li>
-                  <li class="active">
-                    <a href="#">Rojo</a>
-                  </li>
-                  <li>
-                    <a href="#">Amarillo</a>
-                  </li>
-                  <li>
-                    <a href="#">Verde</a>
-                  </li>
-                </ul>
-              </div>
-            </aside>
-
-            <aside class="left_widgets p_filter_widgets">
-              <div class="l_w_title">
-                <h3>Filtrar precio</h3>
-              </div>
-              <div class="widgets_inner">
-                <div class="range_item">
-                  <div id="slider-range"></div>
-                  <div class="">
-                    <label for="amount">Price : </label>
-                    <input type="text" id="amount" readonly />
-                  </div>
-                </div>
+                <form action="" method="post">
+                  <ul class="list">
+                    <li>
+                      <button type="submit" name="filter" value="" class="btn1">Todos</button>
+                    </li>
+                    <li>
+                      <button type="submit" name="filter" value="Cuadernos y Libretas" class="btn1">Cuadernos y Libretas</button>
+                    </li>
+                    <li>
+                      <button type="submit" name="filter" value="Manualidades" class="btn1">Manualidades</button>
+                    </li>
+                    <li>
+                      <button type="submit" name="filter" value="Artículos para Dibujo" class="btn1">Artículos para Dibujo</button>
+                    </li>
+                    <li>
+                      <button type="submit" name="filter" value="Artículos de Oficina" class="btn1">Artículos de Oficina</button>
+                    </li>
+                  </ul>
+                </form>
               </div>
             </aside>
           </div>
         </div>
-
         <div class="col-lg-9">
           <?php
-          $ProductoQuery = $pdo->prepare("SELECT * FROM productos");
+          // Check if filter is set, otherwise set it to an empty string
+          $filter = isset($_POST['filter']) ? $_POST['filter'] : '';
+
+          // Prepare default query to select all products
+          // Prepare default query to select all products
+          $query = "SELECT * FROM productos";
+
+          // If a filter is selected, adjust the query accordingly
+          switch ($filter) {
+            case 'Cuadernos y Libretas':
+              $query = "SELECT * FROM productos WHERE categoriaID = 1";
+              break;
+            case 'Manualidades':
+              $query = "SELECT * FROM productos WHERE categoriaID = 2";
+              break;
+            case 'Artículos para Dibujo':
+              $query = "SELECT * FROM productos WHERE categoriaID = 3";
+              break;
+            case 'Artículos de Oficina':
+              $query = "SELECT * FROM productos WHERE categoriaID = 4";
+              break;
+            default:
+              break;
+          }
+
+          // Execute the query to retrieve the list of products
+          $ProductoQuery = $pdo->prepare($query);
           $ProductoQuery->execute();
           $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
           ?>
+
           <?php if (!empty($mensaje)) : ?>
             <div class="alert alert-success">
               <?php echo $mensaje; ?>
@@ -243,8 +233,12 @@ include 'carrito.php';
                       </div>
                     </div>
                     <div class="product-btm text-center">
-                      <h4 class="reset-anchor"><?php echo $producto['productoNombre']; ?></h4>
-                      <span>$<?php echo $producto['productoPrecio']; ?></span>
+                      <h4 class="reset-anchor">
+                        <?php echo $producto['productoNombre']; ?>
+                      </h4>
+                      <span>$
+                        <?php echo $producto['productoPrecio']; ?>
+                      </span>
                       <form action="" method="POST">
                         <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
                         <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
@@ -257,7 +251,9 @@ include 'carrito.php';
                             <?php if ($producto['productoQTY'] <= 0) : ?>
                               <span class="badge badge-danger">Agotado</span>
                             <?php else : ?>
-                              <span class="badge badge-success"><?php echo $producto['productoQTY']; ?></span>
+                              <span class="badge badge-success">
+                                <?php echo $producto['productoQTY']; ?>
+                              </span>
                             <?php endif; ?>
                           </div>
                         </div>
@@ -270,7 +266,6 @@ include 'carrito.php';
           </div>
         </div>
       </div>
-    </div>
     </div>
   </section>
   <!--================End Category Product Area =================-->

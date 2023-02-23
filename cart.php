@@ -4,6 +4,9 @@ if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");
 }
+    include 'global/serverconfiguration.php';
+    include 'global/dbconnection.php';
+    include 'carrito.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +126,6 @@ if (isset($_GET['logout'])) {
     </div>
   </header>
   <!--================Header Menu Area =================-->
-
   <!--================Home Banner Area =================-->
   <section class="banner_area">
     <div class="banner_inner d-flex align-items-center">
@@ -147,144 +149,116 @@ if (isset($_GET['logout'])) {
     </div>
   </div>
   <h3 class="tittle-w3l">Carrito</h3>
-
   <!--================End Home Banner Area =================-->
-
   <!--================Cart Area =================-->
-  <section class="cart_area">
-    <div class="container">
-      <div class="cart_inner">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Detalles del producto supongo</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                      <i class="lnr lnr-chevron-up"></i>
-                    </button>
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                      <i class="lnr lnr-chevron-down"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Detalles del producto supongo</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                      <i class="lnr lnr-chevron-up"></i>
-                    </button>
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                      <i class="lnr lnr-chevron-down"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Detalles del producto supongo</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                      <i class="lnr lnr-chevron-up"></i>
-                    </button>
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                      <i class="lnr lnr-chevron-down"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr class="bottom_button">
-                <td>
-                  <a class="gray_btn" href="#">Actualizar carrito</a>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>
-                  <h5>Subtotal</h5>
-                </td>
-                <td>
-                  <h5>$2160.00</h5>
-                </td>
-              </tr>
-              <tr class="out_button_area">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div class="checkout_btn_inner">
-                    <a class="gray_btn" href="#">Continuar comprando</a>
-                    <a class="main_btn" href="checkout.php">Proceder a pagar</a>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <section class="py-5">
+    <?php if (!empty($_SESSION['CARRITO'])) { ?>
+      <div class="row">
+
+        <div class="col-lg-12 mb-4 mb-lg-0">
+          <!-- CART TABLE-->
+          <form class="col-md-12" method="post">
+            <div class="table-responsive mb-4">
+              <table class="table text-nowrap">
+                <thead class="bg-light">
+                  <tr>
+                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Producto</strong></th>
+                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Precio</strong></th>
+                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Cantidad</strong></th>
+                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Total</strong></th>
+                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
+                  </tr>
+                </thead>
+                <tbody class="border-0">
+                  <?php $total = 0; ?>
+                  <?php foreach ($_SESSION['CARRITO'] as $indice => $producto) { ?>
+                    <tr>
+                      <th class="ps-0 py-3 border-light" scope="row">
+                        <div class="d-flex align-items-center"><img src="<?php echo 'admin/assets/images/' . $producto['IMAGEN'] ?>" alt="..." width="70" />
+                          <div class="ms-3"><?php echo $producto['NOMBRE'] ?></div>
+                        </div>
+                      </th>
+
+                      <td class="price-pr">
+                        <p id="price">$ <?php echo $producto['PRECIO'] ?></p>
+                      </td>
+                      <td>
+                        <div class="product_count" id="<?php echo $indice; ?>">
+                          <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                          <input class="" type="number" id="quantity" value="<?php echo $producto['CANTIDAD'] ?>" min="0" max="10">
+                          <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                        </div>
+                      </td>
+
+                      <td class="total-pr">
+                        <p id="total">$ <?php echo number_format($producto['PRECIO'] * $producto['CANTIDAD'], 2); ?></p>
+                      </td>
+                      <td class="p-3 align-middle border-light">
+                        <form action="" method="post">
+                          <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['ID'], COD, KEY); ?>">
+                          <button class="btn btn-danger" name="btnAccion" value="Eliminar">Eliminar</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <?php $total = $total + ($producto['PRECIO'] * $producto['CANTIDAD']); ?>
+                  <?php } ?>
+                </tbody>
+              </table>
+
+              <?php
+              if (isset($_SESSION["session_username"])) { //we check if the session username variable has infromation
+                //if it does we display a button that says FINALIZAR PEDIDO,
+                //it will be executed the form action pedir.php code so the order goes to the database
+                echo '<form action="checkout.php" method="post">
+                <input type="hidden" name="help" id="help" value="">
+                <div class="bg-light px-4 py-3">
+                <div class="row align-items-center text-center">
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-warning btn-lg" href="catalogo.php"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continuar buscando</a></div>
+                  <div class="col-md-6 text-md-end"><button class="btn btn-success btn-lg" type="submit" name="btnAccion" value="proceder" href="checkout.php">Proceder al pedido<i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
+                </div>
+              </div>
+                </form>';
+              } else {
+                //but if user is not logged it, we take him to the loggin page using another form action
+                //the button looks the same but we redirect the user to loggin page instead 
+                echo '<form action="login.php" method="post">
+                <div class="bg-light px-4 py-3">
+                <div class="row align-items-center text-center">
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-success btn-lg" href="catalogo.php"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continuar buscando</a></div>
+                  <div class="col-md-6 text-md-end"><button class="btn btn-warning btn-lg" type="submit" name="btnAccion" value="proceder" href="checkout.php">Proceder al pedido<i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
+                </div>
+              </div>
+                </form>';
+              }
+
+              ?>
+            </div>
+          </form>
+          <!-- ORDER TOTAL-->
+          <div class="col-lg-4 col-sm-12">
+            <div class="card border-0 rounded-0 p-lg-4 bg-light">
+              <div class="card-body">
+                <h5 class="text-uppercase mb-4">Total del carrito</h5>
+                <ul class="list-unstyled mb-0" id="">
+                  <li class="border-bottom my-2"></li>
+                  <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong>
+                    <div id="precioTotal">$<?php echo number_format($total, 2); ?></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- CART NAV-->
+
         </div>
+
       </div>
-    </div>
+    <?php } else { ?>
+      <div class="alert alert-success">
+        No hay productos en el carrito..
+      </div>
+    <?php } ?>
   </section>
   <!--================End Cart Area =================-->
 

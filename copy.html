@@ -1,185 +1,135 @@
-<?php
-  $filter = (isset($_POST['filter']))?$_POST['filter']:"";
-?>
-<?php
-  switch ($filter) {
-    case 'Cuadernos':
-       $QueryProductos=$pdo->prepare("SELECT * FROM productos WHERE idcategoria=1");
-       $QueryProductos->execute();
-       $ProductosLista=$QueryProductos->fetchAll(PDO::FETCH_ASSOC);
-      break;
-      case 'Adhesivos':
-        $QueryProductos=$pdo->prepare("SELECT * FROM productos WHERE idcategoria=2");
-       $QueryProductos->execute();
-       $ProductosLista=$QueryProductos->fetchAll(PDO::FETCH_ASSOC);
-        break;
-        case 'Escritura y correccion':
-          $QueryProductos=$pdo->prepare("SELECT * FROM productos WHERE idcategoria=3");
-       $QueryProductos->execute();
-       $ProductosLista=$QueryProductos->fetchAll(PDO::FETCH_ASSOC);
-          break;
-    
-    default:
-    $QueryProductos=$pdo->prepare("SELECT * FROM productos");
-    $QueryProductos->execute();
-    $ProductosLista=$QueryProductos->fetchAll(PDO::FETCH_ASSOC);
-      break;
-  }
-?>
-  <section class="banner_area">
-    <div class="banner_inner d-flex align-items-center">
-      <div class="container">
-        <div class="banner_content d-md-flex justify-content-between align-items-center">
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="services-breadcrumb">
-    <div class="agile_inner_breadcrumb">
-      <div class="container">
-        <ul class="w3_short">
-          <li>
-            <a href="index.php">Inicio</a>
-            <i>|</i>
-          </li>
-          <li>Tienda</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!--================End Home Banner Area =================-->
-  <!--================Category Product Area =================-->
-  <section class="cat_product_area section_gap">
+<section class="cart_area">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="left_sidebar_area">
-            <aside class="left_widgets p_filter_widgets">
-              <div class="l_w_title">
-                <h3>Categorias</h3>
-              </div>
-              <div class="widgets_inner">
-                <form action="" method="post">
-                  <ul class="list">
-                    <li>
-                      <button type="submit" name="filter" value="" class="btn btn-success">Todos</button>
-                    </li>
-                    <li>
-                      <button type="submit" name="filter" value="Cuadernos y Libretas" class="btn btn-success">Cuadernos y
-                        Libretas</button>
-                    </li>
-                    <li>
-                      <button type="submit" name="filter" value="Manualidades"
-                        class="btn btn-success">Manualidades</button>
-                    </li>
-                    <li>
-                      <button type="submit" name="filter" value="Artículos para Dibujo" class="btn btn-success">Artículos
-                        para Dibujo</button>
-                    </li>
-                    <li>
-                      <button type="submit" name="filter" value="Artículos de Oficina" class="btn btn-success">Artículos
-                        de Oficina</button>
-                    </li>
-                  </ul>
-                </form>
-              </div>
-            </aside>
-          </div>
-        </div>
-        <div class="col-lg-9">
-          <?php
-            // Check if filter is set, otherwise set it to an empty string
-            $filter = isset($_POST['filter']) ? $_POST['filter'] : '';
-  
-            // Prepare default query to select all products
-            $query = "SELECT * FROM productos";
-  
-            // If a filter is selected, adjust the query accordingly
-            switch ($filter) {
-              case 'Cuadernos y Libretas':
-                $query = "SELECT * FROM productos WHERE categoriaID = 1";
-                break;
-              case 'Manualidades':
-                $query = "SELECT * FROM productos WHERE categoriaID = 2";
-                break;
-              case 'Artículos para Dibujo':
-                $query = "SELECT * FROM productos WHERE categoriaID = 3";
-                break;
-              case 'Artículos de Oficina':
-                $query = "SELECT * FROM productos WHERE categoriaID = 4";
-                break;
-              default:
-                break;
-            }
-  
-            // Execute the query to retrieve the list of products
-            $ProductoQuery = $pdo->prepare($query);
-            $ProductoQuery->execute();
-            $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
-            ?>
-  
-          <?php if (!empty($mensaje)) : ?>
-          <div class="alert alert-success">
-            <?php echo $mensaje; ?>
-            <a href="cart.php" class="badge badge-success">Ver carrito</a>
-          </div>
-          <?php endif; ?>
-  
-          <div class="latest_product_inner">
-            <div class="row">
-              <?php foreach ($ListProducto as $producto) : ?>
-              <div class="col-lg-4 col-md-6">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>"
-                      alt="...">
-                    <div class="p_icon">
-                      <button type="submit" name="action" value="Agregar" class="btn btn-success">
-                        <i class="ti-shopping-cart fa-1x mr-2"></i>
-                        Agregar
-                      </button>
-  
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="img/product/single-product/cart-1.jpg" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>Detalles del producto supongo</p>
                     </div>
                   </div>
-                  <div class="product-btm text-center">
-                    <h4 class="reset-anchor">
-                      <?php echo $producto['productoNombre']; ?>
-                    </h4>
-                    <span>$
-                      <?php echo $producto['productoPrecio']; ?>
-                    </span>
-                    <form action="" method="POST">
-                      <input type="hidden" name="id" id="id"
-                        value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
-                      <input type="hidden" name="nombre" id="nombre"
-                        value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
-                      <input type="hidden" name="precio" id="precio"
-                        value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
-                      <input type="hidden" name="imagen" id="imagen"
-                        value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
-                      <input type="hidden" name="cantidad" id="cantidad"
-                        value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
-                      <div class="d-flex justify-content-center align-items-center">
-                        <i class="fa-solid fa-boxes-stacked fa-2x mr-2"></i>
-                        <div class="mr-2">
-                          <?php if ($producto['productoQTY'] <= 0) : ?>
-                          <span class="badge badge-danger">Agotado</span>
-                          <?php else : ?>
-                          <span class="badge badge-success">
-                            <?php echo $producto['productoQTY']; ?>
-                          </span>
-                          <?php endif; ?>
-                        </div>
-                      </div>
-                    </form>
+                </td>
+                <td>
+                  <h5>$360.00</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
+                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
+                      <i class="lnr lnr-chevron-up"></i>
+                    </button>
+                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
+                      <i class="lnr lnr-chevron-down"></i>
+                    </button>
                   </div>
-                </div>
-              </div>
-              <?php endforeach; ?>
-            </div>
-          </div>
+                </td>
+                <td>
+                  <h5>$720.00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="img/product/single-product/cart-1.jpg" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>Detalles del producto supongo</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>$360.00</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
+                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
+                      <i class="lnr lnr-chevron-up"></i>
+                    </button>
+                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
+                      <i class="lnr lnr-chevron-down"></i>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <h5>$720.00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="img/product/single-product/cart-1.jpg" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>Detalles del producto supongo</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>$360.00</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
+                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
+                      <i class="lnr lnr-chevron-up"></i>
+                    </button>
+                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
+                      <i class="lnr lnr-chevron-down"></i>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <h5>$720.00</h5>
+                </td>
+              </tr>
+              <tr class="bottom_button">
+                <td>
+                  <a class="gray_btn" href="#">Actualizar carrito</a>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <h5>$2160.00</h5>
+                </td>
+              </tr>
+              <tr class="out_button_area">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="checkout_btn_inner">
+                    <a class="gray_btn" href="#">Continuar comprando</a>
+                    <a class="main_btn" href="checkout.php">Proceder a pagar</a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
     </div>
   </section>

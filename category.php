@@ -154,7 +154,7 @@ include 'carrito.php';
                 <h3>Categorias</h3>
               </div>
               <div class="widgets_inner">
-                <form action="" method="post">
+                <form action="" method="post" class="categoriaid">
                   <ul class="list">
                     <li>
                       <button type="submit" name="filter" value="" class="btn1">Todos</button>

@@ -228,6 +228,11 @@ include 'carrito.php';
                         <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
                         <div class="p_icon">
                           <form action="" method="POST" class="exclude">
+                            <input type="hidden" name="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
+                            <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
+                            <input type="hidden" name="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
+                            <input type="hidden" name="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
+                            <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
                             <button type="submit" name="Añadir" value="Agregar" class="btn btn-success">
                               <i class="ti-shopping-cart fa-1x mr-2"></i>
                               Agregar
@@ -242,12 +247,8 @@ include 'carrito.php';
                         <span>$
                           <?php echo $producto['productoPrecio']; ?>
                         </span>
-                        <form action="" method="POST">
-                          <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
-                          <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
-                          <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
-                          <input type="hidden" name="imagen" id="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
-                          <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
+                        <div>
+                          <h4 class="reset-anchor"> UNIDADES</h4> <br>
                           <div class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-boxes-stacked fa-2x mr-2"></i>
                             <div class="mr-2">
@@ -260,7 +261,7 @@ include 'carrito.php';
                               <?php endif; ?>
                             </div>
                           </div>
-                        </form>
+                        </div>
                       </div>
                     </div>
                   </div>

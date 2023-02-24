@@ -71,7 +71,7 @@ if (isset($_POST["login"])) {
             <input type="password" id="password" name="password" class="input-field">
             <u></u>
           </div>
-          <input type="submit" name="login" value="Login" class="btnLogin">
+          <input type="submit" name="login" value="Iniciar" class="btnLogin">
           <input type="button" onclick="location.href='index.php';" value="Cancelar" class="btnCancelar" />
         </form>
       </div>

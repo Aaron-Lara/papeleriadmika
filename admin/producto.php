@@ -82,7 +82,7 @@ switch ($action) {
       $ModifyQuery->bindParam(':Productoimg', $ImgFileName);
       $ModifyQuery->execute();
     } else {
-      $ModifyQuery = $pdo->prepare("UPDATE productos SET imgProdcutos = :Productoimg WHERE id: id");
+      $ModifyQuery = $pdo->prepare("UPDATE productos SET productoImg = :Productoimg WHERE id: id");
       $ModifyQuery->bindParam(':id', $txtID);
       $ModifyQuery->bindParam(':Productoimg', $txtOldimg);
       $ModifyQuery->execute();

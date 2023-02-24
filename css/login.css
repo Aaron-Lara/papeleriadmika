@@ -11,8 +11,7 @@ body {
   height: 100%;
   width: 100%;
 }
-input,
-button {
+input {
   font-family: sans-serif, Arial;
       font-family: sans-serif, Arial;
         background-color: green;
@@ -20,12 +19,18 @@ button {
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
+        cursor: text;
+}
+input.btnLogin{
+  cursor: pointer;
+  background-color: #71cd14;
+}
+input.btnCancelar{
+  cursor: pointer;
+  background-color: red;
 }
 input:focus,
-button:focus,
-input:active,
-button:active {
+input:active {
   outline: none;
       font-family: sans-serif, Arial;
         background-color: green;

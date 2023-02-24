@@ -1,9 +1,9 @@
 <?php
-if (!defined('KEY')) {
-    define("KEY", "PDMIKA");
-}
 if (!defined('COD')) {
     define("COD", "AES-128-ECB");
+}
+if (!defined('KEY')) {
+    define("KEY", "PDMIKA");
 }
 if (!defined('SERVER')) {
     define("SERVER", "localhost");

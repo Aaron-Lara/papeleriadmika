@@ -4,9 +4,9 @@ if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");
 }
-    include 'global/serverconfiguration.php';
-    include 'global/dbconnection.php';
-    include 'carrito.php';
+include 'global/serverconfiguration.php';
+include 'global/dbconnection.php';
+include 'carrito.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,7 +170,9 @@ if (isset($_GET['logout'])) {
                 </thead>
                 <tbody class="border-0">
                   <?php $total = 0; ?>
+                  
                   <?php foreach ($_SESSION['CARRITO'] as $indice => $producto) { ?>
+                    
                     <tr>
                       <th class="ps-0 py-3 border-light" scope="row">
                         <div class="d-flex align-items-center"><img src="<?php echo 'admin/assets/images/' . $producto['IMAGEN'] ?>" alt="..." width="70" />
@@ -188,16 +190,17 @@ if (isset($_GET['logout'])) {
                         </div>
                       </td>
                       <td class="total-pr">
-                        <p id="total">$ <?php echo number_format($producto['PRECIO'] * $producto['CANTIDAD'], 2); ?></p>
+                        <p id="total">$ <?php echo number_format(intval($producto['PRECIO']) * intval($producto['CANTIDAD']), 2); ?></p>
                       </td>
                       <td class="p-3 align-middle border-light">
-                        <form action="" method="post">
+                        <form action="cart.php" method="post">
                           <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['ID'], COD, KEY); ?>">
-                          <button class="btn btn-danger" name="btnAccion" value="Eliminar">Eliminar</button>
+                          <button class="btn btn-danger" name="action" value="Eliminar">Eliminar</button>
                         </form>
                       </td>
                     </tr>
-                    <?php $total = $total + ($producto['PRECIO'] * $producto['CANTIDAD']); ?>
+                    <?php
+                    $total = $total + (floatval($producto['PRECIO']) * intval($producto['CANTIDAD'])); ?>
                   <?php } ?>
                 </tbody>
               </table>
@@ -209,8 +212,8 @@ if (isset($_GET['logout'])) {
                 <input type="hidden" name="help" id="help" value="">
                 <div class="bg-light px-4 py-3">
                 <div class="row align-items-center text-center">
-                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-warning btn-lg" href="catalogo.php"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continuar buscando</a></div>
-                  <div class="col-md-6 text-md-end"><button class="btn btn-success btn-lg" type="submit" name="btnAccion" value="proceder" href="checkout.php">Proceder al pedido<i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-warning btn-lg" href="category.php"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continuar buscando</a></div>
+                  <div class="col-md-6 text-md-end"><button class="btn btn-success btn-lg" type="submit" name="action" value="proceder" href="checkout.php">Proceder al pedido<i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
                 </div>
               </div>
                 </form>';
@@ -220,8 +223,8 @@ if (isset($_GET['logout'])) {
                 echo '<form action="login.php" method="post">
                 <div class="bg-light px-4 py-3">
                 <div class="row align-items-center text-center">
-                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-success btn-lg" href="catalogo.php"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continuar buscando</a></div>
-                  <div class="col-md-6 text-md-end"><button class="btn btn-warning btn-lg" type="submit" name="btnAccion" value="proceder" href="checkout.php">Proceder al pedido<i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-success btn-lg" href="category.php"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continuar buscando</a></div>
+                  <div class="col-md-6 text-md-end"><button class="btn btn-warning btn-lg" type="submit" name="action" value="proceder" href="checkout.php">Proceder al pedido<i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
                 </div>
               </div>
                 </form>';

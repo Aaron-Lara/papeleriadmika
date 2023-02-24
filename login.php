@@ -71,8 +71,8 @@ if (isset($_POST["login"])) {
             <input type="password" id="password" name="password" class="input-field">
             <u></u>
           </div>
-          <input type="submit" name="login" value="Login">
-          <input type="button" onclick="location.href='index.php';" value="Cancelar" />
+          <input type="submit" name="login" value="Login" class="btnLogin">
+          <input type="button" onclick="location.href='index.php';" value="Cancelar" class="btnCancelar" />
         </form>
       </div>
       <div class="box registerBox" style="overflow-y: auto;">
@@ -109,21 +109,21 @@ if (isset($_POST["login"])) {
             <input type="password" name="password2" id="password2" class="input-field" required>
             <u><u>
           </div>
-          <input type="submit" name="registro" value="Submit">
-          <input type="button" onclick="location.href='index.php';" value="Cancelar" />
+          <input type="submit" name="registro" value="Registro" class="btnLogin">
+          <input type="button" onclick="location.href='index.php';" value="Cancelar" class="btnCancelar" />
         </form>
         <?php if (!empty($message)) { ?>
-          <div class="message">
-            <?php echo $message; ?>
-          </div>
-        <?php } ?>
+          <div class=" message">
+          <?php echo $message; ?>
       </div>
-      <a href="#" class="regTag icon-add">
-        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
-          <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" />
-        </svg>
-      </a>
+    <?php } ?>
     </div>
+    <a href="#" class="regTag icon-add">
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+        <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" />
+      </svg>
+    </a>
+  </div>
   </div>
   <!-- partial -->
   <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

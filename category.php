@@ -210,65 +210,66 @@ include 'carrito.php';
           $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
           ?>
 
-          <?php if($mensaje!=""){?>
-        <div class="alert alert-success">
-          <?php echo $mensaje; ?>
-          <a href="cart.php" class="badge badge-success">Ver carrito</a>
-        </div>
-        <?php } ?>
+          <?php if (isset($mensaje) && $mensaje != "") { ?>
+            <div class="alert alert-success">
+              <?php echo $mensaje; ?>
+              <a href="cart.php" class="badge badge-success">Ver carrito</a>
+            </div>
+          <?php } ?>
+
           <div class="row">
 
-          <div class="latest_product_inner">
-            <div class="row">
-              <?php foreach ($ListProducto as $producto) : ?>
-                <div class="col-lg-4 col-md-6">
-                  <div class="single-product">
-                    <div class="product-img">
-                      <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
-                      <div class="p_icon">
-                        <form action="" method="post" class="exclude">
-                          <button type="submit" name="action" value="Agregar" class="btn btn-success">
-                            <i class="ti-shopping-cart fa-1x mr-2"></i>
-                            Agregar
-                          </button>
+            <div class="latest_product_inner">
+              <div class="row">
+                <?php foreach ($ListProducto as $producto) : ?>
+                  <div class="col-lg-4 col-md-6">
+                    <div class="single-product">
+                      <div class="product-img">
+                        <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
+                        <div class="p_icon">
+                          <form action="" method="POST" class="exclude">
+                            <button type="submit" name="Añadir" value="Agregar" class="btn btn-success">
+                              <i class="ti-shopping-cart fa-1x mr-2"></i>
+                              Agregar
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="product-btm text-center">
+                        <h4 class="reset-anchor">
+                          <?php echo $producto['productoNombre']; ?>
+                        </h4>
+                        <span>$
+                          <?php echo $producto['productoPrecio']; ?>
+                        </span>
+                        <form action="" method="POST">
+                          <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
+                          <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
+                          <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
+                          <input type="hidden" name="imagen" id="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
+                          <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
+                          <div class="d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-boxes-stacked fa-2x mr-2"></i>
+                            <div class="mr-2">
+                              <?php if ($producto['productoQTY'] <= 0) : ?>
+                                <span class="badge badge-danger">Agotado</span>
+                              <?php else : ?>
+                                <span class="badge badge-success">
+                                  <?php echo $producto['productoQTY']; ?>
+                                </span>
+                              <?php endif; ?>
+                            </div>
+                          </div>
                         </form>
                       </div>
                     </div>
-                    <div class="product-btm text-center">
-                      <h4 class="reset-anchor">
-                        <?php echo $producto['productoNombre']; ?>
-                      </h4>
-                      <span>$
-                        <?php echo $producto['productoPrecio']; ?>
-                      </span>
-                      <form action="" method="POST">
-                        <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
-                        <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
-                        <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
-                        <input type="hidden" name="imagen" id="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
-                        <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
-                        <div class="d-flex justify-content-center align-items-center">
-                          <i class="fa-solid fa-boxes-stacked fa-2x mr-2"></i>
-                          <div class="mr-2">
-                            <?php if ($producto['productoQTY'] <= 0) : ?>
-                              <span class="badge badge-danger">Agotado</span>
-                            <?php else : ?>
-                              <span class="badge badge-success">
-                                <?php echo $producto['productoQTY']; ?>
-                              </span>
-                            <?php endif; ?>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
                   </div>
-                </div>
-              <?php endforeach; ?>
+                <?php endforeach; ?>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
   <!--================End Category Product Area =================-->
 

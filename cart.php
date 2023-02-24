@@ -154,7 +154,6 @@ if (isset($_GET['logout'])) {
   <section class="py-5">
     <?php if (!empty($_SESSION['CARRITO'])) { ?>
       <div class="row">
-
         <div class="col-lg-12 mb-4 mb-lg-0">
           <!-- CART TABLE-->
           <form class="col-md-12" method="post">
@@ -178,7 +177,6 @@ if (isset($_GET['logout'])) {
                           <div class="ms-3"><?php echo $producto['NOMBRE'] ?></div>
                         </div>
                       </th>
-
                       <td class="price-pr">
                         <p id="price">$ <?php echo $producto['PRECIO'] ?></p>
                       </td>
@@ -189,7 +187,6 @@ if (isset($_GET['logout'])) {
                           <span class="input-number-increment"> <i class="ti-plus"></i></span>
                         </div>
                       </td>
-
                       <td class="total-pr">
                         <p id="total">$ <?php echo number_format($producto['PRECIO'] * $producto['CANTIDAD'], 2); ?></p>
                       </td>
@@ -204,7 +201,6 @@ if (isset($_GET['logout'])) {
                   <?php } ?>
                 </tbody>
               </table>
-
               <?php
               if (isset($_SESSION["session_username"])) { //we check if the session username variable has infromation
                 //if it does we display a button that says FINALIZAR PEDIDO,

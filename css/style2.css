@@ -168,11 +168,20 @@ form {
     position: relative
 }
 form.categoriaid {
-    color: red;
     padding: 2.3rem 2.2rem;
-        z-index: 10;
-        overflow: hidden;
-        position: relative
+    z-index: 10;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+form:not(.exclude) {
+    padding: 2.3rem 2.2rem;
+    z-index: 10;
+    overflow: hidden;
+    position: relative;
 }
 
 .title {
@@ -245,9 +254,11 @@ textarea.input {
 
 .btn:hover {
     background-color: transparent;
-    color: #fff
+    color: #fff;
 }
 .btn1 {
+    flex: 1 0 25%;
+    margin: 0.5rem;
     padding: 0.6rem 1.3rem;
     background-color: #71cd14;
     border: 2px solid #fff;
@@ -258,12 +269,12 @@ textarea.input {
     outline: none;
     cursor: pointer;
     transition: 0.3s;
-    margin: 0
 }
 
 .btn1:hover {
     background-color: transparent;
-    color: #fff
+    color: #71cd14;
+    border: 2px solid #71cd14;
 }
 
 .social-input-containers span {

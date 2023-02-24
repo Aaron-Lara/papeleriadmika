@@ -210,12 +210,13 @@ include 'carrito.php';
           $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
           ?>
 
-          <?php if (!empty($mensaje)) : ?>
-            <div class="alert alert-success">
-              <?php echo $mensaje; ?>
-              <a href="cart.php" class="badge badge-success">Ver carrito</a>
-            </div>
-          <?php endif; ?>
+          <?php if($mensaje!=""){?>
+        <div class="alert alert-success">
+          <?php echo $mensaje; ?>
+          <a href="cart.php" class="badge badge-success">Ver carrito</a>
+        </div>
+        <?php } ?>
+          <div class="row">
 
           <div class="latest_product_inner">
             <div class="row">
@@ -225,11 +226,12 @@ include 'carrito.php';
                     <div class="product-img">
                       <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
                       <div class="p_icon">
-                        <button type="submit" name="action" value="Agregar" class="btn btn-success">
-                          <i class="ti-shopping-cart fa-1x mr-2"></i>
-                          Agregar
-                        </button>
-
+                        <form action="" method="post" class="exclude">
+                          <button type="submit" name="action" value="Agregar" class="btn btn-success">
+                            <i class="ti-shopping-cart fa-1x mr-2"></i>
+                            Agregar
+                          </button>
+                        </form>
                       </div>
                     </div>
                     <div class="product-btm text-center">

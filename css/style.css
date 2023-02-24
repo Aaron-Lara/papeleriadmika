@@ -3009,7 +3009,7 @@ h6 {
     -o-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
-    background: rgba(113, 205, 20, 0.4);
+    background: #71cd14;
     transition: all 400ms ease;
 }
 .single-product .product-img .p_icon a {

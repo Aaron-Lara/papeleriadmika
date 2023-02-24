@@ -1,5 +1,9 @@
 <?php
-if (isset($_POST['btnAccion'])) 
+ob_start();
+include 'global/serverconfiguration.php';
+include 'global/dbconnection.php';
+$mensaje="";
+if (isset($_POST['action'])) 
 {
     
   switch ($_POST['action'])

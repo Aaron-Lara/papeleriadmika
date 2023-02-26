@@ -180,104 +180,76 @@ include 'carrito.php';
                         </div>
                       </div>
                     </td>
-                    <td>$
-                      <?php echo $producto['PRECIO'] ?>
+                    <td class="price-pr">
+                      <p id="price">$ <?php echo $producto['PRECIO'] ?></p>
                     </td>
                     <td>
                       <div class="product_count" id="<?php echo $indice; ?>">
-                        <input type="number" name="qty" id="sst" maxlength="12" value="<?php echo $producto['CANTIDAD'] ?>" title="Quantity:" class="input-text qty" />
-                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                          <i class="lnr lnr-chevron-up"></i>
-                        </button>
-                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                          <i class="lnr lnr-chevron-down"></i>
-                        </button>
+                        <input type="number" name="qty" id="quantity" maxlength="12" value="<?php echo $producto['CANTIDAD'] ?>" title="Quantity:" class="input-text qty" />
                       </div>
                     </td>
-                    <td>$
-                      <?php echo number_format(intval($producto['PRECIO']) * intval($producto['CANTIDAD']), 2); ?>
+                    <td class="total-pr">
+                      <p id="total">$ <?php echo number_format(intval($producto['PRECIO']) * intval($producto['CANTIDAD']), 2); ?></p>
                     </td>
                     <td>
-                      <form action="cart.php" method="post">
+                      <form action="" method="post">
                         <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['ID'], COD, KEY); ?>">
-                        <button class="btndanger btn-danger" name="action" value="Eliminar">Eliminar</button>
+                        <button type="submit" class="btndanger btn-danger" name="Accion" value="Eliminar">Eliminar</button>
                       </form>
                     </td>
                   </tr>
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <h5>Subtotal</h5>
-                    </td>
-                    <td>
-                      <?php
-                      $total = $total + (floatval($producto['PRECIO']) * intval($producto['CANTIDAD'])); ?>
-                    <?php } ?>
-                    </td>
+                    <?php
+                    $total = $total + (floatval($producto['PRECIO']) * intval($producto['CANTIDAD'])); ?>
+                  <?php } ?>
                   </tr>
                   <tr class="out_button_area">
-                    <td>but</td>
                     <td></td>
                     <td></td>
-                    <td>
-                      <div class="checkout_btn_inner">
-                        <?php
-                        if (isset($_SESSION["session_username"])) {
-                          echo '<form action="checkout.php" method="post">
-                  <input type="hidden" name="help" id="help" value="">
-                  <div class="bg-light px-4 py-3">
-                  <div class="row align-items-center text-center">
-                    <div class="col-md-6 mb-3 mb-md-0 text-md-start">
-                      <a class="main_btn" href="category.php">
-                        <i class="fas fa-long-arrow-alt-left me-2"> </i> Continuar buscando</a>
-                      </div>
-                    <div class="col-md-6 text-md-end">
-                      <button class="main_btn" type="submit" name="action" value="proceder" href="checkout.php"> Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
-                    </div>
-                  </div>
-                </div>
-                  </form>';
-                        } else {
-                          echo '<form action="login.php" method="post">
-                  <div class="bg-light px-4 py-3">
-                  <div class="row align-items-center text-center">
-                    <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="main_btn" href="category.php">
-                    <i class="fas fa-long-arrow-alt-left me-2"> </i> Continuar buscando</a>
-                    </div>
-                    <div class="col-md-6 text-md-end"><button class="main_btn" type="submit" name="action" value="proceder" href="checkout.php"> Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button></div>
-                  </div>
-                </div>
-                  </form>';
-                        }
-                        ?>
-                      </div>
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
               </tbody>
             </table>
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-12 col-sm-12" style="border:2px solid; box-shadow: 0px 0px 15px 0px #d6d6d6;">
               <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                <div class="card-body">
-                  <h5 class="text-uppercase mb-4">Total del carrito</h5>
-                  <ul class="list-unstyled mb-0" id="">
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong>
-                      <div id="precioTotal">$
-                        <?php echo number_format($total, 2); ?>
-                      </div>
-                    </li>
-                  </ul>
+                <div class="card-body d-flex justify-content-between align-items-center">
+                  <div>
+                    <h3 class="text-uppercase mb-4">Total del carrito</h3>
+                    <h5 id="precioTotal">$<?php echo number_format($total, 2); ?></h5>
+                  </div>
+                  <?php
+                  if (isset($_SESSION["user"])) {
+                    echo '<form action="checkout.php" method="post">
+            <input type="hidden" name="help" id="help" value="" />
+            <div class="bg-light px-4 py-3">
+              <a class="main_btn me-3" href="category.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
+              <button class="main_btn" type="submit" name="Accion" value="proceder" href="checkout.php">Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
+            </div>
+          </form>
+        ';
+                  } else {
+                    echo '<form action="login.php" method="post">
+          <div class="bg-light px-4 py-3">
+            <a class="main_btn me-3" href="category.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
+            <button class="main_btn" type="submit" name="Accion" value="proceder" href="checkout.php">Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
+          </div>
+        </form>';
+                  }
+                  ?>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     <?php } else { ?>
-      <div class="alert alert-success">
-        No hay productos en el carrito..
+      <div class="alert alert-success text-uppercase text-center">
+        No hay productos en el carrito
       </div>
+
     <?php } ?>
     </section>
     <!--================End Cart Area =================-->
@@ -383,6 +355,50 @@ include 'carrito.php';
     <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
     <script src="vendors/counter-up/jquery.counterup.js"></script>
     <script src="js/theme.js"></script>
+    <script>
+      const quantities = document.querySelectorAll("#quantity");
+      const prices = document.querySelectorAll("#total");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        quantities.forEach(quantity => {
+          quantity.value = 1;
+          actualizarValue();
+        });
+      });
+
+      quantities.forEach(quantity => {
+        quantity.addEventListener("change", () => {
+          //Poner precios dinamicos
+          const price = quantity.parentElement.parentElement.parentElement.querySelector("#price");
+          const total = quantity.parentElement.parentElement.parentElement.querySelector("#total");
+          const id = quantity.parentElement.id;
+          total.textContent = "$ " + (quantity.value) * (price.textContent.replace("$ ", "").replace(".00", "")) + ".00";
+
+          //Intento de actualizar
+          actualizarValue();
+          actualizarTotal();
+        })
+      });
+
+      function actualizarTotal() {
+        let total = 0;
+        const precioTotal = document.querySelector("#precioTotal");
+        prices.forEach(price => {
+          total += parseInt(price.textContent.replace("$ ", ""));
+        });
+        precioTotal.textContent = "$" + total + ".00";
+      }
+
+      function actualizarValue() {
+        const help = document.querySelector("#help");
+        help.value = "";
+        document.querySelectorAll("#quantity").forEach(element => {
+          const id = element.parentElement.id;
+          help.value += id + "-" + element.value + "/";
+        });
+      }
+    </script>
+
 </body>
 
 </html>

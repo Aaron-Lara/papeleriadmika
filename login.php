@@ -110,7 +110,7 @@ if (isset($_POST["login"])) {
             <u><u>
           </div>
           <input type="submit" name="registro" value="Registro" class="btnLogin">
-          <input type="button" onclick="location.href='index.php';" value="Cancelar" class="btnCancelar" />
+          <input type="button" onclick="location.href='login.php';" value="Cancelar" class="btnCancelar" />
         </form>
         <?php if (!empty($message)) { ?>
           <div class=" message">

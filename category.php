@@ -43,7 +43,8 @@ include 'carrito.php';
         <nav class="navbar navbar-expand-lg navbar-light w-100">
           <!-- Brand and toggle get grouped for better mobile display -->
           <a class="navbar-brand logo_h" href="index.php">
-            <img src="img/logo.jpg" alt="" /> </a>
+            <img src="img/logo.jpg" alt="" />
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -146,16 +147,19 @@ include 'carrito.php';
   <!--================Category Product Area =================-->
   <section class="cat_product_area section_gap">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="left_sidebar_area">
-            <aside class="left_widgets p_filter_widgets">
-              <div class="l_w_title">
-                <h3>Categorias</h3>
-              </div>
-              <div class="widgets_inner">
+      <div class="row justify-content-center">
+        <nav class=" navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="col-lg-12">
+              <div class="left_sidebar_area">
                 <form action="" method="post" class="categoriaid">
-                  <ul class="list">
+                  <h3 style="text-align: center;">Categorias</h3>
+                  <ul class="navbar-nav mr-auto d-flex">
                     <li>
                       <button type="submit" name="filter" value="" class="btn1">Todos</button>
                     </li>
@@ -174,10 +178,10 @@ include 'carrito.php';
                   </ul>
                 </form>
               </div>
-            </aside>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-9">
+        </nav>
+        <div class="col-lg-12">
           <?php
           // Check if filter is set, otherwise set it to an empty string
           $filter = isset($_POST['filter']) ? $_POST['filter'] : '';
@@ -203,22 +207,19 @@ include 'carrito.php';
             default:
               break;
           }
-
-          // Execute the query to retrieve the list of products
           $ProductoQuery = $pdo->prepare($query);
           $ProductoQuery->execute();
           $ListProducto = $ProductoQuery->fetchAll(PDO::FETCH_ASSOC);
           ?>
-
           <?php if (isset($mensaje) && $mensaje != "") { ?>
-            <div class="alert alert-success">
+            <div class="alert alert-success text-uppercase text-center">
               <?php echo $mensaje; ?>
-              <a href="cart.php" class="badge badge-success">Ver carrito</a>
+              <br>
+              <a href="cart.php" class="badge badge-success">VER CARRITO</a>
             </div>
+
           <?php } ?>
-
           <div class="row">
-
             <div class="latest_product_inner">
               <div class="row">
                 <?php foreach ($ListProducto as $producto) : ?>
@@ -233,7 +234,7 @@ include 'carrito.php';
                             <input type="hidden" name="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
                             <input type="hidden" name="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
                             <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
-                            <button type="submit" name="Añadir" value="Agregar" class="btn btn-success">
+                            <button type="submit" name="Accion" value="Agregar" class="btn btn-success">
                               <i class="ti-shopping-cart fa-1x mr-2"></i>
                               Agregar
                             </button>

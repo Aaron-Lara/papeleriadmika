@@ -186,17 +186,8 @@ if (isset($_GET['logout'])) {
                   <div class="card-body px-4 py-4-5">
                     <div class="row">
                       <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"></div>
-                      <div style="text-align: center">
-                        <?php if (isset($_SESSION['user'])) {
-                          echo '<a href="logout.php" style="color:red;">';
-                          echo '<i class="bi bi-box-arrow-right fa-5x" style="margin: 10px"></i>';
-                          echo '</a>';
-                        } else {
-                          echo '<a href="../login.php" class="icons">';
-                          echo '<i class="ti-user" aria-hidden="true"></i>';
-                          echo '</a>';
-                        }
-                        ?>
+                      <div style="color:red; text-align: center">
+                        <i class="bi bi-box-arrow-right fa-5x" style="margin: 10px"></i>
                       </div>
                     </div>
                   </div>
@@ -243,6 +234,13 @@ if (isset($_GET['logout'])) {
     });
     document.getElementById("tipo-div").addEventListener("click", function() {
       window.location.href = "tipoUsuario.php";
+    });
+    document.getElementById("logout-div").addEventListener("click", function() {
+      <?php if (isset($_SESSION['user'])) { ?>
+        window.location.href = "logout.php";
+      <?php } else { ?>
+        window.location.href = "../login.php";
+      <?php } ?>
     });
   </script>
 </body>

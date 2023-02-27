@@ -235,9 +235,12 @@ include 'carrito.php';
                             <input type="hidden" name="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
                             <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
                             <button type="submit" name="Accion" value="Agregar" class="btn btn-success">
-                              <i class="ti-shopping-cart fa-1x mr-2"></i>
-                              Agregar
+                              <i class="ti-shopping-cart fa-1x"></i>
                             </button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productInfoModal<?php echo $producto['id']; ?>">
+                              <i class="fa-solid fa-circle-info fa-1x"></i>
+                            </button>
+
                           </form>
                         </div>
                       </div>
@@ -260,6 +263,30 @@ include 'carrito.php';
                                   <?php echo $producto['productoQTY']; ?>
                                 </span>
                               <?php endif; ?>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="productInfoModal<?php echo $producto['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="productInfoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="productInfoModalLabel"><?php echo $producto['productoNombre']; ?></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-6">
+                              <img class="img-fluid" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
+                            </div>
+                            <div class="col-6">
+                              <p><?php echo $producto['productoDetalles']; ?></p>
+                              <p>Precio: $<?php echo $producto['productoPrecio']; ?></p>
                             </div>
                           </div>
                         </div>

@@ -241,7 +241,7 @@ switch ($action) {
                             <form method="POST">
                               <input type="hidden" name="txtID" value="<?php echo $tipoUsuario['id'] ?>">
                               <input type="submit" name="action" value="Seleccionar" class="btn btn-warning btn-sm"></input>
-                              <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm"></input>
+                              <input type="submit" name="action" value="Eliminar" class="btn btn-danger btn-sm" onclick='return confirmacion()'></input>
                             </form>
                           </td>
                         </tr>
@@ -276,6 +276,7 @@ switch ($action) {
   <!-- Need: Apexcharts -->
   <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
   <script src="assets/js/pages/dashboard.js"></script>
+  <script src="assets/js/confirmarBorrar.js"></script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@ if (isset($_POST["login"])) {
         header("Location: index.php");
         exit;
       } else {
-        $message = "Incorrect email or password";
+        $message = "Correo o contraseña incorrecta";
       }
     } else {
       $query = $pdo->prepare("SELECT * FROM usuario WHERE usuarioEmial = :email");
@@ -31,10 +31,10 @@ if (isset($_POST["login"])) {
           header("Location: admin/index.php");
           exit;
         } else {
-          $message = "Incorrect email or password";
+          $message = "Correo o contraseña incorrecta";
         }
       } else {
-        $message = "Incorrect email or password";
+        $message = "Correo o contraseña incorrecta";
       }
     }
   } else {
@@ -113,28 +113,28 @@ if (isset($_POST["login"])) {
           <input type="button" onclick="location.href='login.php';" value="Cancelar" class="btnCancelar" />
         </form>
         <?php if (!empty($message)) { ?>
-          <div class=" message">
+          <div class="alert alert-danger text-uppercase text-center"">
           <?php echo $message; ?>
       </div>
     <?php } ?>
     </div>
-    <a href="#" class="regTag icon-add">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
-        <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" />
-      </svg>
-    </a>
-  </div>
-  </div>
-  <!-- partial -->
-  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="js/script.js"></script>
-  <script>
-    const form = document.getElementById('register-form');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      // Your code to submit the form to the server
-    });
-  </script>
+    <a href=" #" class="regTag icon-add">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+              <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" />
+            </svg>
+            </a>
+          </div>
+      </div>
+      <!-- partial -->
+      <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src="js/script.js"></script>
+      <script>
+        const form = document.getElementById('register-form');
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          // Your code to submit the form to the server
+        });
+      </script>
 
 </body>
 

@@ -248,7 +248,10 @@ include 'carrito.php';
     <?php } else { ?>
       <div class="alert alert-success text-uppercase text-center">
         No hay productos en el carrito
+        <br>
+        <a href="category.php" class="badge badge-success">IR A LA TIENDA</a>
       </div>
+
 
     <?php } ?>
     </section>
@@ -374,9 +377,10 @@ include 'carrito.php';
           const id = quantity.parentElement.id;
           total.textContent = "$ " + (quantity.value) * (price.textContent.replace("$ ", "").replace(".00", "")) + ".00";
 
-          //Intento de actualizar
-          actualizarValue();
+          //Actualizar total del carrito
           actualizarTotal();
+          //Actualizar input hidden
+          actualizarValue();
         })
       });
 
@@ -384,9 +388,9 @@ include 'carrito.php';
         let total = 0;
         const precioTotal = document.querySelector("#precioTotal");
         prices.forEach(price => {
-          total += parseInt(price.textContent.replace("$ ", ""));
+          total += parseFloat(price.textContent.replace("$ ", ""));
         });
-        precioTotal.textContent = "$" + total + ".00";
+        precioTotal.textContent = "$" + total.toFixed(2);
       }
 
       function actualizarValue() {
@@ -398,6 +402,7 @@ include 'carrito.php';
         });
       }
     </script>
+
 
 </body>
 

@@ -564,3 +564,16 @@ textarea.input {
     text-align: center;
     line-height: 20px;
 }
+.btnCancelar {
+    padding: 0.6rem 1.3rem;
+    background-color: red;
+    border: 2px solid red;
+    font-size: 0.95rem;
+    color: white;
+    line-height: 1;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0;
+}

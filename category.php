@@ -228,20 +228,28 @@ include 'carrito.php';
                       <div class="product-img">
                         <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
                         <div class="p_icon">
-                          <form action="" method="POST" class="exclude">
-                            <input type="hidden" name="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
-                            <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
-                            <input type="hidden" name="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
-                            <input type="hidden" name="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
-                            <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
-                            <button type="submit" name="Accion" value="Agregar" class="btn btn-success">
-                              <i class="ti-shopping-cart fa-1x"></i>
+                          <?php if ($producto['productoQTY'] > 0) : ?>
+                            <form action="" method="POST" class="exclude">
+                              <input type="hidden" name="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
+                              <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
+                              <input type="hidden" name="precio" value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
+                              <input type="hidden" name="imagen" value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
+                              <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
+                              <button type="submit" name="Accion" value="Agregar" class="btn btn-success">
+                                <i class="ti-shopping-cart fa-1x"></i>
+                              </button>
+                              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productInfoModal<?php echo $producto['id']; ?>">
+                                <i class="fa-solid fa-circle-info fa-1x"></i>
+                              </button>
+                            </form>
+                          <?php else : ?>
+                            <button type="button" class="btnCancelar" disabled>
+                              Agotado
                             </button>
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productInfoModal<?php echo $producto['id']; ?>">
                               <i class="fa-solid fa-circle-info fa-1x"></i>
                             </button>
-
-                          </form>
+                          <?php endif; ?>
                         </div>
                       </div>
                       <div class="product-btm text-center">

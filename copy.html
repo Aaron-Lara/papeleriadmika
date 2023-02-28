@@ -432,3 +432,46 @@
         </div>
     </div>
 </div>
+<script>
+      const quantities = document.querySelectorAll("#quantity");
+      const prices = document.querySelectorAll("#total");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        quantities.forEach(quantity => {
+          quantity.value = 1;
+          actualizarValue();
+        });
+      });
+
+      quantities.forEach(quantity => {
+        quantity.addEventListener("change", () => {
+          //Poner precios dinamicos
+          const price = quantity.parentElement.parentElement.parentElement.querySelector("#price");
+          const total = quantity.parentElement.parentElement.parentElement.querySelector("#total");
+          const id = quantity.parentElement.id;
+          total.textContent = "$ " + (quantity.value) * (price.textContent.replace("$ ", "").replace(".00", "")) + ".00";
+
+          //Intento de actualizar
+          actualizarValue();
+          actualizarTotal();
+        })
+      });
+
+      function actualizarTotal() {
+        let total = 0;
+        const precioTotal = document.querySelector("#precioTotal");
+        prices.forEach(price => {
+          total += parseInt(price.textContent.replace("$ ", ""));
+        });
+        precioTotal.textContent = "$" + total + ".00";
+      }
+
+      function actualizarValue() {
+        const help = document.querySelector("#help");
+        help.value = "";
+        document.querySelectorAll("#quantity").forEach(element => {
+          const id = element.parentElement.id;
+          help.value += id + "-" + element.value + "/";
+        });
+      }
+    </script>

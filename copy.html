@@ -486,4 +486,34 @@
             }
           }
         </script>
-    onclick='return confirmacion()'
+DELIMITER //
+CREATE PROCEDURE ModifyProduct (
+  IN ProductoID INT,
+  IN Productoname VARCHAR(255),
+  IN Productoprice DECIMAL(10,2),
+  IN Productodetails TEXT,
+  IN Productoqty INT,
+  IN Productoimg VARCHAR(255),
+  IN CategoriaID INT
+)
+BEGIN
+  UPDATE productos SET productoNombre = Productoname, productoPrecio = Productoprice, productoDetalles = Productodetails,
+    productoQTY = Productoqty, productoImg = Productoimg, categoriaID = CategoriaID
+  WHERE id = ProductoID;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE AddProduct (
+  IN Productoname VARCHAR(255),
+  IN Productoprice DECIMAL(10,2),
+  IN Productodetails TEXT,
+  IN Productoqty INT,
+  IN Productoimg VARCHAR(255),
+  IN CategoriaID INT
+)
+BEGIN
+  INSERT INTO productos (productoNombre, productoPrecio, productoDetalles, productoQTY, productoImg, categoriaID)
+  VALUES (Productoname, Productoprice, Productodetails, Productoqty, Productoimg, CategoriaID);
+END //
+DELIMITER ;

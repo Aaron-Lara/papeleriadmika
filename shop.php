@@ -59,10 +59,10 @@ include 'carrito.php';
                     <a class="nav-link" href="index.php">Inicio</a>
                   </li>
                   <li class="nav-item active">
-                    <a href="category.php" class="nav-link">Tienda</a>
+                    <a href="shop.php" class="nav-link">Tienda</a>
                     <!-- <ul class="dropdown-menu">
                       <li class="nav-item">
-                        <a class="nav-link" href="category.php">Categorias</a>
+                        <a class="nav-link" href="shop.php">Categorias</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="single-product.php">Detalles de producto</a>
@@ -342,7 +342,7 @@ include 'carrito.php';
               <a href="index.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Inicio</a>
             </li>
             <li class="mb-2">
-              <a href="category.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Categorias</a>
+              <a href="shop.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Categorias</a>
             </li>
           </ul>
         </div>

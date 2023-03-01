@@ -65,10 +65,10 @@ include 'carrito.php';
                     <a class="nav-link" href="index.php">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a href="category.php" class="nav-link">Tienda</a>
+                    <a href="shop.php" class="nav-link">Tienda</a>
                     <!-- <ul class="dropdown-menu">
                       <li class="nav-item">
-                        <a class="nav-link" href="category.php">Categorias</a>
+                        <a class="nav-link" href="shop.php">Categorias</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="single-product.php">Detalles de producto</a>
@@ -224,7 +224,7 @@ include 'carrito.php';
                     echo '<form action="checkout.php" method="post">
             <input type="hidden" name="help" id="help" value="" />
             <div class="bg-light px-4 py-3">
-              <a class="main_btn me-3" href="category.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
+              <a class="main_btn me-3" href="shop.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
               <button class="main_btn" type="submit" name="Accion" value="proceder" href="checkout.php">Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
             </div>
           </form>
@@ -232,7 +232,7 @@ include 'carrito.php';
                   } else {
                     echo '<form action="login.php" method="post">
           <div class="bg-light px-4 py-3">
-            <a class="main_btn me-3" href="category.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
+            <a class="main_btn me-3" href="shop.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
             <button class="main_btn" type="submit" name="Accion" value="proceder" href="checkout.php">Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
           </div>
         </form>';
@@ -249,7 +249,7 @@ include 'carrito.php';
       <div class="alert alert-success text-uppercase text-center">
         No hay productos en el carrito
         <br>
-        <a href="category.php" class="badge badge-success">IR A LA TIENDA</a>
+        <a href="shop.php" class="badge badge-success">IR A LA TIENDA</a>
       </div>
 
 
@@ -289,7 +289,7 @@ include 'carrito.php';
                 <a href="index.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Inicio</a>
               </li>
               <li class="mb-2">
-                <a href="category.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Categorias</a>
+                <a href="shop.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Categorias</a>
               </li>
             </ul>
           </div>

@@ -4,6 +4,9 @@ if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");
 }
+include 'global/serverconfiguration.php';
+include 'global/dbconnection.php';
+include 'carrito.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -151,156 +154,99 @@ if (isset($_GET['logout'])) {
   <!--================End Home Banner Area =================-->
 
   <!--================Checkout Area =================-->
+
+  <?php
+  $QueryPedidos = $pdo->prepare("SELECT id, pedidoFecha, pagoTotal, clienteID FROM pedidos
+    Where clienteID = :id ORDER BY pedidoFecha DESC");
+  $QueryPedidos->bindParam(':id', $_SESSION['session_clienteID']);
+  $QueryPedidos->execute();
+  $PedidosLista = $QueryPedidos->fetchAll(PDO::FETCH_ASSOC);
+  $Pedido = $QueryPedidos->fetch(PDO::FETCH_LAZY);
+  ?>
   <section class="checkout_area section_gap">
-    <div class="container">
-      <div class="billing_details">
-        <div class="row">
-          <div class="col-lg-8">
-            <h3>Billing Details</h3>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="first" name="name" />
-                <span class="placeholder" data-placeholder="First name"></span>
+    <?php
+    foreach ($PedidosLista as $cadpedido) {
+    ?>
+      <div class="container">
+        <div class="billing_details">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="order_box">
+                <h2>INFORMACIÓN DE TU PEDIDO</h2>
+                <ul class="list list_2">
+                  <li>
+                    <p>Número de Pedido</p><span>:
+                      <?php echo $cadpedido['id']; ?>
+                    </span>
+                  </li>
+                </ul>
+                <ul class="list list_2">
+                  <li>
+                    <p>Fecha del Pedido</p><span>:
+                      <?php echo $cadpedido['pedidoFecha']; ?>
+                    </span>
+                  </li>
+                  <li>
+                    <p>Total</p><span>:
+                      <?php echo $cadpedido['pagoTotal']; ?>
+                    </span>
+                  </li>
+                </ul>
               </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="last" name="name" />
-                <span class="placeholder" data-placeholder="Last name"></span>
+              <div class="">
+                <span>Gracias por ordenar. Tu pedido ha sido recibido.</span>
               </div>
-              <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="company" name="company" placeholder="Company name" />
+            </div>
+            <div class="col-lg-6">
+              <div class="order_box">
+                <h2>TU ORDEN</h2>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="2">Producto</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <?php
+                  $PedidosQuery = $pdo->prepare("SELECT pd.id, pd.productoQTY, pd.productoPrecio, p.productoNombre
+                FROM pedidodetalles pd
+                INNER JOIN productos p ON pd.idProducto = p.id
+                WHERE pd.idPedido = :idPedido");
+                  $PedidosQuery->bindParam(':idPedido', $cadpedido['id']);
+                  $PedidosQuery->execute();
+                  $ListadoPedido = $PedidosQuery->fetchAll(PDO::FETCH_ASSOC);
+                  foreach ($ListadoPedido as $dpedido) {
+                  ?>
+                    <tbody>
+                      <tr>
+                        <th colspan="2"><span>
+                            <?php echo $dpedido['productoNombre']; ?>
+                          </span></th>
+                        <th>
+                          <?php echo $dpedido['productoQTY']; ?>
+                        </th>
+                        <th> <span>$
+                            <?php echo $dpedido['productoPrecio']; ?>
+                          </span></th>
+                      </tr>
+                    </tbody>
+                  <?php } ?>
+                  <tfoot>
+                    <tr>
+                      <th scope="col" colspan="3"></th>
+                      <th scope="col">Total :
+                        <?php echo $cadpedido['pagoTotal']; ?>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="number" name="number" />
-                <span class="placeholder" data-placeholder="Phone number"></span>
-              </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="email" name="compemailany" />
-                <span class="placeholder" data-placeholder="Email Address"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">Country</option>
-                  <option value="2">Country</option>
-                  <option value="4">Country</option>
-                </select>
-              </div>
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add1" name="add1" />
-                <span class="placeholder" data-placeholder="Address line 01"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add2" name="add2" />
-                <span class="placeholder" data-placeholder="Address line 02"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="city" name="city" />
-                <span class="placeholder" data-placeholder="Town/City"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">District</option>
-                  <option value="2">District</option>
-                  <option value="4">District</option>
-                </select>
-              </div>
-              <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
-              </div>
-              <div class="col-md-12 form-group">
-                <div class="creat_account">
-                  <input type="checkbox" id="f-option2" name="selector" />
-                  <label for="f-option2">Create an account?</label>
-                </div>
-              </div>
-              <div class="col-md-12 form-group">
-                <div class="creat_account">
-                  <h3>Shipping Details</h3>
-                  <input type="checkbox" id="f-option3" name="selector" />
-                  <label for="f-option3">Ship to a different address?</label>
-                </div>
-                <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="col-lg-4">
-            <div class="order_box">
-              <h2>Your Order</h2>
-              <ul class="list">
-                <li>
-                  <a href="#">Product
-                    <span>Total</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Blackberry
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Tomatoes
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Brocoli
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-              </ul>
-              <ul class="list list_2">
-                <li>
-                  <a href="#">Subtotal
-                    <span>$2160.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Shipping
-                    <span>Flat rate: $50.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Total
-                    <span>$2210.00</span>
-                  </a>
-                </li>
-              </ul>
-              <div class="payment_item">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option5" name="selector" />
-                  <label for="f-option5">Check payments</label>
-                  <div class="check"></div>
-                </div>
-                <p>
-                  Please send a check to Store Name, Store Street, Store Town,
-                  Store State / County, Store Postcode.
-                </p>
-              </div>
-              <div class="payment_item active">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option6" name="selector" />
-                  <label for="f-option6">Paypal </label>
-                  <img src="img/product/single-product/card.jpg" alt="" />
-                  <div class="check"></div>
-                </div>
-                <p>
-                  Please send a check to Store Name, Store Street, Store Town,
-                  Store State / County, Store Postcode.
-                </p>
-              </div>
-              <div class="creat_account">
-                <input type="checkbox" id="f-option4" name="selector" />
-                <label for="f-option4">I’ve read and accept the </label>
-                <a href="#">terms & conditions*</a>
-              </div>
-              <a class="main_btn" href="#">Proceed to Paypal</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <?php } ?>
   </section>
   <!--================End Checkout Area =================-->
 

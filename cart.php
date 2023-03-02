@@ -227,8 +227,7 @@ include 'carrito.php';
               <a class="main_btn me-3" href="shop.php"><i class="fas fa-long-arrow-alt-left me-2"></i> Continuar buscando</a>
               <button class="main_btn" type="submit" name="Accion" value="proceder" href="checkout.php">Proceder al pedido <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
             </div>
-          </form>
-        ';
+          </form>';
                   } else {
                     echo '<form action="login.php" method="post">
           <div class="bg-light px-4 py-3">

@@ -1,206 +1,90 @@
-<div class="latest_product_inner">
-  <div class="row">
-    <?php foreach ($ListProducto as $producto) : ?>
-    <div class="col-lg-4 col-md-6">
-      <div class="single-product">
-        <div class="product-img">
-          <img class="card-img" src="<?php echo 'admin/assets/images/' . $producto['productoImg']; ?>" alt="...">
-          <div class="p_icon">
-            <form action="" method="POST" class="exclude">
-              <input type="hidden" name="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
-              <input type="hidden" name="nombre"
-                value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
-              <input type="hidden" name="precio"
-                value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
-              <input type="hidden" name="imagen"
-                value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
-              <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
-              <button type="submit" name="Añadir" value="Agregar" class="btn btn-success">
-                <i class="ti-shopping-cart fa-1x mr-2"></i>
-                Agregar
-              </button>
-            </form>
+<section class="checkout_area section_gap">
+  <?php
+    foreach ($PedidosLista as $cadpedido) {
+    ?>
+  <div class="container">
+    <div class="billing_details">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="order_box">
+            <h2>INFORMACIÓN DE TU PEDIDO</h2>
+            <ul class="list list_2">
+              <li>
+                <p>Número de Pedido</p><span>:
+                  <?php echo $cadpedido['id']; ?>
+                </span>
+              </li>
+            </ul>
+            <ul class="list list_2">
+              <li>
+                <p>Fecha del Pedido</p><span>:
+                  <?php echo $cadpedido['pedidoFecha']; ?>
+                </span>
+              </li>
+              <li>
+                <p>Total</p><span>:
+                  <?php echo $cadpedido['pagoTotal']; ?>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="">
+            <span>Gracias por ordenar. Tu pedido ha sido recibido.</span>
           </div>
         </div>
-        <div class="product-btm text-center">
-          <h4 class="reset-anchor">
-            <?php echo $producto['productoNombre']; ?>
-          </h4>
-          <span>$
-            <?php echo $producto['productoPrecio']; ?>
-          </span>
-          <form action="" method="POST">
-            <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id'], COD, KEY); ?>">
-            <input type="hidden" name="nombre" id="nombre"
-              value="<?php echo openssl_encrypt($producto['productoNombre'], COD, KEY); ?>">
-            <input type="hidden" name="precio" id="precio"
-              value="<?php echo openssl_encrypt($producto['productoPrecio'], COD, KEY); ?>">
-            <input type="hidden" name="imagen" id="imagen"
-              value="<?php echo openssl_encrypt($producto['productoImg'], COD, KEY); ?>">
-            <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
-            <h4 class="reset-anchor"> UNIDADES</h4>
-            <div class="d-flex justify-content-center align-items-center">
-              <i class="fa-solid fa-boxes-stacked fa-2x mr-2"></i>
-              <div class="mr-2">
-                <?php if ($producto['productoQTY'] <= 0) : ?>
-                <span class="badge badge-danger">Agotado</span>
-                <?php else : ?>
-                <span class="badge badge-success">
-                  <?php echo $producto['productoQTY']; ?>
-                </span>
-                <?php endif; ?>
-              </div>
-            </div>
-          </form>
+        <div class="col-lg-6">
+          <div class="order_box">
+            <h2>TU ORDEN</h2>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="2">Producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <?php
+                  $PedidosQuery = $pdo->prepare("SELECT id, pedidoFecha, clienteNombre, productoNombre,
+                  productoQTY, productoPrecio, pagoTotal 
+                    FROM pedidodetalles INNER JOIN pedidos USING (id) INNER JOIN productos USING 
+                    (id) INNER JOIN cliente USING (id)
+                    WHERE id = :id AND id = :id  ORDER BY pedidoFecha DESC;");
+                  $PedidosQuery->bindParam(':id', $_SESSION['session_clienteID']);
+                  $PedidosQuery->bindParam(':id', $cadpedido['id']);
+                  $PedidosQuery->execute();
+                  $ListadoPedido = $PedidosQuery->fetchAll(PDO::FETCH_ASSOC);
+                  foreach ($ListadoPedido as $dpedido) {
+                  ?>
+              <tbody>
+                <tr>
+                  <th colspan="2"><span>
+                      <?php echo $dpedido['productoNombre']; ?>
+                    </span></th>
+                  <th>
+                    <?php echo $dpedido['productoQTY']; ?>
+                  </th>
+                  <th> <span>$
+                      <?php echo $dpedido['productoPrecio']; ?>
+                    </span></th>
+                </tr>
+              </tbody>
+              <?php } ?>
+              <tfoot>
+                <tr>
+                  <th scope="col" colspan="3"></th>
+                  <th scope="col">Total :
+                    <?php echo $cadpedido['pagoTotal']; ?>
+                  </th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-    <?php endforeach; ?>
   </div>
-</div>
-<section class="cart_area">
-    <div class="container">
-      <div class="cart_inner">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Detalles del producto supongo</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                      <i class="lnr lnr-chevron-up"></i>
-                    </button>
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                      <i class="lnr lnr-chevron-down"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Detalles del producto supongo</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                      <i class="lnr lnr-chevron-up"></i>
-                    </button>
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                      <i class="lnr lnr-chevron-down"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Detalles del producto supongo</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" />
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
-                      <i class="lnr lnr-chevron-up"></i>
-                    </button>
-                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
-                      <i class="lnr lnr-chevron-down"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr class="bottom_button">
-                <td>
-                  <a class="gray_btn" href="#">Actualizar carrito</a>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>
-                  <h5>Subtotal</h5>
-                </td>
-                <td>
-                  <h5>$2160.00</h5>
-                </td>
-              </tr>
-              <tr class="out_button_area">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div class="checkout_btn_inner">
-                    <a class="gray_btn" href="#">Continuar comprando</a>
-                    <a class="main_btn" href="checkout.php">Proceder a pagar</a>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-<div class="col-md-6 mb-3 mb-md-0 text-md-start">
-  <a class="main_btn" href="shop.php">
-    <i class="fas fa-long-arrow-alt-left me-2"> </i> Continuar buscando</a>
-</div>
-<div class="col-md-6 text-md-end">
-  <button class="main_btn" type="submit" name="action" value="proceder" href="checkout.php"> Proceder al pedido <i
-      class="fas fa-long-arrow-alt-right ms-2"></i></button>
-</div>
+  <?php } ?>
+</section>
 
 
 
@@ -517,3 +401,16 @@ BEGIN
   VALUES (Productoname, Productoprice, Productodetails, Productoqty, Productoimg, CategoriaID);
 END //
 DELIMITER ;
+
+<?php
+  $QueryPedidos = $pdo->prepare("SELECT id, pedidoFecha, pagoTotal , estadoID, clienteID FROM pedidos
+    Where idCliente = :id ORDER BY fechaPedido DESC");
+  $QueryPedidos->bindParam(':id', $_SESSION['session_clienteID']);
+  $QueryPedidos->execute();
+  $PedidosLista = $QueryPedidos->fetchAll(PDO::FETCH_ASSOC);
+  $Pedido = $QueryPedidos->fetch(PDO::FETCH_LAZY);
+  ?>
+<section class="checkout_area section_gap">
+  <?php 
+      foreach($PedidosLista as $cadpedido){
+      ?>

@@ -120,7 +120,6 @@ include 'carrito.php';
     </div>
   </header>
   <!--================Header Menu Area =================-->
-
   <!--================Home Banner Area =================-->
   <section class="banner_area">
     <div class="banner_inner d-flex align-items-center">
@@ -180,7 +179,7 @@ include 'carrito.php';
               </div>
             </div>
           </div>
-        </nav>
+        </nav>  
         <div class="col-lg-12">
           <?php
           // Check if filter is set, otherwise set it to an empty string

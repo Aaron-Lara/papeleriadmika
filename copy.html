@@ -360,16 +360,17 @@
       }
     </script>
 
-        <script>
-          function confirmacion() {
-            var respuesta = confirm("¿Está seguro que quiere eliminar este registro?");
-            if (respuesta == true) {
-              return true;
-            } else {
-              return false;
-            }
-          }
-        </script>
+<?php if (!empty($mensaje)) : ?>
+            <div class="alert alert-success">
+              <?php echo $mensaje; ?>
+              <a href="cart.php" class="badge badge-success">Ver carrito</a>
+            </div>
+          <?php endif; ?>
+
+
+
+          
+
 DELIMITER //
 CREATE PROCEDURE ModifyProduct (
   IN ProductoID INT,

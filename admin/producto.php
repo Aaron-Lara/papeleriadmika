@@ -380,7 +380,7 @@ switch ($action) {
                           <td><?php echo $productos['productoPrecio'] ?></td>
                           <td><?php echo $productos['productoDetalles'] ?></td>
                           <td><?php echo $productos['productoQTY'] ?></td>
-                          <td><img src="assets/images/<?php echo $productos['productoImg']; ?>" width="50%"></td>
+                          <td><img src="assets/images/<?php echo $productos['productoImg']; ?>" width="200px" height="200px"></td>
                           <td>
                             <?php
                             $CategoryQuery = $pdo->prepare("SELECT categoriaNombre FROM categorias WHERE id=?");

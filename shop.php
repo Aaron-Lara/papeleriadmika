@@ -15,7 +15,6 @@ include 'carrito.php';
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="icon" hrefassets/images/favicon.png" type="image/png" />
   <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
   <title>Papelería D Mika</title>
   <!-- Bootstrap CSS -->
@@ -216,7 +215,6 @@ include 'carrito.php';
               <br>
               <a href="cart.php" class="badge badge-success">VER CARRITO</a>
             </div>
-
           <?php } ?>
           <div class="row">
             <div class="latest_product_inner">

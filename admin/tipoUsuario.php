@@ -23,39 +23,28 @@ $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtname = (isset($_POST['txtname'])) ? $_POST['txtname'] : "";
 $action = (isset($_POST['action'])) ? $_POST['action'] : "";
 
-switch ($action) {
-  case 'Añadir':
-    $InsertQuery = $pdo->prepare("INSERT INTO tipousuario (usuarioTipo)  VALUES (:Usuariotipo)");
-    $InsertQuery->bindParam(':Usuariotipo', $txtname);
-    $InsertQuery->execute();
-    break;
-  case 'Modificar':
-    $ModifyQuery = $pdo->prepare("UPDATE tipousuario SET usuarioTipo = :Usuariotipo WHERE id= :id");
-    $ModifyQuery->bindParam(':id', $txtID);
-    $ModifyQuery->bindParam(':Usuariotipo', $txtname);
-    $ModifyQuery->execute();
-    break;
-  case 'Eliminar':
-    $DeleteQuery = $pdo->prepare("DELETE FROM tipousuario  WHERE id=:id");
-    $DeleteQuery->bindParam(':id', $txtID);
-    $DeleteQuery->execute();
-    break;
-
-  case 'Seleccionar':
-    $SelectQuery = $pdo->prepare("SELECT * FROM tipousuario WHERE id=:id");
-    $SelectQuery->bindParam(':id', $txtID);
-    $SelectQuery->execute();
-    $AUsuario = $SelectQuery->fetch(PDO::FETCH_LAZY);
-    $txtname = $AUsuario['usuarioTipo'];
-    break;
-
-  case 'Cancelar':
-    header('location: tipoUsuario.php');
-    break;
-
-  default:
-
-    break;
+if ($action == 'Añadir') {
+  $spQuery = $pdo->prepare("CALL sp_tipousuario(1, 0, :tipo)");
+  $spQuery->bindParam(':tipo', $txtname);
+  $spQuery->execute();
+} elseif ($action == 'Modificar') {
+  $spQuery = $pdo->prepare("CALL sp_tipousuario(2, :id, :tipo)");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->bindParam(':tipo', $txtname);
+  $spQuery->execute();
+} elseif ($action == 'Eliminar') {
+  $spQuery = $pdo->prepare("CALL sp_tipousuario(3, :id, '')");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+} elseif ($action == 'Seleccionar') {
+  $spQuery = $pdo->prepare("CALL sp_tipousuario(4, :id, '')");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+  $ACategoria = $spQuery->fetch(PDO::FETCH_LAZY);
+  $txtname = $ACategoria['usuarioTipo'];
+  $spQuery->closeCursor();
+} elseif ($action == 'Cancelar') {
+  header('location: tipoUsuario.php');
 }
 ?>
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>

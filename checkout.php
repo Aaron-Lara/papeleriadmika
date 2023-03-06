@@ -13,8 +13,6 @@ include 'carrito.php';
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
-
-
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 <head>

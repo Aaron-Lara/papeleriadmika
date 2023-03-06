@@ -93,7 +93,7 @@ include 'carrito.php';
                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
                   <li class="nav-item">
                     <a href="cart.php" class="icons">
-                      <i class="ti-shopping-cart"></i>
+                      <i class="ti-shopping-cart active"></i>
                     </a>
                   <li>
                   </li>

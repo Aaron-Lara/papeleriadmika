@@ -3,13 +3,13 @@ session_start();
 
 if (!isset($_SESSION['user']) || $_SESSION['user']['usuarioEmial'] != 'pdmika@outlook.com') {
   header("Location: ../login.php");
-  exit;
+  exit();
 }
 
 if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");
-  exit;
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -19,45 +19,34 @@ include '../global/serverconfiguration.php';
 include '../global/dbconnection.php';
 ?>
 <?php
-$txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
-$txtname = (isset($_POST['txtname'])) ? $_POST['txtname'] : "";
-$action = (isset($_POST['action'])) ? $_POST['action'] : "";
-
-switch ($action) {
-  case 'Añadir':
-    $InsertQuery = $pdo->prepare("INSERT INTO categorias (categoriaNombre) VALUES (:nombreCategoria)");
-    $InsertQuery->bindParam(':nombreCategoria', $txtname);
-    $InsertQuery->execute();
-    break;
-  case 'Modificar':
-    $ModifyQuery = $pdo->prepare("UPDATE categorias SET categoriaNombre=:nombreCategoria WHERE id=:id");
-    $ModifyQuery->bindParam(':id', $txtID);
-    $ModifyQuery->bindParam(':nombreCategoria', $txtname);
-    $ModifyQuery->execute();
-    break;
-  case 'Eliminar':
-    $DeleteQuery = $pdo->prepare("DELETE FROM categorias  WHERE id=:id");
-    $DeleteQuery->bindParam(':id', $txtID);
-    $DeleteQuery->execute();
-    break;
-
-  case 'Seleccionar':
-    $SelectQuery = $pdo->prepare("SELECT * FROM categorias WHERE id=:id");
-    $SelectQuery->bindParam(':id', $txtID);
-    $SelectQuery->execute();
-    $ACategoria = $SelectQuery->fetch(PDO::FETCH_LAZY);
-    $txtname = $ACategoria['categoriaNombre'];
-    break;
-
-  case 'Cancelar':
-    header('location: categorias.php');
-    break;
-
-  default:
-
-    break;
+$txtID = isset($_POST['txtID']) ? $_POST['txtID'] : "";
+$txtname = isset($_POST['txtname']) ? $_POST['txtname'] : "";
+$action = isset($_POST['action']) ? $_POST['action'] : "";
+if ($action == 'Añadir') {
+  $spQuery = $pdo->prepare("CALL sp_categories(1, 0, :cat)");
+  $spQuery->bindParam(':cat', $txtname);
+  $spQuery->execute();
+} elseif ($action == 'Modificar') {
+  $spQuery = $pdo->prepare("CALL sp_categories(2, :id, :cat)");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->bindParam(':cat', $txtname);
+  $spQuery->execute();
+} elseif ($action == 'Eliminar') {
+  $spQuery = $pdo->prepare("CALL sp_categories(3, :id, '')");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+} elseif ($action == 'Seleccionar') {
+  $spQuery = $pdo->prepare("CALL sp_categories(4, :id, '')");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+  $ACategoria = $spQuery->fetch(PDO::FETCH_LAZY);
+  $txtname = $ACategoria['categoriaNombre'];
+  $spQuery->closeCursor();
+} elseif ($action == 'Cancelar') {
+  header('location: categorias.php');
 }
 ?>
+
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
 
 <head>
@@ -177,7 +166,7 @@ switch ($action) {
                             <div class="col-12">
                               <div class="form-group has-icon-left">
                                 <div class="position-relative">
-                                  <input type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" class="form-control single-input" />
+                                  <input required type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" class="form-control single-input" />
                                 </div>
                               </div>
                             </div>
@@ -185,7 +174,7 @@ switch ($action) {
                               <div class="form-group has-icon-left">
                                 <label for="first-name-icon">Nombre</label>
                                 <div class="position-relative">
-                                  <input type="text" name="txtname" id="txtname" value="<?php echo $txtname; ?>" class="form-control single-input" />
+                                  <input required type="text" name="txtname" id="txtname" value="<?php echo $txtname; ?>" class="form-control single-input" />
                                   <div class="form-control-icon">
                                     <i class="fa-solid fa-tags"></i>
                                   </div>

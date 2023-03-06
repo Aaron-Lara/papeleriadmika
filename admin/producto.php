@@ -380,14 +380,14 @@ switch ($action) {
                           <td><?php echo $productos['productoPrecio'] ?></td>
                           <td><?php echo $productos['productoDetalles'] ?></td>
                           <td><?php echo $productos['productoQTY'] ?></td>
-                          <td><img src="assets/images/<?php echo $productos['productoImg']; ?>" width="200px" height="200px"></td>
+                          <td><img src="assets/images/<?php echo $productos['productoImg']; ?>" width="50%"></td>
                           <td>
                             <?php
                             $CategoryQuery = $pdo->prepare("SELECT categoriaNombre FROM categorias WHERE id=?");
                             $CategoryQuery->execute([$productos['categoriaID']]);
                             $ListCategory = $CategoryQuery->fetch(PDO::FETCH_ASSOC);
                             $categoriaNombre = $ListCategory['categoriaNombre'];
-                            echo $categoriaNombre
+                            echo $categoriaNombre;
                             ?>
                           </td>
                           <td>

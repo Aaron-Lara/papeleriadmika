@@ -25,56 +25,48 @@ $txtapellido = (isset($_POST['txtapellido'])) ? $_POST['txtapellido'] : "";
 $txtcorreo = (isset($_POST['txtcorreo'])) ? $_POST['txtcorreo'] : "";
 $txtcontraseña = (isset($_POST['txtcontraseña'])) ? $_POST['txtcontraseña'] : "";
 $txtnumero = (isset($_POST['txtnumero'])) ? $_POST['txtnumero'] : "";
-$txtfecha = date("Y-m-d H:i:s");
+$txtfecha = (!empty($txtfecha)) ? $txtfecha : date("Y-m-d H:i:s");
 $action = (isset($_POST['action'])) ? $_POST['action'] : "";
-switch ($action) {
-  case 'Añadir':
-    $hash = password_hash($txtcontraseña, PASSWORD_DEFAULT);
-    $InsertQuery = $pdo->prepare("INSERT INTO clientes (clienteNombre, clienteApellido, clienteEmail, clientePw, clienteTel, fechaRegistro)  
-    VALUES (:Clientename, :ClienteLastname, :Clienteemail, :Clientepass, :Clientetel, :Registrofecha)");
-    $InsertQuery->bindParam(':Clientename', $txtnombre);
-    $InsertQuery->bindParam(':ClienteLastname', $txtapellido);
-    $InsertQuery->bindParam(':Clienteemail', $txtcorreo);
-    $InsertQuery->bindParam(':Clientepass', $hash);
-    $InsertQuery->bindParam(':Clientetel', $txtnumero);
-    $InsertQuery->bindParam(':Registrofecha', $txtfecha);
-    $InsertQuery->execute();
-    break;
-  case 'Modificar':
-    $hash = password_hash($txtcontraseña, PASSWORD_DEFAULT);
-    $ModifyQuery = $pdo->prepare("UPDATE clientes SET clienteNombre = :Clientename, clienteApellido = :ClienteLastname, 
-    clienteEmail = :Clienteemail, clientePw = :Clientepass, clienteTel = :Clientetel, fechaRegistro = :Registrofecha   WHERE id=:id");
-    $ModifyQuery->bindParam(':id', $txtID);
-    $ModifyQuery->bindParam(':Clientename', $txtnombre);
-    $ModifyQuery->bindParam(':ClienteLastname', $txtapellido);
-    $ModifyQuery->bindParam(':Clienteemail', $txtcorreo);
-    $ModifyQuery->bindParam(':Clientetel', $txtnumero);
-    $ModifyQuery->bindParam(':Clientepass', $hash);
-    $ModifyQuery->bindParam(':Registrofecha', $txtfecha);
-    $ModifyQuery->execute();
-    break;
-  case 'Eliminar':
-    $DeleteQuery = $pdo->prepare("DELETE FROM clientes  WHERE id=:id");
-    $DeleteQuery->bindParam(':id', $txtID);
-    $DeleteQuery->execute();
-    break;
-  case 'Seleccionar':
-    $SelectQuery = $pdo->prepare("SELECT * FROM clientes WHERE id=:id");
-    $SelectQuery->bindParam(':id', $txtID);
-    $SelectQuery->execute();
-    $AClient = $SelectQuery->fetch(PDO::FETCH_LAZY);
-    $txtnombre = $AClient['clienteNombre'];
-    $txtapellido = $AClient['clienteApellido'];
-    $txtcorreo = $AClient['clienteEmail'];
-    $txtnumero = $AClient['clienteTel'];
-    $txtfecha = $AClient['fechaRegistro'];
-    $hash = $AClient['clientePw'];
-    break;
-  case 'Cancelar':
-    header('Location: cliente.php');
-    break;
-  default:
-    break;
+if ($action == 'Añadir') {
+  $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
+  $spQuery = $pdo->prepare("CALL sp_clientes(1, 0, :name, :lastname, :email, :pass, :tel, :regdate)");
+  $spQuery->bindParam(':name', $txtnombre);
+  $spQuery->bindParam(':lastname', $txtapellido);
+  $spQuery->bindParam(':email', $txtcorreo);
+  $spQuery->bindParam(':pass', $hash);
+  $spQuery->bindParam(':tel', $txtnumero);
+  $spQuery->bindParam(':regdate', $txtfecha);
+  $spQuery->execute();
+} elseif ($action == 'Modificar') {
+  $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
+  $spQuery = $pdo->prepare("CALL sp_clientes(2, :id, :name, :lastname, :email, :pass, :tel, :regdate)");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->bindParam(':name', $txtnombre);
+  $spQuery->bindParam(':lastname', $txtapellido);
+  $spQuery->bindParam(':email', $txtcorreo);
+  $spQuery->bindParam(':pass', $hash);
+  $spQuery->bindParam(':tel', $txtnumero);
+  $spQuery->bindParam(':regdate', $txtfecha);
+  $spQuery->execute();
+} elseif ($action == 'Eliminar') {
+  $spQuery = $pdo->prepare("CALL sp_clientes(3, :id, '', '', '', '', '', NOW())");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+  $spQuery->closeCursor();
+} elseif ($action == 'Seleccionar') {
+  $spQuery = $pdo->prepare("CALL sp_clientes(4, :id, '', '', '', '', '', @regdate)");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+  $ACategoria = $spQuery->fetch(PDO::FETCH_LAZY);
+  $txtnombre = $ACategoria['clienteNombre'];
+  $txtapellido = $ACategoria['clienteApellido'];
+  $txtcorreo = $ACategoria['clienteEmail'];
+  $txtnumero = $ACategoria['clienteTel'];
+  $txtfecha = $ACategoria['regdate'];
+  $hash = $ACategoria['clientePw'];
+  $spQuery->closeCursor();
+} elseif ($action == 'Cancelar') {
+  header('location: cliente.php');
 }
 ?>
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>

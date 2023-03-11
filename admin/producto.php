@@ -29,99 +29,98 @@ $txtOldimg = (isset($_POST['txtOldimg'])) ? $_POST['txtOldimg'] : "";
 $txtcategoriaID = (isset($_POST['txtcategoriaID'])) ? $_POST['txtcategoriaID'] : "";
 $action = (isset($_POST['action'])) ? $_POST['action'] : "";
 
-switch ($action) {
-  case 'Añadir':
-    $InsertQuery = $pdo->prepare("INSERT INTO productos (productoNombre, productoPrecio, productoDetalles, productoQTY, productoImg, categoriaID)
-    VALUES (:Productoname, :Productoprice, :Productodetails, :Productoqty, :Productoimg, :CategoriaID)");
+if ($action == 'Añadir') {
+  $InsertQuery = $pdo->prepare("CALL sp_productos(1, 0, :Productoname, :Productoprice, :Productodetails, :Productoqty, :Productoimg, :CategoriaID)");
+  $date = new DateTime();
+  $ImgFileName = ($txtimagen != "") ? $date->getTimestamp() . "_" . $_FILES["txtimagen"]["name"] : "";
+  $ImgTmp = $_FILES["txtimagen"]["tmp_name"];
+  if ($ImgTmp != "") {
+    if (isset($_FILES["txtimagen"]) && $_FILES["txtimagen"]["error"] == UPLOAD_ERR_OK) {
+      move_uploaded_file($ImgTmp, "assets/images/" . $ImgFileName);
+    } else {
+      echo "No file was uploaded";
+    }
+  }
+  $InsertQuery->bindParam(':Productoname', $txtnombre);
+  $InsertQuery->bindParam(':Productoprice', $txtprecio);
+  $InsertQuery->bindParam(':Productodetails', $txtdetalles);
+  $InsertQuery->bindParam(':Productoqty', $txtcantidad);
+  $InsertQuery->bindParam(':Productoimg', $ImgFileName);
+  $InsertQuery->bindParam(':CategoriaID', $txtcategoriaID);
+  $InsertQuery->execute();
+  header('location: producto.php');
+} elseif ($action == 'Modificar') {
+  $ModifyQuery = $pdo->prepare("CALL sp_productos(2, :id, :Productoname, :Productoprice, :Productodetails, :Productoqty, '', :CategoriaID)");
+  $ModifyQuery->bindParam(':id', $txtID);
+  $ModifyQuery->bindParam(':Productoname', $txtnombre);
+  $ModifyQuery->bindParam(':Productoprice', $txtprecio);
+  $ModifyQuery->bindParam(':Productodetails', $txtdetalles);
+  $ModifyQuery->bindParam(':Productoqty', $txtcantidad);
+  $ModifyQuery->bindParam(':CategoriaID', $txtcategoriaID);
+  $ModifyQuery->execute();
+  if ($txtimagen != "") {
     $date = new DateTime();
     $ImgFileName = ($txtimagen != "") ? $date->getTimestamp() . "_" . $_FILES["txtimagen"]["name"] : "";
     $ImgTmp = $_FILES["txtimagen"]["tmp_name"];
     if ($ImgTmp != "") {
-      if (isset($_FILES["txtimagen"]) && $_FILES["txtimagen"]["error"] == UPLOAD_ERR_OK) {
-        move_uploaded_file($ImgTmp, "assets/images/" . $ImgFileName);
-      } else {
-        echo "No file was uploaded";
-      }
+      move_uploaded_file($ImgTmp, "assets/images/" . $ImgFileName);
     }
-    $InsertQuery->bindParam(':Productoname', $txtnombre);
-    $InsertQuery->bindParam(':Productoprice', $txtprecio);
-    $InsertQuery->bindParam(':Productodetails', $txtdetalles);
-    $InsertQuery->bindParam(':Productoqty', $txtcantidad);
-    $InsertQuery->bindParam(':Productoimg', $ImgFileName);
-    $InsertQuery->bindParam(':CategoriaID', $txtcategoriaID);
-    $InsertQuery->execute();
-    break;
-  case 'Modificar':
-    $ModifyQuery = $pdo->prepare("UPDATE productos SET productoNombre = :Productoname, productoPrecio = :Productoprice, productoDetalles = :Productodetails,
-        productoQTY = :Productoqty, categoriaID = :CategoriaID WHERE id = :id");
+    $ModifyQuery = $pdo->prepare("SELECT productoImg FROM productos WHERE id=:id");
     $ModifyQuery->bindParam(':id', $txtID);
-    $ModifyQuery->bindParam(':Productoname', $txtnombre);
-    $ModifyQuery->bindParam(':Productoprice', $txtprecio);
-    $ModifyQuery->bindParam(':Productodetails', $txtdetalles);
-    $ModifyQuery->bindParam(':Productoqty', $txtcantidad);
-    $ModifyQuery->bindParam(':CategoriaID', $txtcategoriaID);
     $ModifyQuery->execute();
-    if ($txtimagen != "") {
-      $date = new DateTime();
-      $ImgFileName = ($txtimagen != "") ? $date->getTimestamp() . "_" . $_FILES["txtimagen"]["name"] : "";
-      $ImgTmp = $_FILES["txtimagen"]["tmp_name"];
-      if ($ImgTmp != "") {
-        move_uploaded_file($ImgTmp, "assets/images/" . $ImgFileName);
-      }
-      $ModifyQuery = $pdo->prepare("SELECT productoImg FROM productos WHERE id=:id");
-      $ModifyQuery->bindParam(':id', $txtID);
-      $ModifyQuery->execute();
-      $Producto = $ModifyQuery->fetch(PDO::FETCH_LAZY);
-      if (isset($Producto["productoImg"]) && ($Producto["productoImg"] != "productoImg.jpg")) {
-        if (file_exists("assets/images/" . $Producto['productoImg'])) {
-          unlink("assets/images/" . $Producto['productoImg']);
-        }
-      }
-      $ModifyQuery = $pdo->prepare("UPDATE productos SET productoImg =:Productoimg WHERE id =:id");
-      $ModifyQuery->bindParam(':id', $txtID);
-      $ModifyQuery->bindParam(':Productoimg', $ImgFileName);
-      $ModifyQuery->execute();
-    } else {
-      $ModifyQuery = $pdo->prepare("UPDATE productos SET productoImg = :Productoimg WHERE id: id");
-      $ModifyQuery->bindParam(':id', $txtID);
-      $ModifyQuery->bindParam(':Productoimg', $txtOldimg);
-      $ModifyQuery->execute();
-    }
-    break;
-  case 'Eliminar':
-    $DeleteQuery = $pdo->prepare("SELECT productoImg FROM productos WHERE id=:id");
-    $DeleteQuery->bindParam(':id', $txtID);
-    $DeleteQuery->execute();
-    $Producto = $DeleteQuery->fetch(PDO::FETCH_LAZY);
-
-    if (isset($Producto["productoImg"]) && ($Producto["productoImg"] != "image.jpg")) {
+    $Producto = $ModifyQuery->fetch(PDO::FETCH_LAZY);
+    if (isset($Producto["productoImg"]) && ($Producto["productoImg"] != "productoImg.jpg")) {
       if (file_exists("assets/images/" . $Producto['productoImg'])) {
         unlink("assets/images/" . $Producto['productoImg']);
       }
     }
-    $DeleteQuery = $pdo->prepare("DELETE FROM productos  WHERE id=:id");
-    $DeleteQuery->bindParam(':id', $txtID);
-    $DeleteQuery->execute();
-    break;
+    $ModifyQuery = $pdo->prepare("UPDATE productos SET productoImg =:Productoimg WHERE id = :id");
+    $ModifyQuery->bindParam(':id', $txtID);
+    $ModifyQuery->bindParam(':Productoimg', $ImgFileName);
+    $ModifyQuery->execute();
 
-  case 'Seleccionar':
-    $SelectQuery = $pdo->prepare("SELECT * FROM productos WHERE id=:id");
-    $SelectQuery->bindParam(':id', $txtID);
-    $SelectQuery->execute();
-    $AProducto = $SelectQuery->fetch(PDO::FETCH_LAZY);
-    $txtnombre = $AProducto['productoNombre'];
-    $txtprecio = $AProducto['productoPrecio'];
-    $txtdetalles = $AProducto['productoDetalles'];
-    $txtcantidad = $AProducto['productoQTY'];
-    $txtimagen = $AProducto['productoImg'];
-    $txtOldimg = $AProducto['productoImg'];
-    $txtcategoriaID = $AProducto['categoriaID'];
-    break;
-  case 'Cancelar':
-    header('Location: producto.php');
-    break;
-  default:
-    break;
+    if ($txtOldimg != "" && file_exists("assets/images/" . $txtOldimg)) {
+      unlink("assets/images/" . $txtOldimg);
+    }
+  } else {
+    $ModifyQuery = $pdo->prepare("UPDATE productos SET productoImg = :Productoimg WHERE id = :id");
+    $ModifyQuery->bindParam(':id', $txtID);
+    $ModifyQuery->bindParam(':Productoimg', $txtOldimg);
+    $ModifyQuery->execute();
+  }
+  header('location: producto.php');
+} elseif ($action == 'Eliminar') {
+  $DeleteQuery = $pdo->prepare("SELECT productoImg FROM productos WHERE id=:id");
+  $DeleteQuery->bindParam(':id', $txtID);
+  $DeleteQuery->execute();
+  $Producto = $DeleteQuery->fetch(PDO::FETCH_LAZY);
+
+  if (isset($Producto["productoImg"]) && ($Producto["productoImg"] != "image.jpg")) {
+    if (file_exists("assets/images/" . $Producto['productoImg'])) {
+      unlink("assets/images/" . $Producto['productoImg']);
+    }
+  }
+
+  $DeleteQuery = $pdo->prepare("CALL sp_productos(3, :id, '', 0, '', 0, '', 0)");
+  $DeleteQuery->bindParam(':id', $txtID);
+  $DeleteQuery->execute();
+  $DeleteQuery->closeCursor();
+
+} elseif ($action == 'Seleccionar') {
+  $SelectQuery = $pdo->prepare("CALL sp_productos(4, :id, '', NULL , '', NULL, '', NULL)");
+  $SelectQuery->bindParam(':id', $txtID);
+  $SelectQuery->execute();
+  $AProducto = $SelectQuery->fetch(PDO::FETCH_LAZY);
+  $txtnombre = $AProducto['productoNombre'];
+  $txtprecio = $AProducto['productoPrecio'];
+  $txtdetalles = $AProducto['productoDetalles'];
+  $txtcantidad = $AProducto['productoQTY'];
+  $txtimagen = $AProducto['productoImg'];
+  $txtOldimg = $AProducto['productoImg'];
+  $txtcategoriaID = $AProducto['categoriaID'];
+  $SelectQuery->closeCursor();
+} elseif ($action == 'Cancelar') {
+  header('location: producto.php');
 }
 ?>
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>
@@ -248,7 +247,7 @@ switch ($action) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-6">
                             <div class="form-group has-icon-left">
                               <label for="first-name-icon">Nombre</label>
                               <div class="position-relative">
@@ -259,7 +258,7 @@ switch ($action) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-6">
                             <div class="form-group has-icon-left">
                               <label>Precio</label>
                               <div class="position-relative">
@@ -270,7 +269,7 @@ switch ($action) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-6">
                             <div class="form-group has-icon-left">
                               <label>Detalles</label>
                               <div class="position-relative">
@@ -281,7 +280,7 @@ switch ($action) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-6">
                             <div class="form-group has-icon-left">
                               <label>Cantidad</label>
                               <div class="position-relative">
@@ -292,7 +291,7 @@ switch ($action) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-6">
                             <div class="form-group">
                               <label for="txtimagen">Imagen</label>
                               <div>
@@ -301,7 +300,7 @@ switch ($action) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-6">
                             <div class="form-group">
                               <label>Categoria</label>
                               <?php echo $txtcategoriaID; ?>

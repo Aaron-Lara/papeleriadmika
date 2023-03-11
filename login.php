@@ -41,7 +41,6 @@ if (isset($_POST["login"])) {
     $message = "You tried to submit an empty form";
   }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,8 +73,13 @@ if (isset($_POST["login"])) {
           <input type="submit" name="login" value="Iniciar" class="btnLogin">
           <input type="button" onclick="location.href='index.php';" value="Cancelar" class="btnCancelar" />
         </form>
+        <?php if (!empty($message)) { ?>
+          <div class="alert">
+            <?php echo $message; ?>
+          </div>
+        <?php } ?>
       </div>
-      <div class="box registerBox" style="overflow-y: auto;">
+      <div class=" box registerBox" style="overflow-y: auto;">
         <span class="reg_bg"></span>
         <h2>Registro</h2>
         <form action="register.php" method="post" class="form">
@@ -113,28 +117,28 @@ if (isset($_POST["login"])) {
           <input type="button" onclick="location.href='login.php';" value="Cancelar" class="btnCancelar" />
         </form>
         <?php if (!empty($message)) { ?>
-          <div class="alert alert-danger text-uppercase text-center"">
-          <?php echo $message; ?>
-      </div>
-    <?php } ?>
-    </div>
-    <a href=" #" class="regTag icon-add">
-            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
-              <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" />
-            </svg>
-            </a>
+          <div class="alert">
+            <?php echo $message; ?>
           </div>
+        <?php } ?>
       </div>
-      <!-- partial -->
-      <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-      <script src="js/script.js"></script>
-      <script>
-        const form = document.getElementById('register-form');
-        form.addEventListener('submit', function(event) {
-          event.preventDefault();
-          // Your code to submit the form to the server
-        });
-      </script>
+      <a href=" #" class="regTag icon-add">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+          <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="js/script.js"></script>
+  <script>
+    const form = document.getElementById('register-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Your code to submit the form to the server
+    });
+  </script>
 
 </body>
 

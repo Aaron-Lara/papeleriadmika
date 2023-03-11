@@ -4,7 +4,8 @@ include 'global/serverconfiguration.php';
 include 'global/dbconnection.php';
 if (isset($_POST["registro"])) {
   // Check if all fields are filled
-  if (!empty($_POST['name']) && !empty($_POST['apellidos']) && !empty($_POST['correo']) && !empty($_POST['tel']) && !empty($_POST['password1']) && !empty($_POST['password2'])) {
+  if (!empty($_POST['name']) && !empty($_POST['apellidos']) && !empty($_POST['correo']) && 
+  !empty($_POST['tel']) && !empty($_POST['password1']) && !empty($_POST['password2'])) {
     $Nombre = $_POST['name'];
     $Apellido = $_POST['apellidos'];
     $correo = $_POST['correo'];
@@ -22,7 +23,8 @@ if (isset($_POST["registro"])) {
       $query->execute();
       if ($query->rowCount() == 0) {
         // Insert the user's information into the database
-        $query = $pdo->prepare("INSERT INTO clientes (clienteNombre, clienteApellido, clienteEmail, clientePw, clienteTel, fechaRegistro)
+        $query = $pdo->prepare("INSERT INTO clientes (clienteNombre, clienteApellido, 
+        clienteEmail, clientePw, clienteTel, fechaRegistro)
         VALUES(:nombre, :apellido, :correo, :password_hash, :numero, now());");
         $query->bindParam(":nombre", $Nombre);
         $query->bindParam(":apellido", $Apellido);
@@ -33,20 +35,20 @@ if (isset($_POST["registro"])) {
 
         // Check if the query was successful
         if ($result) {
-          $message = "Account successfully created";
-          header("Location: index.php");
+          $message = "Cuenta creada correctamenta";
+          header("Location: login.php");
           exit;
         } else {
-          $message = "Error entering data, try again!";
+          $message = "Error al ingresar los datos, intenta de nuevo!";
         }
       } else {
-        $message = "Email already registered";
+        $message = "El correo ya está registrado";
       }
     } else {
-      $message = "Passwords do not match... Try again";
+      $message = "Las contraseñas no coinciden.";
     }
   } else {
-    $message = "You tried to submit an empty form";
+    $message = "Enviaste un formulario vacio. Intenta de nuevo.";
   }
 }
 ?>

@@ -27,6 +27,7 @@ $txtcontraseña = (isset($_POST['txtcontraseña'])) ? $_POST['txtcontraseña'] :
 $txtnumero = (isset($_POST['txtnumero'])) ? $_POST['txtnumero'] : "";
 $txtfecha = (!empty($txtfecha)) ? $txtfecha : date("Y-m-d H:i:s");
 $action = (isset($_POST['action'])) ? $_POST['action'] : "";
+
 if ($action == 'Añadir') {
   $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
   $spQuery = $pdo->prepare("CALL sp_clientes(1, 0, :name, :lastname, :email, :pass, :tel, :regdate)");
@@ -37,6 +38,7 @@ if ($action == 'Añadir') {
   $spQuery->bindParam(':tel', $txtnumero);
   $spQuery->bindParam(':regdate', $txtfecha);
   $spQuery->execute();
+  header('location: cliente.php');
 } elseif ($action == 'Modificar') {
   $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
   $spQuery = $pdo->prepare("CALL sp_clientes(2, :id, :name, :lastname, :email, :pass, :tel, :regdate)");
@@ -48,6 +50,7 @@ if ($action == 'Añadir') {
   $spQuery->bindParam(':tel', $txtnumero);
   $spQuery->bindParam(':regdate', $txtfecha);
   $spQuery->execute();
+  header('location: cliente.php');
 } elseif ($action == 'Eliminar') {
   $spQuery = $pdo->prepare("CALL sp_clientes(3, :id, '', '', '', '', '', NOW())");
   $spQuery->bindParam(':id', $txtID);
@@ -192,7 +195,7 @@ if ($action == 'Añadir') {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                               <div class="form-group has-icon-left">
                                 <label for="first-name-icon">Nombre</label>
                                 <div class="position-relative">
@@ -203,7 +206,7 @@ if ($action == 'Añadir') {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                               <div class="form-group has-icon-left">
                                 <label>Apellidos</label>
                                 <div class="position-relative">
@@ -214,7 +217,7 @@ if ($action == 'Añadir') {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                               <div class="form-group has-icon-left">
                                 <label>Email</label>
                                 <div class="position-relative">
@@ -225,7 +228,7 @@ if ($action == 'Añadir') {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                               <div class="form-group has-icon-left">
                                 <label>Contraseña</label>
                                 <div class="position-relative">
@@ -236,7 +239,7 @@ if ($action == 'Añadir') {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                               <div class="form-group has-icon-left">
                                 <label>Confirmar Contraseña</label>
                                 <div class="position-relative">
@@ -247,7 +250,7 @@ if ($action == 'Añadir') {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                               <div class="form-group has-icon-left">
                                 <label>Numero</label>
                                 <div class="position-relative">

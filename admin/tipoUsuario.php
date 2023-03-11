@@ -27,11 +27,13 @@ if ($action == 'Añadir') {
   $spQuery = $pdo->prepare("CALL sp_tipousuario(1, 0, :tipo)");
   $spQuery->bindParam(':tipo', $txtname);
   $spQuery->execute();
+  header('location: tipoUsuario.php');
 } elseif ($action == 'Modificar') {
   $spQuery = $pdo->prepare("CALL sp_tipousuario(2, :id, :tipo)");
   $spQuery->bindParam(':id', $txtID);
   $spQuery->bindParam(':tipo', $txtname);
   $spQuery->execute();
+  header('location: tipoUsuario.php');
 } elseif ($action == 'Eliminar') {
   $spQuery = $pdo->prepare("CALL sp_tipousuario(3, :id, '')");
   $spQuery->bindParam(':id', $txtID);

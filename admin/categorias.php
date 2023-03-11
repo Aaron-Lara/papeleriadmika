@@ -26,11 +26,13 @@ if ($action == 'Añadir') {
   $spQuery = $pdo->prepare("CALL sp_categories(1, 0, :cat)");
   $spQuery->bindParam(':cat', $txtname);
   $spQuery->execute();
+  header('location: categorias.php');
 } elseif ($action == 'Modificar') {
   $spQuery = $pdo->prepare("CALL sp_categories(2, :id, :cat)");
   $spQuery->bindParam(':id', $txtID);
   $spQuery->bindParam(':cat', $txtname);
   $spQuery->execute();
+  header('location: categorias.php');
 } elseif ($action == 'Eliminar') {
   $spQuery = $pdo->prepare("CALL sp_categories(3, :id, '')");
   $spQuery->bindParam(':id', $txtID);

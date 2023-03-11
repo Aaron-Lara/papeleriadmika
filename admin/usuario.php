@@ -23,53 +23,46 @@ $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtnombre = (isset($_POST['txtnombre'])) ? $_POST['txtnombre'] : "";
 $txtcorreo = (isset($_POST['txtcorreo'])) ? $_POST['txtcorreo'] : "";
 $txtcontraseña = (isset($_POST['txtcontraseña'])) ? $_POST['txtcontraseña'] : "";
-$txtnumero = (isset($_POST['txtnumero'])) ? $_POST['txtnumero'] : "";
 $txttipoID = (isset($_POST['txttipoID'])) ? $_POST['txttipoID'] : "";
 $action = (isset($_POST['action'])) ? $_POST['action'] : "";
 
-switch ($action) {
-  case 'Añadir':
-    $hash = password_hash($txtcontraseña, PASSWORD_DEFAULT);
-    $InsertQuery = $pdo->prepare("INSERT INTO usuario (usuarioNombre, usuarioEmial, usuarioPw, tipoID)  
-    VALUES (:Usuarioname, :Usuarioemail, :Usuariopass, :tipoid)");
-    $InsertQuery->bindParam(':Usuarioname', $txtnombre);
-    $InsertQuery->bindParam(':Usuarioemail', $txtcorreo);
-    $InsertQuery->bindParam(':Usuariopass', $hash);
-    $InsertQuery->bindParam(':tipoid', $txttipoID);
-    $InsertQuery->execute();
-    break;
-  case 'Modificar':
-    $hash = password_hash($txtcontraseña, PASSWORD_DEFAULT);
-    $ModifyQuery = $pdo->prepare("UPDATE usuario SET usuarioNombre = :Usuarioname, 
-    usuarioEmial = :Usuarioemail, usuarioPw = :Usuariopass, tipoID = :tipoid  WHERE id=:id");
-    $ModifyQuery->bindParam(':id', $txtID);
-    $ModifyQuery->bindParam(':Usuarioname', $txtnombre);
-    $ModifyQuery->bindParam(':UsuarioLastname',);
-    $ModifyQuery->bindParam(':Usuarioemail', $txtcorreo);
-    $ModifyQuery->bindParam(':Usuariopass', $hash);
-    $ModifyQuery->bindParam(':tipoid', $txttipoID);
-    $ModifyQuery->execute();
-    break;
-  case 'Eliminar':
-    $DeleteQuery = $pdo->prepare("DELETE FROM usuario  WHERE id=:id");
-    $DeleteQuery->bindParam(':id', $txtID);
-    $DeleteQuery->execute();
-    break;
-  case 'Seleccionar':
-    $SelectQuery = $pdo->prepare("SELECT * FROM usuario WHERE id=:id");
-    $SelectQuery->bindParam(':id', $txtID);
-    $SelectQuery->execute();
-    $AUsuario = $SelectQuery->fetch(PDO::FETCH_LAZY);
-    $txtnombre = $AUsuario['usuarioNombre'];
-    $txtcorreo = $AUsuario['usuarioEmial'];
-    $txtcontraseña = $AUsuario['usuarioPw'];
-    $txttipoID = $AUsuario['tipoID'];
-    break;
-  case 'Cancelar':
-    header('location: usuario.php');
-    break;
-  default:
-    break;
+if ($action == 'Añadir') {
+  $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
+  $spQuery = $pdo->prepare("CALL sp_usuario(1, 0, :Usuarioname, :Usuarioemail, :Usuariopass, :tipoid)");
+  $spQuery->bindParam(':Usuarioname', $txtnombre);
+  $spQuery->bindParam(':Usuarioemail', $txtcorreo);
+  $spQuery->bindParam(':Usuariopass', $hash);
+  $spQuery->bindParam(':tipoid', $txttipoID);
+  $spQuery->execute();
+  header('location: usuario.php');
+} elseif ($action == 'Modificar') {
+  $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
+  $spQuery = $pdo->prepare("CALL sp_usuario(2, :id, :Usuarioname, :Usuarioemail, :Usuariopass, :tipoid)");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->bindParam(':Usuarioname', $txtnombre);
+  $spQuery->bindParam(':Usuarioemail', $txtcorreo);
+  $spQuery->bindParam(':Usuariopass', $hash);
+  $spQuery->bindParam(':tipoid', $txttipoID);
+  $spQuery->execute();
+  header('location: usuario.php');
+} elseif ($action == 'Eliminar') {
+  $spQuery = $pdo->prepare("CALL sp_usuario(3, :id, '', '', '', '1')");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+  $spQuery->closeCursor();
+} elseif ($action == 'Seleccionar') {
+  $spQuery = $pdo->prepare("CALL sp_usuario(4, :id, '', '', '', 1)");
+  $spQuery->bindParam(':id', $txtID);
+  $spQuery->execute();
+  $ACategoria = $spQuery->fetch(PDO::FETCH_LAZY);
+  $txtnombre = $ACategoria['usuarioNombre'];
+  $txtcorreo = $ACategoria['usuarioEmial'];
+  $hash = $ACategoria['usuarioPw'];
+  $txttipoID = $ACategoria['tipoID'];
+  $spQuery->closeCursor();
+}
+ elseif ($action == 'Cancelar') {
+  header('location: usuario.php');
 }
 ?>
 <script src="https://kit.fontawesome.com/7218e15624.js" crossorigin="anonymous"></script>

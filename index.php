@@ -49,7 +49,7 @@ if (isset($_GET['logout'])) {
           </button>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
-            <div class="row w-100 mr-0">
+            <div class="row w-100">
               <div class="col-lg-7 pr-0">
                 <ul class="nav navbar-nav center_nav pull-right">
                   <li class="nav-item active">
@@ -57,20 +57,6 @@ if (isset($_GET['logout'])) {
                   </li>
                   <li class="nav-item">
                     <a href="shop.php" class="nav-link">Tienda</a>
-                    <!-- <ul class="dropdown-menu">
-                      <li class="nav-item">
-                        <a class="nav-link" href="shop.php">Categorias</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="single-product.php">Detalles de producto</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="checkout.php">Pagar</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="cart.php">Carrito</a>
-                      </li>
-                    </ul> -->
                   </li>
                   <li class="nav-item">
                     <a href="blog.php" class="nav-link">Sobre nosotros</a>
@@ -82,32 +68,45 @@ if (isset($_GET['logout'])) {
               </div>
               <div class="col-lg-5 pr-0">
                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
-                  <li class="nav-item">
-                    <a href="cart.php" class="icons">
-                      <i class="ti-shopping-cart"></i>
-                    </a>
-                  <li>
-                  </li>
-                  </li>
-                  <li class="nav-item">
-                    <?php
-                    if (isset($_SESSION['user'])) {
-                      $user = $_SESSION['user'];
-                      if (isset($user['clienteNombre'])) {
-                        echo "Bienvenido, " . $user['clienteNombre'] . "!";
-                      } elseif (isset($user['usuarioNombre'])) {
-                        echo "Bienvenido, " . $user['usuarioNombre'] . "!";
-                      }
-                      echo '<a href="index.php?logout=1" class="icons">';
-                      echo '<i class="ti-power-off" aria-hidden="true"></i>';
-                      echo '</a>';
-                    } else {
-                      echo '<a href="login.php" class="icons">';
-                      echo '<i class="ti-user" aria-hidden="true"></i>';
-                      echo '</a>';
+                  <?php
+                  if (isset($_SESSION['user'])) {
+                    $user = $_SESSION['user'];
+                    echo '<div class="dropdown">';
+                    echo '<a href="#" class="icons dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                    echo '<i class="ti-user" aria-hidden="true"></i>';
+                    echo '</a>';
+                    echo '<div class="dropdown-menu" aria-labelledby="userDropdown">';
+                    if (isset($user['profilePicture'])) {
+                      echo '<img src="' . $user['profilePicture'] . '" alt="Profile Picture" class="dropdown-item">';
                     }
-                    ?>
-
+                    if (isset($user['clienteNombre'])) {
+                      echo '<p class="dropdown-item"><strong>Nombre:</strong> ' . $user['clienteNombre'] . '</p>';
+                    } elseif (isset($user['usuarioNombre'])) {
+                      echo '<p class="dropdown-item"><strong>Nombre:</strong> ' . $user['usuarioNombre'] . '</p>';
+                    }
+                    if (isset($user['clienteEmail'])) {
+                      echo '<p class="dropdown-item"><strong>Email:</strong> ' . $user['clienteEmail'] . '</p>';
+                    } elseif (isset($user['usuarioEmail'])) {
+                      echo '<p class="dropdown-item"><strong>Email:</strong> ' . $user['usuarioEmial'] . '</p>';
+                    }
+                    // Add more profile information as needed
+                    echo '<a href="index.php?logout=1" class="dropdown-item"><i class="ti-power-off" aria-hidden="true"></i> Logout</a>';
+                    echo '</div>';
+                    echo '</div>';
+                  } else {
+                    echo '<a href="login.php" class="icons">';
+                    echo '<i class="ti-user" aria-hidden="true"></i>';
+                    echo '</a>';
+                  }
+                  ?>
+                  <li class="nav-item">
+                    <div class="d-flex">
+                      <a href="cart.php" class="icons">
+                        <i class="ti-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </li>
+                  <li class="nav-item">
                   </li>
                 </ul>
               </div>
@@ -375,116 +374,7 @@ if (isset($_GET['logout'])) {
       </div>
     </div>
   </section>
-  <!--================ End New Product Area =================-->
-
-  <!--================ Inspired Product Area =================-->
-
-  <!--================ End Inspired Product Area =================-->
-
-  <!--================ Start Blog Area =================-->
-
-  <!--================ End Blog Area =================-->
-
   <!--================ start footer Area  =================-->
-  <footer class="bg-primary text-center text-lg-start text-white">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!--Grid row-->
-      <div class="row my-4">
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4"><strong>Sobre nosotros</strong></h5>
-          <div class="shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 150px; height: 150px;">
-            <p>Este proyecto nace al querer cumplir un gran sueño, el cual es ser una papelería útil</p>
-            <p></p>
-          </div>
-          <div class="mt-4">
-            <!-- Facebook -->
-            <a type="button" class="btn btn-floating btn-success btn-lg"><i class="fab fa-facebook-f"></i></a>
-            <!-- Twitter -->
-            <a type="button" class="btn btn-floating btn-success btn-lg"><i class="fab fa-twitter"></i></a>
-            <!-- Google + -->
-            <a type="button" class="btn btn-floating btn-success btn-lg"><i class="fab fa-google-plus-g"></i></a>
-            <!-- Linkedin -->
-          </div>
-        </div>
-        <!--Grid column-->
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4"><strong>Acceso Rápido</strong></h5>
-          <ul class="list-unstyled">
-            <li class="mb-2">
-              <a href="index.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Inicio</a>
-            </li>
-            <li class="mb-2">
-              <a href="shop.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Categorias</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4"><strong>Información</strong></h5>
-          <ul class="list-unstyled">
-            <li class="mb-2">
-              <a href="blog.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Sobre nosotros</a>
-            </li>
-            <li class="mb-2">
-              <a href="contact.php" class="text-white"><i class="fa-solid fa-circle-arrow-right"></i> Contacto</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4"><strong>Mantente en contacto</strong>
-          </h5>
-          <ul class="list-unstyled">
-            <li>
-              <p><i class="fas fa-map-marker-alt pe-2"></i> Calle Toluca #507 Col. Morelos</p>
-            </li>
-            <li>
-              <p><i class="fas fa-phone pe-2"></i> + 01 234 567 89</p>
-            </li>
-            <li>
-              <p><i class="fas fa-envelope pe-2 mb-0"></i> contact@example.com</p>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
-    </div>
-    <!-- Grid container -->
-    <!-- Copyright -->
-    <div class=" p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-      <p class="footer-text m-0 col-lg-12 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>
-          document.write(new Date().getFullYear());
-        </script> Papelería D Mika | Todos los derechos reservados
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-      </p>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!--================ End footer Area  =================-->
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/stellar.js"></script>
-  <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-  <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-  <script src="vendors/isotope/isotope-min.js"></script>
-  <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="js/jquery.ajaxchimp.min.js"></script>
-  <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-  <script src="vendors/counter-up/jquery.counterup.js"></script>
-  <script src="js/mail-script.js"></script>
-  <script src="js/theme.js"></script>
-</body>
-
-</html>
+  <?php
+  include_once 'footer.php';
+  ?>

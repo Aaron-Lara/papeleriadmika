@@ -103,46 +103,138 @@
     $hash = password_hash($txtcontraseña, PASSWORD_ARGON2ID);
 
     Clientes
-    CREATE PROCEDURE `sp_clientes`(IN `op` INT, IN `i` INT, IN `name` VARCHAR(100), IN `lastname` VARCHAR(100), IN `email`
-    VARCHAR(50), IN `pass` VARCHAR(255), IN `tel` VARCHAR(20), IN `regdate` DATETIME) NOT DETERMINISTIC CONTAINS SQL SQL
-    SECURITY DEFINER BEGIN START TRANSACTION; IF op = 1 THEN -- Añadir INSERT INTO clientes (clienteNombre, clienteApellido,
-    clienteEmail, clientePw, clienteTel, fechaRegistro) VALUES (name, lastname, email, pass, tel, regdate); ELSEIF op = 2
-    THEN -- Modificar UPDATE clientes SET clienteNombre = name, clienteApellido = lastname, clienteEmail = email, clientePw
-    = pass, clienteTel = tel, fechaRegistro = regdate WHERE id = i; ELSEIF op = 3 THEN -- Eliminar DELETE FROM clientes
-    WHERE id = i; ELSEIF op = 4 THEN -- Seleccionar SELECT * FROM clientes WHERE id = i; END IF; COMMIT; END
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_clientes`(IN `op` INT, IN `i` INT, IN `name` VARCHAR(100), IN `lastname`
+VARCHAR(100), IN `email` VARCHAR(50), IN `pass` VARCHAR(255), IN `tel` VARCHAR(20), IN `regdate` DATETIME)
+BEGIN
+START TRANSACTION;
+
+IF op = 1 THEN -- Añadir
+INSERT INTO clientes (clienteNombre, clienteApellido, clienteEmail, clientePw, clienteTel, fechaRegistro)
+VALUES (name, lastname, email, pass, tel, regdate);
+
+ELSEIF op = 2 THEN -- Modificar
+UPDATE clientes SET clienteNombre = name, clienteApellido = lastname, clienteEmail = email, clientePw = pass, clienteTel
+= tel, fechaRegistro = regdate
+WHERE id = i;
+
+ELSEIF op = 3 THEN -- Eliminar
+DELETE FROM clientes WHERE id = i;
+
+ELSEIF op = 4 THEN -- Seleccionar
+SELECT * FROM clientes WHERE id = i;
+
+END IF;
+
+COMMIT;
+END$$
+DELIMITER ;
 
     Tipo de usuario
-    DROP PROCEDURE `sp_tipousuario`; CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_tipousuario`(IN `op` INT, IN `i` INT,
-    IN `tipo` VARCHAR(100)) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN START TRANSACTION; IF op = 1 THEN --
-    Añadir INSERT INTO tipousuario (usuarioTipo) VALUES (tipo); ELSEIF op = 2 THEN -- Modificar UPDATE tipousuario SET
-    usuarioTipo = tipo WHERE id = i; ELSEIF op = 3 THEN -- Eliminar DELETE FROM tipousuario WHERE id = i; ELSEIF op = 4 THEN
-    -- Seleccionar SELECT * FROM tipousuario WHERE id = i; END IF; COMMIT; END
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_tipousuario`(IN `op` INT, IN `i` INT, IN `tipo` VARCHAR(100))
+BEGIN
+START TRANSACTION;
+
+IF op = 1 THEN -- Añadir
+INSERT INTO tipousuario (usuarioTipo) VALUES (tipo);
+
+ELSEIF op = 2 THEN -- Modificar
+UPDATE tipousuario SET usuarioTipo = tipo WHERE id = i;
+
+ELSEIF op = 3 THEN -- Eliminar
+DELETE FROM tipousuario WHERE id = i;
+
+ELSEIF op = 4 THEN -- Seleccionar
+SELECT * FROM tipousuario WHERE id = i;
+
+END IF;
+COMMIT;
+END$$
+DELIMITER ;
 
     Categoria
-    DROP PROCEDURE `sp_categories`; CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_categories`(IN `op` INT, IN `i` INT, IN
-    `cat` VARCHAR(100)) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN START TRANSACTION; IF op = 1 THEN --
-    Añadir INSERT INTO categorias (categoriaNombre) VALUES (cat); ELSEIF op = 2 THEN -- Modificar UPDATE categorias SET
-    categoriaNombre = cat WHERE id = i; ELSEIF op = 3 THEN -- Eliminar DELETE FROM categorias WHERE id = i; ELSEIF op = 4
-    THEN -- Seleccionar SELECT * FROM categorias WHERE id = i; END IF; COMMIT; END
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_categories`(IN `op` INT, IN `i` INT, IN `cat` VARCHAR(100))
+BEGIN
+START TRANSACTION;
+
+IF op = 1 THEN -- Añadir
+INSERT INTO categorias (categoriaNombre) VALUES (cat);
+
+ELSEIF op = 2 THEN -- Modificar
+UPDATE categorias SET categoriaNombre = cat WHERE id = i;
+
+ELSEIF op = 3 THEN -- Eliminar
+DELETE FROM categorias WHERE id = i;
+
+ELSEIF op = 4 THEN -- Seleccionar
+SELECT * FROM categorias WHERE id = i;
+
+END IF;
+
+COMMIT;
+END$$
+DELIMITER ;
 
     Usuario
-    CREATE PROCEDURE `sp_usuario`(IN `op` INT, IN `i` INT, IN `Usuarioname` VARCHAR(100), IN `Usuarioemail` VARCHAR(100), IN
-    `Usuariopass` VARCHAR(100), IN `tipoid` INT) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN START
-    TRANSACTION; IF op = 1 THEN -- Añadir INSERT INTO usuario (usuarioNombre, usuarioEmial, usuarioPw, tipoID) VALUES
-    (Usuarioname, Usuarioemail, Usuariopass, tipoid); ELSEIF op = 2 THEN -- Modificar UPDATE usuario SET usuarioNombre =
-    Usuarioname, usuarioEmial = Usuarioemail, usuarioPw = Usuariopass, tipoID = tipoid WHERE id = i; ELSEIF op = 3 THEN --
-    Eliminar DELETE FROM usuario WHERE id = i; ELSEIF op = 4 THEN -- Seleccionar SELECT * FROM usuario WHERE id = i; END IF;
-    COMMIT; END
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario`(IN `op` INT, IN `i` INT, IN `Usuarioname` VARCHAR(100), IN
+`Usuarioemail` VARCHAR(100), IN `Usuariopass` VARCHAR(100), IN `tipoid` INT)
+BEGIN
+START TRANSACTION;
+
+IF op = 1 THEN -- Añadir
+INSERT INTO usuario (usuarioNombre, usuarioEmial, usuarioPw, tipoID)
+VALUES (Usuarioname, Usuarioemail, Usuariopass, tipoid);
+
+ELSEIF op = 2 THEN -- Modificar
+UPDATE usuario SET usuarioNombre = Usuarioname, usuarioEmial = Usuarioemail, usuarioPw = Usuariopass, tipoID = tipoid
+WHERE id = i;
+
+ELSEIF op = 3 THEN -- Eliminar
+DELETE FROM usuario WHERE id = i;
+
+ELSEIF op = 4 THEN -- Seleccionar
+SELECT * FROM usuario WHERE id = i;
+
+END IF;
+
+COMMIT;
+END$$
+DELIMITER ;
 
     Productos
-    DROP PROCEDURE `sp_productos`; CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_productos`(IN `op` INT, IN `i` INT, IN
-    `Productoname` VARCHAR(100), IN `Productoprice` DECIMAL(10, 2), IN `Productodetails` TEXT, IN `Productoqty` INT, IN
-    `Productoimg` VARCHAR(100), IN `CategoriaID` INT) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN START
-    TRANSACTION; IF op = 1 THEN -- Añadir INSERT INTO productos (productoNombre, productoPrecio, productoDetalles,
-    productoQTY, productoImg, categoriaID) VALUES (Productoname, Productoprice, Productodetails, Productoqty, Productoimg,
-    CategoriaID); ELSEIF op = 2 THEN -- Modificar UPDATE productos SET productoNombre = Productoname, productoPrecio =
-    Productoprice, productoDetalles = Productodetails, productoQTY = Productoqty, productoImg = Productoimg, categoriaID =
-    CategoriaID WHERE id = i; ELSEIF op = 3 THEN -- Eliminar DELETE FROM productos WHERE id =[...]
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_productos`(IN `op` INT, IN `i` INT, IN `Productoname` VARCHAR(100), IN
+`Productoprice` DECIMAL(10,2), IN `Productodetails` TEXT, IN `Productoqty` INT, IN `Productoimg` VARCHAR(100), IN
+`CategoriaID` INT)
+BEGIN
+START TRANSACTION;
+
+IF op = 1 THEN -- Añadir
+INSERT INTO productos (productoNombre, productoPrecio, productoDetalles,
+productoQTY, productoImg, categoriaID)
+VALUES (Productoname, Productoprice, Productodetails,
+Productoqty, Productoimg, CategoriaID);
+
+ELSEIF op = 2 THEN -- Modificar
+UPDATE productos SET productoNombre = Productoname, productoPrecio = Productoprice,
+productoDetalles = Productodetails, productoQTY = Productoqty,
+productoImg = Productoimg, categoriaID = CategoriaID
+WHERE id = i;
+
+ELSEIF op = 3 THEN -- Eliminar
+DELETE FROM productos WHERE id = i;
+
+ELSEIF op = 4 THEN -- Seleccionar
+SELECT * FROM productos WHERE id = i;
+
+END IF;
+
+COMMIT;
+END$$
+DELIMITER ;
 
 
     switch ($action) {

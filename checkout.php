@@ -156,10 +156,9 @@ include 'carrito.php';
   <?php
   $QueryPedidos = $pdo->prepare("SELECT id, pedidoFecha, pagoTotal, clienteID FROM pedidos
     Where clienteID = :id ORDER BY pedidoFecha DESC");
-  $QueryPedidos->bindParam(':id', $_SESSION['session_clienteID']);
+  $QueryPedidos->bindParam(':id', $_SESSION['user']);
   $QueryPedidos->execute();
   $PedidosLista = $QueryPedidos->fetchAll(PDO::FETCH_ASSOC);
-  $Pedido = $QueryPedidos->fetch(PDO::FETCH_LAZY);
   ?>
   <section class="checkout_area section_gap">
     <?php
@@ -174,7 +173,7 @@ include 'carrito.php';
                 <ul class="list list_2">
                   <li>
                     <p>Número de Pedido</p><span>:
-                      <?php echo $cadpedido['id']; ?>
+                      <?php echo intval($cadpedido['id']); ?>
                     </span>
                   </li>
                 </ul>
@@ -186,7 +185,13 @@ include 'carrito.php';
                   </li>
                   <li>
                     <p>Total</p><span>:
-                      <?php echo $cadpedido['pagoTotal']; ?>
+                      <?php
+                      $total = $cadpedido['pagoTotal'];
+                      if (is_array($total)) {
+                        $total = $total[0]; // assuming the total is stored in the first element of the array
+                      }
+                      echo $total;
+                      ?>
                     </span>
                   </li>
                 </ul>
@@ -207,11 +212,13 @@ include 'carrito.php';
                     </tr>
                   </thead>
                   <?php
-                  $PedidosQuery = $pdo->prepare("SELECT pd.id, pd.productoQTY, pd.productoPrecio, p.productoNombre
-                FROM pedidodetalles pd
-                INNER JOIN productos p ON pd.idProducto = p.id
-                WHERE pd.idPedido = :idPedido");
-                  $PedidosQuery->bindParam(':idPedido', $cadpedido['id']);
+                  $PedidosQuery = $pdo->prepare("SELECT id, pedidoFecha, clienteNombre, productoNombre,
+                    productoQTY, productoPrecio, pagoTotal 
+                      FROM pedidodetalles INNER JOIN pedidos USING (id) INNER JOIN productos USING 
+                      (id) INNER JOIN cliente USING (id)
+                      WHERE id = :id AND id = :id  ORDER BY pedidoFecha DESC;");
+                  $PedidosQuery->bindParam(':id', $_SESSION['user']);
+                  $PedidosQuery->bindParam(':id', $cadpedido['id']);
                   $PedidosQuery->execute();
                   $ListadoPedido = $PedidosQuery->fetchAll(PDO::FETCH_ASSOC);
                   foreach ($ListadoPedido as $dpedido) {

@@ -19,7 +19,7 @@ $_SESSION["CARRITO"][$indice]["CANTIDAD"] = $cantidad[1];
 }
 
 $total=0;
-$IDusuario=$_SESSION['session_idusuario'];
+$IDusuario=$_SESSION['user'];
 foreach($_SESSION['CARRITO'] as $indice=>$producto){
 $total=$total+($producto['PRECIO']*$producto['CANTIDAD']);
 }

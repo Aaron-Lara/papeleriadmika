@@ -331,3 +331,98 @@ DELIMITER ;
     default:
     break;
     }
+
+  <?php
+    $QueryPedidos = $pdo->prepare("SELECT id, pedidoFecha, pagoTotal, clienteID FROM pedidos
+    Where clienteID = :id ORDER BY pedidoFecha DESC");
+    $QueryPedidos->bindParam(':id', $_SESSION['user']);
+    $QueryPedidos->execute();
+    $PedidosLista = $QueryPedidos->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+  <section class="checkout_area section_gap">
+    <?php
+      foreach ($PedidosLista as $cadpedido) {
+      ?>
+    <div class="container">
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="order_box">
+              <h2>INFORMACIÓN DE TU PEDIDO</h2>
+              <ul class="list list_2">
+                <li>
+                  <p>Número de Pedido</p><span>:
+                    <?php echo $cadpedido['id']; ?>
+                  </span>
+                </li>
+              </ul>
+              <ul class="list list_2">
+                <li>
+                  <p>Fecha del Pedido</p><span>:
+                    <?php echo $cadpedido['pedidoFecha']; ?>
+                  </span>
+                </li>
+                <li>
+                  <p>Total</p><span>:
+                    <?php echo $cadpedido['pagoTotal']; ?>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="">
+              <span>Gracias por ordenar. Tu pedido ha sido recibido.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="order_box">
+              <h2>TU ORDEN</h2>
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="2">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <?php
+                    $PedidosQuery = $pdo->prepare("SELECT id, pedidoFecha, clienteNombre, productoNombre,
+                    productoQTY, productoPrecio, pagoTotal 
+                      FROM pedidodetalles INNER JOIN pedidos USING (id) INNER JOIN productos USING 
+                      (id) INNER JOIN cliente USING (id)
+                      WHERE id = :id AND id = :id  ORDER BY pedidoFecha DESC;");
+                    $PedidosQuery->bindParam(':id', $_SESSION['user']);
+                    $PedidosQuery->bindParam(':id', $cadpedido['id']);
+                    $PedidosQuery->execute();
+                    $ListadoPedido = $PedidosQuery->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($ListadoPedido as $dpedido) {
+                    ?>
+                <tbody>
+                  <tr>
+                    <th colspan="2"><span>
+                        <?php echo $dpedido['productoNombre']; ?>
+                      </span></th>
+                    <th>
+                      <?php echo $dpedido['productoQTY']; ?>
+                    </th>
+                    <th> <span>$
+                        <?php echo $dpedido['productoPrecio']; ?>
+                      </span></th>
+                  </tr>
+                </tbody>
+                <?php } ?>
+                <tfoot>
+                  <tr>
+                    <th scope="col" colspan="3"></th>
+                    <th scope="col">Total :
+                      <?php echo $cadpedido['pagoTotal']; ?>
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php } ?>
+  </section>
